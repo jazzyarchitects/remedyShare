@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+
+<h1>Signup</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/signup">
+
+    Name <input type="text" name="name" required/> <br/>
+    Email <input type="email" name="email" required/> <br/>
+    Password <input type="password" name="pasword" required/> <br/>
+    Mobile <input type="text" name="mobile" required/> <br/>
+    Google Id<input type="text" name="googleId"/><br/>
+    Facebook Id<input type="text" name="facebookId"/><br/>
+    <input type="submit"/>
+</form>
+<br/>
+<br/>
+
+<hr>
+<h1>Login</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/login">
+
+    Email <input type="email" name="email" required/> <br/>
+    Password <input type="password" name="password" required/> <br/>
+
+    <input type="submit"/>
+</form>
+
+<hr>
+<h1>Login Google Social</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/login/google">
+
+    Email <input type="email" name="email" required/> <br/>
+    Google Id <input type="text" name="googleId" required/> <br/>
+
+    <input type="submit"/>
+</form>
+
+<hr>
+
+<h1>Login Facebook Social</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/login/facebook">
+
+    Email <input type="email" name="email" required/> <br/>
+    Facebook Id <input type="text" name="facebookId" required/> <br/>
+
+    <input type="submit"/>
+</form>
+
+<hr>
+
+<h1>Link Social</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/linkSocialNetwork">
+
+    Email <input type="email" name="email" required/> <br/>
+    Google Id <input type="text" name="googleId"/> <br/>
+    Facebook Id <input type="text" name="facebookId"/> <br/>
+
+    <input type="submit"/>
+</form>
+
+<hr>
+<h1>GCM Key</h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/likeDeal">
+
+    Email <input type="email" name="email" required/> <br/>
+    Gcm <input type="text" name="gcmkey"/> <br/>
+
+    <input type="submit"/>
+</form>
+
+
+
+<hr>
+<h1>Update </h1>
+
+<form name="signupForm" method="post" action="http://localhost:3000/insertGcm">
+
+    Email <input type="email" name="email" required/> <br/>
+    Deal Id <input type="text" name="dealId"/> <br/>
+    Liked <input type="text" name="liked"/> <br/>
+
+    <input type="submit"/>
+</form>
+
+
+<hr>
+<h1>Reset Password</h1>
+<form name="signupForm" method="get" action="http://localhost:3000/forgotPassword">
+
+    Email <input type="email" name="email" required/> <br/>
+    <input type="submit"/>
+</form>
+
+</body>
+
+
+</html>

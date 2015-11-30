@@ -1,0 +1,33 @@
+{
+  "name": "server-side",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.2.0",
+    "bcrypt-nodejs": "latest",
+    "compression": "^1.0.1",
+    "consolidate": "^0.10.0",
+    "cookie-parser": "^1.1.0",
+    "dependable": "0.2.5",
+    "errorhandler": "^1.0.0",
+    "express": "^4.2.0",
+    "express-session": "^1.1.0",
+    "express-validator": "^2.1.1",
+    "jsonwebtoken": "latest",
+    "lodash": "^3.0.0",
+    "method-override": "^1.0.0",
+    "mongoose": "4.0",
+    "jade": "latest",
+    "mongoose-search-plugin": "latest",
+    "morgan": "^1.0.0",
+    "multer": "latest",
+    "nodemailer": "latest",
+    "serve-favicon": "^2.0.0",
+    "sha1": "latest",
+    "static-favicon": "*",
+    "view-helpers": "^0.1.4"
+  }
+}
