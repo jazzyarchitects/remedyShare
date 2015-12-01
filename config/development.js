@@ -11,7 +11,8 @@ var rootPath = path.normalize(__dirname + '/..');
 module.exports = {
     root: rootPath,
     db: {
-        uri: 'mongodb://localhost/remedyShare',
+        //uri: 'mongodb://localhost/remedyShare',
+        uri: 'mongodb://jazzyarchitects:jazzy@architects@ds061354.mongolab.com:61354/heroku_mrwqgl13',
         options: {
             server: {
                 socketOptions: {
