@@ -24,7 +24,7 @@ module.exports = {
         port: 3000
     },
     keys: {
-		token: 'scribblerKey'
+		token: 'jazziness'
     },
 	image: {
 		cdnURL: 'https://upload.uploadcare.com/base/',
@@ -32,8 +32,8 @@ module.exports = {
 	},
     mailserver:{
         service: "Gmail",
-        email: "scribblernotebooks@gmail.com",
-        password: "scribbler@notebooks",
-        sender: "hi@scribblernotebooks.com"
+        email: "jazzy.architects@gmail.com",
+        password: "jazzy@architects",
+        sender: "jazzyarchitects@gmail.com"
     }
 };

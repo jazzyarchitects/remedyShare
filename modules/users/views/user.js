@@ -20,7 +20,6 @@ var getUserObject=function(req){
 
 var signup = function (req, res) {
     var user = getUserObject(req);
-
     control.signUp(user, function(result){
         console.log("Signup attempt: "+result);
         res.json(result);
@@ -45,7 +44,14 @@ var update=function(req, res){
     });
 };
 
+var del=function(req, res){
+    var user=getUserObject(req);
+    control.delete(user, function(result){
+        res.json(result);
+    });
+};
+
 exports.signUp=signup;
 exports.login=login;
 exports.update=update;
-
+exports.delete=del;

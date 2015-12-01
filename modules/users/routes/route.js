@@ -17,8 +17,14 @@ app.post('/login',function(req, res, next){
     next();
 });
 
-app.put('/edit', function(req, res, next){
+app.put('/user', function(req, res, next){
     console.log("User data Edit...");
     user.update(req, res);
+    next();
+});
+
+app.delete('/user',function(req, res, next){
+    console.log("Delete User...");
+    user.delete(req, res);
     next();
 });

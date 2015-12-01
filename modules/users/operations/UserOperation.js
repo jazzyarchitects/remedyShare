@@ -82,8 +82,19 @@ var update = function (user, callback) {
     }
 };
 
+var del=function(user, callback){
+    User.remove({_id:user._id},function(err, doc){
+       if(doc){
+           callback(successJSON(doc));
+       } else{
+           callback(errorJSON(501, err));
+       }
+    });
+};
+
 
 exports.signUp = signUp;
 exports.loginWithEmail = loginWithEmail;
 exports.loginWithMobile = loginWithMobile;
 exports.updateUser = update;
+exports.delete=del;

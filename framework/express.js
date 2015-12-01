@@ -49,6 +49,7 @@ module.exports = function (app) {
     // app.set('views', config.root + '/server/views');
 
     // Enable jsonp
+
     app.enable('jsonp callback');
 
     // The cookieParser should be above session
@@ -90,7 +91,7 @@ module.exports = function (app) {
 
 
 
-    app.use('/',router);
+    app.use('/api',router);
 
 
 
@@ -113,5 +114,5 @@ module.exports = function (app) {
         app.use(errorHandler());
     }
 
-    console.log('****************Medical Assistant is now live!****************');
+    console.log('********Medical Assistant is now live!*********');
 };

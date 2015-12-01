@@ -25,7 +25,6 @@ var login=function(user, callback){
     }else{
         callback(errorJSON(501,"INVALID_PARAMETERS_PASSED"));
     }
-
 };
 
 var update=function(user, callback){
@@ -34,6 +33,14 @@ var update=function(user, callback){
     });
 };
 
+var del=function(user, callback){
+    userOperations.delete(user, function(result){
+       callback(result);
+    });
+    //Delete user from all other links - remedy, likes, shares
+};
+
 exports.signUp=signup;
 exports.login=login;
 exports.update=update;
+exports.delete=del;
