@@ -19,6 +19,6 @@ var CommentSchema=new Schema({
         type: String,
         required: true
     }
-});
+},{strict:false});
 
 mongoose.model('Comment', CommentSchema);

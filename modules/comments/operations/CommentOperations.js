@@ -14,7 +14,7 @@ var insertComment = function(commentDetails, callback){
                    if(doc){
                        callback(successJSON(doc));
                    }else{
-                       callback(errorJSON(501, "ERROR_INSERTING"));
+                       callback(errorJSON(600, "ERROR_INSERTING"));
                    }
                 });
             }else{
@@ -22,7 +22,21 @@ var insertComment = function(commentDetails, callback){
             }
         });
     }else{
-        callback(errorJSON(501, "INVALID_AUTHOR_ID_IN_COMMENT"));
+        callback(errorJSON(601, "INVALID_DATA_PASSED" , "INVALID_AUTHOR_ID_IN_COMMENT"));
+    }
+};
+
+var update=function(commentDetails, callback){
+    if(mongoose.Types.ObjectId.isValid(commentDetails._id)){
+        Comment.update({_id:commentDetails._id},commentDetails,{upsert: true},function(err, doc){
+           if(doc){
+               callback(successJSON(doc));
+           } else{
+               callback(errorJSON(501, err));
+           }
+        });
+    }else{
+        callback(errorJSON(601, "INVALID_DATA_PASSED", "INVALID_COMMENT_ID_FOR_UPDATING"));
     }
 };
 
@@ -36,9 +50,10 @@ var del=function(commentDetails, callback){
            }
         });
     }else{
-        callback(errorJSON(501, "INVALID_COMMENT_ID_FOR_DELETION"));
+        callback(errorJSON(601, "INVALID_DATA_PASSED", "INVALID_COMMENT_ID_FOR_DELETION"));
     }
 };
 
 exports.insert=insertComment;
 exports.delete=del;
+exports.update=update;

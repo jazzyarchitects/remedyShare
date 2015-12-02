@@ -32,7 +32,7 @@ var signUp = function (userDetails, callback) {
     if (!emailRegistered(userDetails) && !mobileRegistered(userDetails)) {
         User.save(userDetails, function (err, doc) {
             if (!doc) {
-                callback(errorJSON(500, err));
+                callback(errorJSON(501, err));
             } else {
                 callback(successJSON(doc))
             }
@@ -46,7 +46,7 @@ var signUp = function (userDetails, callback) {
         //   }
         //});
     } else {
-        callback(errorJSON(501, "EMAIL_OR_MOBILE_REGISTERED"));
+        callback(errorJSON(601, "INVALID_DATA_PASSED" , "EMAIL_OR_MOBILE_REGISTERED"));
     }
 };
 
@@ -55,7 +55,7 @@ var loginWithEmail = function (user, callback) {
     if (emailRegistered(user)) {
         //Login Logic
     } else {
-        callback(errorJSON(501, "USER_NOT_REGISTERED"));
+        callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
     }
 };
 
@@ -64,7 +64,7 @@ var loginWithMobile = function (user, callback) {
     if (mobileRegistered(user)) {
         //Login Logic
     } else {
-        callback(errorJSON(501, "USER_NOT_REGISTERED"));
+        callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
     }
 };
 
@@ -78,7 +78,7 @@ var update = function (user, callback) {
             }
         });
     } else {
-        callback(errorJSON(501, "USER_NOT_LOGGED_IN"));
+        callback(errorJSON(602, "AUTHENTICATION_ERROR", "USER_NOT_LOGGED_IN"));
     }
 };
 

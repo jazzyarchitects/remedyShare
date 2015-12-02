@@ -23,7 +23,7 @@ var login=function(user, callback){
            callback(result);
         });
     }else{
-        callback(errorJSON(501,"INVALID_PARAMETERS_PASSED"));
+        callback(errorJSON(601,"INVALID_DATA_PASSED", "NO_EMAIL_FOR_LOGIN"));
     }
 };
 

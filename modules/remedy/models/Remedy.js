@@ -52,6 +52,6 @@ var RemedySchema=new Schema({
         required: false
     }
 
-});
+},{strict:false});
 
 mongoose.model('Remedy',RemedySchema);

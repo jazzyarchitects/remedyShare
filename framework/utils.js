@@ -42,8 +42,8 @@ var successJSON=function(data){
     }
 };
 
-var errorJSON=function(errorCode, data){
-    return JSON.stringify({success: false, error: true, errorCode: errorCode, data:data});
+var errorJSON=function(errorCode, data, optionalDescription){
+    return JSON.stringify({success: false, error: true, errorCode: errorCode, message:data, description: optionalDescription});
 };
 
 exports.walk = walk;

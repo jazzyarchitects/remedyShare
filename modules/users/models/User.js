@@ -29,7 +29,22 @@ var UserSchema=new Schema({
     password:{
         type: String,
         required: true
+    },
+    remedies:{
+        type: [Schema.Types.ObjectId],
+        required: false,
+        ref:'Remedy'
+    },
+    comments:{
+        type: [Schema.Types.ObjectId],
+        required: false,
+        ref:'Comment'
+    },
+    medicines:{
+        type: [Schema.Types.ObjectId],
+        required: false,
+        ref: 'MedicineDetail'
     }
-});
+},{strict:false});
 
 mongoose.model('User',UserSchema);
