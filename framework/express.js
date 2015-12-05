@@ -49,7 +49,6 @@ module.exports = function (app) {
     // app.set('views', config.root + '/server/views');
 
     // Enable jsonp
-
     app.enable('jsonp callback');
 
     // The cookieParser should be above session
@@ -63,31 +62,28 @@ module.exports = function (app) {
 
     app.use('/public', express.static(__dirname  + 'static/public'));
 
-    /**
     //authenticate request
-    router.use(function(req, res, next) {
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
-        if(token) {
-            jwt.verify(token, app.get('secretKey'), function(err, success) {
-                if(success) {
-                    // console.log("authenticated "+true);
-                    req.authenticated = true;
-                    // return res.json({ success: false, message: 'AUTHENTICATION_FAILURE' });
-                }
-                else {
-                    // console.log("authenticated "+false);
-                    req.authenticated = false;
-                }
-            });
-        }
-        else {
-            // console.log("authenticated 2"+false);
-            req.authenticated = false;
-        }
-        next();
-    });
-
-     **/
+    //router.use(function(req, res, next) {
+        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //if(token) {
+        //    jwt.verify(token, app.get('secretKey'), function(err, success) {
+        //        if(success) {
+        //            // console.log("authenticated "+true);
+        //            req.authenticated = true;
+        //            // return res.json({ success: false, message: 'AUTHENTICATION_FAILURE' });
+        //        }
+        //        else {
+        //            // console.log("authenticated "+false);
+        //            req.authenticated = false;
+        //        }
+        //    });
+        //}
+        //else {
+        //    // console.log("authenticated 2"+false);
+        //    req.authenticated = false;
+        //}
+        //next();
+    //});
 
 
 
@@ -114,5 +110,5 @@ module.exports = function (app) {
         app.use(errorHandler());
     }
 
-    console.log('********Medical Assistant is now live!*********');
+    console.log('****************Medical Assistant is now live!****************');
 };

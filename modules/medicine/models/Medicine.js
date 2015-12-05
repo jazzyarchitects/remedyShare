@@ -2,6 +2,7 @@
  * Created by Jibin_ism on 02-Dec-15.
  */
 var mongoose=require('mongoose');
+var Schema=mongoose.Schema;
 
 var MedicineSchema = new Schema({
    name:{

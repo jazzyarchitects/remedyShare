@@ -8,7 +8,7 @@ var userOperations=requireFromModule('users/operations/UserOperation');
 
 var signup = function (user, callback) {
     userOperations.signUp(user, function(result){
-        console.log(result);
+        //console.log(result);
         callback(result);
     });
 };

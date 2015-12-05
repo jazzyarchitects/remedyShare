@@ -2,31 +2,33 @@
  * Created by Jibin_ism on 26-Nov-15.
  */
 
-var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var UserSchema=new Schema({
-   name:{
-       type:String,
-       required: true
-   },
-    age:{
+var UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    age: {
         type: Number,
-        required:false
+        required: false
     },
-    sex:{
-        type:String,
-        required: true
-    },
-    email:{
+    sex: {
         type: String,
         required: true
     },
-    mobile:{
+    email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    password:{
+    mobile: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
         type: String,
         required: true
     },
@@ -45,6 +47,17 @@ var UserSchema=new Schema({
         required: false,
         ref: 'MedicineDetail'
     }
-},{strict:false});
+});
 
-mongoose.model('User',UserSchema);
+
+UserSchema.methods.toJSON=function(pass){
+    return {
+        _id: this._id,
+        name: this.name,
+        email: this.email,
+        age: this.age,
+        sex: this.sex
+    }
+};
+
+mongoose.model('User', UserSchema);

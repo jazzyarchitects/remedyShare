@@ -6,9 +6,11 @@
 var path = requireFromModule('path');
 var control=requireFromModule('users/controllers/user');
 
-var getUserObject=function(req){
+var getUserObject=function(req, signup){
     var user={};
-    user._id=req.body.id;
+    if(!signup){
+        user._id=req.body.id;
+    }
     user.name=req.body.name;
     user.age=req.body.age;
     user.sex=req.body.sex;
@@ -19,9 +21,9 @@ var getUserObject=function(req){
 };
 
 var signup = function (req, res) {
-    var user = getUserObject(req);
+    var user = getUserObject(req, true);
     control.signUp(user, function(result){
-        console.log("Signup attempt: "+result);
+        //console.log("Signup attempt: "+result);
         res.json(result);
     });
 
@@ -31,7 +33,7 @@ var login=function(req, res){
     var user=getUserObject(req);
 
     control.login(user, function(result){
-        console.log("Login Attempt: "+result);
+        console.log("Login Attempt: "+JSON.stringify(result));
         res.json(result);
     });
 

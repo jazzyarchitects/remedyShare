@@ -7,65 +7,50 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var userExists = function (condition) {
-    console.log('Checking user existence');
-    User.findOne(condition, function (err, doc) {
-        if (doc) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-};
-
-var emailRegistered = function (user) {
-    return userExists({email: user.email});
-};
-
-var mobileRegistered = function (user) {
-    return userExists({mobile: user.mobile});
-};
-
-
+/**
+ * User SignUp Function
+ * @param userDetails - json object containing all the fields
+ * @param callback - callback function
+ */
 var signUp = function (userDetails, callback) {
-    console.log('Signing up user: ' + userDetails.name);
-    if (!emailRegistered(userDetails) && !mobileRegistered(userDetails)) {
-        User.save(userDetails, function (err, doc) {
-            if (!doc) {
-                callback(errorJSON(501, err));
-            } else {
-                callback(successJSON(doc))
-            }
-        });
-        //var user=new User(userDetails);
-        //user.save(function(err){
-        //   if(err){
-        //        callback(errorJSON(500, err));
-        //   }else{
-        //       callback(successJSON())
-        //   }
-        //});
-    } else {
-        callback(errorJSON(601, "INVALID_DATA_PASSED" , "EMAIL_OR_MOBILE_REGISTERED"));
-    }
+    User.findOne({$or :[{email: userDetails.email},{mobile:userDetails.mobile}]},function(err, doc){
+       if(doc){
+           callback(errorJSON(601, "INVALID_DATA_PASSED" , "EMAIL_OR_MOBILE_REGISTERED"));
+       } else {
+           var user=new User(userDetails);
+           console.log("Made User: "+JSON.stringify(user));
+           user.save(function(err) {
+               if (err) {
+                   callback(errorJSON(501, err));
+               } else {
+                   callback(successJSON(user))
+               }
+           });
+
+       }
+    });
 };
 
 var loginWithEmail = function (user, callback) {
     console.log("Login With Email...");
-    if (emailRegistered(user)) {
-        //Login Logic
-    } else {
-        callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
-    }
+    User.findOne({email: user.email},function(err,doc){
+       if(doc){
+            //Local Login
+       } else{
+           callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
+       }
+    });
 };
 
 var loginWithMobile = function (user, callback) {
     console.log("Login with mobile...");
-    if (mobileRegistered(user)) {
-        //Login Logic
-    } else {
-        callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
-    }
+    User.findOne({mobile: user.mobile},function(err, doc){
+        if(doc){
+            //LOcal login
+        }else{
+            callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
+        }
+    });
 };
 
 var update = function (user, callback) {

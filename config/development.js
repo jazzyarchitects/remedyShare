@@ -11,8 +11,8 @@ var rootPath = path.normalize(__dirname + '/..');
 module.exports = {
     root: rootPath,
     db: {
-        //uri: 'mongodb://localhost/remedyShare',
-        uri: 'mongodb://jazzyarchitects:jazzy@architects@ds061354.mongolab.com:61354/heroku_mrwqgl13',
+        //uri: 'mongodb://127.0.0.1/remedyShare',
+        uri: ' mongodb://jazzyarchitects:jazzy@architects@ds061354.mongolab.com:61354/heroku_mrwqgl13';
         options: {
             server: {
                 socketOptions: {
@@ -33,8 +33,8 @@ module.exports = {
 	},
     mailserver:{
         service: "Gmail",
-        email: "jazzy.architects@gmail.com",
+        email: "jazzyarchitects@gmail.com",
         password: "jazzy@architects",
-        sender: "jazzyarchitects@gmail.com"
+        sender: "hi@jazzyarchitects.com"
     }
 };

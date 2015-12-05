@@ -35,15 +35,11 @@ var requireFromModule = function (filePath, callback) {
 };
 
 var successJSON=function(data){
-    if(data) {
-        return JSON.stringify({success: true, data: data});
-    }else{
-        return JSON.stringify({success:true});
-    }
+    return {success: true, data: data};
 };
 
-var errorJSON=function(errorCode, data, optionalDescription){
-    return JSON.stringify({success: false, error: true, errorCode: errorCode, message:data, description: optionalDescription});
+var errorJSON=function(errorCode, description, message){
+    return {success: false, error: true, errorCode: errorCode, description: description, message:message};
 };
 
 exports.walk = walk;
