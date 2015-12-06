@@ -1,7 +1,3 @@
-/*
-    Author : Akas Antony
-    Date : 14/05/2015
-*/
 
 'use strict';
 
