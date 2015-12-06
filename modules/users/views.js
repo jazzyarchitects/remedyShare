@@ -4,7 +4,7 @@
 'use strict';
 
 var path = requireFromModule('path');
-var control=requireFromModule('users/controllers/user');
+var control=requireFromModule('users/controller');
 
 var getUserObject=function(req, signup){
     var user={};

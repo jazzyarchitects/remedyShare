@@ -5,7 +5,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var User = requireFromModule('users/userModel');
 
 /**
  * User SignUp Function

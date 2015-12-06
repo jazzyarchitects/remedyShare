@@ -25,11 +25,5 @@ module.exports = {
 	image: {
 		cdnURL: 'https://upload.uploadcare.com/base/',
 		imageBaseURL: 'https://ucarecdn.com/'
-	},
-    mailserver:{
-        service: "Gmail",
-        email: "jazzyarchitects@gmail.com",
-        password: "jazzy@architects",
-        sender: "hi@jazzyarchitects.com"
-    }
+	}
 };

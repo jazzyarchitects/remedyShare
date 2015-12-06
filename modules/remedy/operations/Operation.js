@@ -5,4 +5,4 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Remedy = mongoose.model('Remedy');
+//var Remedy = mongoose.model('Remedy');

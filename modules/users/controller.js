@@ -4,7 +4,7 @@
 'use strict';
 
 var path = requireFromModule('path');
-var userOperations=requireFromModule('users/operations/UserOperation');
+var userOperations=requireFromModule('users/operations');
 
 var signup = function (user, callback) {
     userOperations.signUp(user, function(result){

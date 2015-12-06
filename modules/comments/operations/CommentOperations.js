@@ -3,7 +3,8 @@
  */
     'use strict';
 var mongoose=require('mongoose');
-var Comment=mongoose.model('Comment');
+//var Comment=mongoose.model('Comment');
+var Comment=null;
 
 
 var insertComment = function(commentDetails, callback){

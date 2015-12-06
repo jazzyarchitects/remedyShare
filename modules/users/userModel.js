@@ -32,17 +32,17 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-    remedies:{
+    remedies: {
         type: [Schema.Types.ObjectId],
         required: false,
-        ref:'Remedy'
+        ref: 'Remedy'
     },
-    comments:{
+    comments: {
         type: [Schema.Types.ObjectId],
         required: false,
-        ref:'Comment'
+        ref: 'Comment'
     },
-    medicines:{
+    medicines: {
         type: [Schema.Types.ObjectId],
         required: false,
         ref: 'MedicineDetail'
@@ -50,7 +50,7 @@ var UserSchema = new Schema({
 });
 
 
-UserSchema.methods.toJSON=function(pass){
+UserSchema.methods.toJSON = function (pass) {
     return {
         _id: this._id,
         name: this.name,
@@ -60,4 +60,4 @@ UserSchema.methods.toJSON=function(pass){
     }
 };
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

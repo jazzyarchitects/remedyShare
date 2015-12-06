@@ -29,16 +29,18 @@ module.exports = function(config) {
 
 	connectDb();
 
-	function bootstrapModels() {
-        var dir = 'models';
-        utils.walk(moduleDir, dir);
-    }
-
-    bootstrapModels();
-
+	//function bootstrapModels() {
+     //   var dir = 'models';
+     //   utils.walk(moduleDir, dir);
+    //}
+    //
+    //bootstrapModels();
+    //
     function bootstrapRoutes() {
-        var dir = 'routes';
-        utils.walk(moduleDir, dir);
+    //    var dir = 'routes';
+    //    utils.walk(moduleDir, dir);
+        //app.use(requireFromModule('routes'));
+		requireFromModule('users/route')(app);
     }
 
     bootstrapRoutes();

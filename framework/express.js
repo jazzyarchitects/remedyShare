@@ -15,7 +15,9 @@ var consolidate = require('consolidate');
 var multer = require('multer');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
-var router=express.Router();
+var fs=require('fs');
+//var router=express.Router();
+
 
 module.exports = function (app) {
 
@@ -60,9 +62,21 @@ module.exports = function (app) {
     app.use(methodOverride());
 
 
-    app.use('/public', express.static(__dirname  + 'static/public'));
+    app.use(express.static('public'));
 
-    //authenticate request
+
+    app.get('/',function(req, res){
+        fs.readFile('./public/medicalAssistant.html', function(err, html){
+           if(err){
+               throw err;
+           }else{
+               res.writeHead(200, {'Content-Type': 'text/html','Content-Length':html.length});
+               res.write(html);
+               res.end();
+           }
+        });
+    });
+
     //router.use(function(req, res, next) {
         //var token = req.body.token || req.query.token || req.headers['x-access-token'];
         //if(token) {
@@ -85,25 +99,8 @@ module.exports = function (app) {
         //next();
     //});
 
+    //app.use('/api',userRoutes);
 
-
-    app.use('/api',router);
-
-
-
-    //Error
-    app.use(function (err, req, res, next) {
-        // Treat as 404
-        if (~err.message.indexOf('not found')) return next();
-
-        // Log it
-        console.error(err.stack);
-
-        // Error page
-        res.status(500).render('500', {
-            error: err.stack
-        });
-    });
 
     //Error handler
     if (process.env.NODE_ENV === 'development') {
