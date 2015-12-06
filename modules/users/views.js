@@ -5,6 +5,7 @@
 
 var path = requireFromModule('path');
 var control=requireFromModule('users/controller');
+var fs=require('fs');
 
 var getUserObject=function(req, signup){
     var user={};
@@ -40,20 +41,42 @@ var login=function(req, res){
 };
 
 var update=function(req, res){
-    var user = getUserObject(req);
+    var user = getUserObject(req.params.id);
     control.update(user, function(result){
        res.json(result);
     });
 };
 
 var del=function(req, res){
-    var user=getUserObject(req);
+    var user=getUserObject(req.params.id);
     control.delete(user, function(result){
         res.json(result);
     });
+};
+
+var sendFile=function(res, file){
+    fs.readFile(file, function(err, html){
+      if(err){
+          throw err;
+      } else{
+          res.writeHead(200, {'Content-Type': 'text/html','Content-Length':html.length});
+          res.write(html);
+          res.end();
+      }
+    });
+};
+
+var loginForm=function(req, res){
+    sendFile(res, './public/authen/login.html');
+};
+
+var signupForm=function(req, res){
+    sendFile(res, './public/authen/signup.html');
 };
 
 exports.signUp=signup;
 exports.login=login;
 exports.update=update;
 exports.delete=del;
+exports.sendLoginForm=loginForm;
+exports.sendSignUpForm=signupForm;

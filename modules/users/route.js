@@ -17,12 +17,12 @@ router.post('/login', function (req, res) {
     user.login(req, res);
 });
 
-router.put('/user', function (req, res) {
+router.put('/:id', function (req, res) {
     console.log("User data Edit...");
     user.update(req, res);
 });
 
-router.delete('/user', function (req, res) {
+router.delete('/:id', function (req, res) {
     console.log("Delete User...");
     user.delete(req, res);
 });
@@ -37,6 +37,19 @@ router.get('/', function (req, res) {
 //app.use('/api', router);
 //app.use('/api', router);
 //
+
+var defaultRouter=express.Router();
+
+defaultRouter.get('/signup',function(req, res){
+   user.sendSignUpForm(req, res);
+});
+
+defaultRouter.get('/login', function(req, res){
+    user.sendLoginForm(req, res);
+});
+
 module.exports = function(app){
-    app.use('/api',router);
+    app.use('/user',router);
+    app.use(defaultRouter);
 };
+

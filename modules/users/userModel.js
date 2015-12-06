@@ -32,6 +32,11 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
+    admin:{
+        type: Boolean,
+        required: true,
+        default: false
+    },
     remedies: {
         type: [Schema.Types.ObjectId],
         required: false,
