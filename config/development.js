@@ -1,8 +1,3 @@
-/*
-    Author : Akas Antony
-    Date : 14/05/2015
-*/
-
 'use strict';
 var path = require('path');
 
@@ -12,7 +7,7 @@ module.exports = {
     root: rootPath,
     db: {
         //uri: 'mongodb://127.0.0.1/remedyShare',
-        uri: ' mongodb://jazzyarchitects:jazzy@architects@ds061354.mongolab.com:61354/heroku_mrwqgl13';
+        uri: ' mongodb://jazzyarchitects:jazzy@architects@ds061354.mongolab.com:61354/heroku_mrwqgl13'
         options: {
             server: {
                 socketOptions: {
