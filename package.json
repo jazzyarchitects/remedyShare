@@ -17,6 +17,7 @@
     "express-session": "^1.1.0",
     "express-validator": "^2.1.1",
     "fs": "latest",
+    "handlebars": "^4.0.5",
     "jade": "latest",
     "jsonwebtoken": "latest",
     "lodash": "^3.0.0",

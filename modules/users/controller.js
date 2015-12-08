@@ -28,7 +28,7 @@ var login=function(user, callback){
 };
 
 var update=function(user, callback){
-    userOperations.update(user, function(result){
+    userOperations.updateUser(user, function(result){
        callback(result);
     });
 };

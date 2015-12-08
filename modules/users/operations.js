@@ -35,7 +35,7 @@ var loginWithEmail = function (user, callback) {
     console.log("Login With Email...");
     User.findOne({email: user.email},function(err,doc){
        if(doc){
-            //Local Login
+            callback(successJSON(doc));
        } else{
            callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
        }

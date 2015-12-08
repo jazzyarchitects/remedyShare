@@ -61,7 +61,8 @@ UserSchema.methods.toJSON = function (pass) {
         name: this.name,
         email: this.email,
         age: this.age,
-        sex: this.sex
+        sex: this.sex,
+        admin: this.admin
     }
 };
 
