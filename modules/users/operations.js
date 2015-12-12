@@ -6,6 +6,7 @@
 
 var mongoose = require('mongoose');
 var User = requireFromModule('users/userModel');
+var Hash=requireFromModule('clients/cryptoOperations');
 
 /**
  * User SignUp Function
@@ -18,24 +19,40 @@ var signUp = function (userDetails, callback) {
            callback(errorJSON(601, "INVALID_DATA_PASSED" , "EMAIL_OR_MOBILE_REGISTERED"));
        } else {
            var user=new User(userDetails);
-           console.log("Made User: "+JSON.stringify(user));
-           user.save(function(err) {
-               if (err) {
-                   callback(errorJSON(501, err));
-               } else {
-                   callback(successJSON(user))
+           Hash.hash(user, user.created_at.toString(),function(result){
+               if(result.success){
+                   user.password=result.hash;
+                   user.save(function(err){
+                       if (err) {
+                           callback(errorJSON(501, err));
+                       } else {
+                           callback(successJSON(user))
+                       }
+                   });
+               }else{
+                   callback(errorJSON(501, result.error));
                }
            });
-
        }
     });
 };
 
 var loginWithEmail = function (user, callback) {
     console.log("Login With Email...");
-    User.findOne({email: user.email},function(err,doc){
-       if(doc){
-            callback(successJSON(doc));
+    User.findOne({email: user.email},function(err,userDoc){
+       if(userDoc){
+           Hash.hash(user, userDoc.created_at.toString(), function(result){
+               if(result.success){
+                   if(userDoc.password == result.hash){
+                       callback(successJSON(userDoc));
+                   }else{
+                       callback(errorJSON(602, "AUTHENTICATION_ERROR"));
+                   }
+               }else{
+                   callback(errorJSON(501, result.error))
+               }
+           });
+           //TODO: Compare password and then execute the clientOperation
        } else{
            callback(errorJSON(601,"INVALID_DATA_PASSED", "USER_NOT_REGISTERED"));
        }

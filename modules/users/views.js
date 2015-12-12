@@ -44,13 +44,13 @@ var login=function(req, res){
     var user=getUserObject(req);
 
     control.login(user, function(result){
-        console.log("Login Attempt: "+JSON.stringify(result));
-        if(result.success) {
-            //handlebars.print('./public/dashboard.html', {user: result.data});
-        }else{
-            sendFile(res, './public/authen/login.html', options);
-        }
-        //res.json(result);
+        //console.log("Login Attempt: "+JSON.stringify(result));
+        //if(result.success) {
+        //    handlebars.print('./public/dashboard.html', {user: result.data});
+        //}else{
+        //    sendFile(res, './public/authen/login.html', options);
+        //}
+        res.json(result);
     });
 
 };

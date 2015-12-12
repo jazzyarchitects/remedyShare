@@ -16,6 +16,7 @@ var multer = require('multer');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
 var fs=require('fs');
+var ClientOperations = requireFromModule('clients/operations');
 //var router=express.Router();
 
 
@@ -65,41 +66,36 @@ module.exports = function (app) {
     app.use(express.static('public'));
 
 
-    app.get('/',function(req, res){
-        fs.readFile('./public/medicalAssistant.html', function(err, html){
-           if(err){
-               throw err;
-           }else{
-               res.writeHead(200, {'Content-Type': 'text/html','Content-Length':html.length});
-               res.write(html);
-               res.end();
-           }
-        });
+    app.use(function(req, res, next) {
+        var key =  req.headers['x-access-key'];
+        var id=req.headers['x-access-id'];
+        if(key && id){
+            ClientOperations.authenticate(id, key, function(success, user){
+                console.log("OAuth authen: "+success+" "+user);
+                req.authenticated=success;
+                if(success){
+                    req.user=user;
+                }
+                next();
+            });
+        }else {
+            next();
+        }
     });
 
-    //router.use(function(req, res, next) {
-        //var token = req.body.token || req.query.token || req.headers['x-access-token'];
-        //if(token) {
-        //    jwt.verify(token, app.get('secretKey'), function(err, success) {
-        //        if(success) {
-        //            // console.log("authenticated "+true);
-        //            req.authenticated = true;
-        //            // return res.json({ success: false, message: 'AUTHENTICATION_FAILURE' });
-        //        }
-        //        else {
-        //            // console.log("authenticated "+false);
-        //            req.authenticated = false;
-        //        }
-        //    });
-        //}
-        //else {
-        //    // console.log("authenticated 2"+false);
-        //    req.authenticated = false;
-        //}
-        //next();
-    //});
 
-    //app.use('/api',userRoutes);
+    app.get('/',function(req, res){
+        //console.log("Req.user: "+req.user);
+        fs.readFile('./public/medicalAssistant.html', function(err, html){
+            if(err){
+                throw err;
+            }else{
+                res.writeHead(200, {'Content-Type': 'text/html','Content-Length':html.length});
+                res.write(html);
+                res.end();
+            }
+        });
+    });
 
 
     //Error handler

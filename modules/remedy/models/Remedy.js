@@ -41,17 +41,33 @@ var RemedySchema=new Schema({
     },
     upvote:{
         type: [Schema.Types.ObjectId],
-        required: false
+        required: false,
+        ref: 'User'
     },
     downvote:{
         type: [Schema.Types.ObjectId],
-        required: false
+        required: false,
+        ref: 'User'
     },
     comments:{
         type: [Schema.Types.ObjectId],
-        required: false
+        required: false,
+        ref: 'Comment'
     }
 
-},{strict:false});
+});
 
-mongoose.model('Remedy',RemedySchema);
+RemedySchema.methods.toJSON=function(){
+  return {
+      author: this.author,
+      stats:{
+          views: this.stats.views,
+          comments: this.stats.comments,
+          downvote: this.stats.downvote,
+          upvote: this.stats.upvote
+      },
+      published_on: this.publishedOn
+  }
+};
+
+module.exports=mongoose.model('Remedy',RemedySchema);

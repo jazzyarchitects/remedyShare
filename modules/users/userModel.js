@@ -51,6 +51,11 @@ var UserSchema = new Schema({
         type: [Schema.Types.ObjectId],
         required: false,
         ref: 'MedicineDetail'
+    },
+    created_at:{
+        type: Schema.Types.Date,
+        required: true,
+        'default': Date.now
     }
 });
 
@@ -62,7 +67,8 @@ UserSchema.methods.toJSON = function (pass) {
         email: this.email,
         age: this.age,
         sex: this.sex,
-        admin: this.admin
+        admin: this.admin,
+        created_at: this.created_at
     }
 };
 
