@@ -2,7 +2,7 @@
  * Created by Jibin_ism on 09-Dec-15.
  */
 var mongoose = require('mongoose');
-var Client = requireFromModule('clients/ClientModel');
+var Client = requireFromModule('clients/clientModel');
 var uuid = require('node-uuid');
 var Hash = requireFromModule('clients/cryptoOperations');
 
