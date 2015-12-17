@@ -71,7 +71,7 @@ module.exports = function (app) {
         var id=req.headers['x-access-id'];
         if(key && id){
             ClientOperations.authenticate(id, key, function(success, user){
-                console.log("OAuth authen: "+success+" "+user);
+                //console.log("OAuth authen: "+success+" "+user);
                 req.authenticated=success;
                 if(success){
                     req.user=user;

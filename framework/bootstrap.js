@@ -37,10 +37,9 @@ module.exports = function(config) {
     //bootstrapModels();
     //
     function bootstrapRoutes() {
-    //    var dir = 'routes';
-    //    utils.walk(moduleDir, dir);
-        //app.use(requireFromModule('routes'));
 		requireFromModule('users/route')(app);
+		requireFromModule('remedy/route')(app);
+		requireFromModule('comments/route')(app);
     }
 
     bootstrapRoutes();
