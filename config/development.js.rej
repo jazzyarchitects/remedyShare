@@ -1,0 +1,9 @@
+diff a/config/development.js b/config/development.js	(rejected hunks)
+@@ -6,6 +6,7 @@
+ module.exports = {
+     root: rootPath,
+     db: {
++        // uri: 'mongodb://127.0.0.1/remedyShare',
+         uri: 'mongodb://jibin19596:jazzy_architects@ds061354.mongolab.com:61354/heroku_mrwqgl13',
+         options: {
+             server: {
