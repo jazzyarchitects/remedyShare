@@ -8,18 +8,18 @@ var userOperations = requireFromModule('users/operations');
 var ClientOperations = requireFromModule('clients/operations');
 
 var signUp = function (user, callback) {
-    userOperations.signUp(user, function (result) {
+    userOperations.signUp(user, function (resultUser) {
         //console.log(result);
-        if (result.success) {
-            ClientOperations.createNewClient(result.data, function (result) {
+        if (resultUser.success) {
+            ClientOperations.createNewClient(resultUser.data, function (result) {
                 if (result.error) {
                     callback(errorJSON(501, result.err));
                 } else {
-                    callback(successJSON({detail: user, client: result}));
+                    callback(successJSON({detail: resultUser.data, client: result}));
                 }
             });
         } else {
-            callback(result);
+            callback(resultUser);
         }
     });
 };

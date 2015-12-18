@@ -23,6 +23,7 @@ var signUp = function (userDetails, callback) {
             Hash.hash(user, user.created_at.toString(), function (result) {
                 if (result.success) {
                     user.password = result.hash;
+
                     user.save(function (err) {
                         if (err) {
                             callback(errorJSON(501, err));
