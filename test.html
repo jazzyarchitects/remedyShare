@@ -8,7 +8,7 @@
 <body style="margin:0;padding:0;height:100%; width:100%;">
 
 <div>
-    <form method="post" action="http://localhost:3000/signup" id="register_form">
+    <form method="post" action="http://localhost:3000/user/profilePicture" enctype="multipart/form-data" id="register_form">
         <table width="100%" id="register_table" class="form_table">
             <!--<form method="post" action="php/register_use<!-- r.php" id="register_form">
             <caption>Register Yourself</caption>
@@ -24,15 +24,18 @@
             </form> -->
 
                 <caption>Register Yourself</caption>
-                <tr><td width="35%"><label for="name">Name</label></td><td><input type="text" name="name" class="register_input"></td></tr>
-                <tr><td><label for="email">Email-Id</label></td><td><input type="text" name="email" id="email_user" class="register_input"></td></tr>
-                <tr><td><label for="age" style="font-size:0.6em;">Age</label></td><td><input type="text" name="age" class="register_input"></td></tr>
-                <tr><td><label for="sex">Sex</label></td><td><input type="text" name="sex" id="user_id" class="register_input"></td></tr>
-                <tr><td><label for="user_pass">Password</label></td><td><input type="password" name="password" id="password_1" class="register_input"></td></tr>
-                <tr><td><label for="pass_confirm">Confirm Password</label></td><td><input type="password" id="password_2" class="register_input"></td></tr>
-                <tr><td><label for="mobile">Mobile</label></td><td><input type="tel" name="mobile" class="register_input"></td></tr>
-                <tr><td></td><td><input type="submit" id="register_submit" class="buttons" value="Register"><input type="reset" class="buttons" value="Clear"></td></tr>
-                <tr><td colspan="2">If already registered <a href="index.php">Click Here</a> to login</td></tr>
+                <!--<tr><td width="35%"><label for="name">Name</label></td><td><input type="text" name="name" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="email">Email-Id</label></td><td><input type="text" name="email" id="email_user" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="age" style="font-size:0.6em;">Age</label></td><td><input type="text" name="age" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="sex">Sex</label></td><td><input type="text" name="sex" id="user_id" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="user_pass">Password</label></td><td><input type="password" name="password" id="password_1" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="pass_confirm">Confirm Password</label></td><td><input type="password" id="password_2" class="register_input"></td></tr>-->
+                <!--<tr><td><label for="mobile">Mobile</label></td><td><input type="tel" name="mobile" class="register_input"></td></tr>-->
+                <!--<tr><td></td><td><input type="submit" id="register_submit" class="buttons" value="Register"><input type="reset" class="buttons" value="Clear"></td></tr>-->
+                <!--<tr><td colspan="2">If already registered <a href="index.php">Click Here</a> to login</td></tr>-->
+            <tr><td>Hi</td><td><input type="text" name="hi" /> </td></tr>
+            <tr><td>File</td><td><input type="file" name="fileHi" /> </td></tr>
+            <tr><td><input type="submit" /> </td></tr>
         </table>
     </form>
     </div><!--user-interface-->

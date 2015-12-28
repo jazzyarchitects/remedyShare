@@ -10,9 +10,22 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-    age: {
-        type: Number,
-        required: false
+    oldId: {
+        type: Schema.Types.ObjectId,
+        select: false
+    },
+    dob: {
+        type: {
+            dd: Number,
+            mm: Number,
+            yyyy: Number
+        },
+        required: true,
+        'default': {
+            dd: 0,
+            mm: 0,
+            yyyy: 0
+        }
     },
     sex: {
         type: String,
@@ -30,19 +43,21 @@ var UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     admin: {
         type: Boolean,
         required: true,
-        default: false
+        default: false,
+        select: false
     },
     remedies: [{
         type: Schema.Types.ObjectId,
         ref: 'Remedy'
     }],
-    comments:[{
-       type: Schema.Types.ObjectId,
+    comments: [{
+        type: Schema.Types.ObjectId,
         required: false,
         ref: 'Comment'
     }],
@@ -75,7 +90,8 @@ var UserSchema = new Schema({
                     remedies: Number,
                     medicines: Number,
                     comments: Number
-                }
+                },
+                select: false
             },
             remedyVotes: {
                 type: {
@@ -100,6 +116,12 @@ var UserSchema = new Schema({
             }
         }
     },
+    image: {
+        type: {
+            filename: String,
+            path: String
+        }
+    },
     remedyVotes: {
         type: {
             upvote: [{
@@ -110,7 +132,8 @@ var UserSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: 'Remedy'
             }]
-        }
+        },
+        select: false
     },
     deleted: {
         type: {
@@ -124,22 +147,28 @@ var UserSchema = new Schema({
                 unique: true,
                 ref: 'MedicineDetails'
             }],
-            comments:[{
+            comments: [{
                 type: Schema.Types.ObjectId,
                 unique: true,
                 ref: 'Comment'
             }]
-        }
+        },
+        select: false
     }
 });
 
 
-UserSchema.methods.toJSON = function () {
-    var obj = this.toObject();
-    delete obj.password;
-    //delete obj.deleted;
-    //delete obj."stats.deleted";
-    return obj;
-};
+//UserSchema.methods.toJSON = function () {
+//    var obj = this.toObject();
+//    delete obj.password;
+//    //delete obj.deleted;
+//    //delete obj."stats.deleted";
+//    return obj;
+//};
+
+//UserSchema.methods.completeData = function(){
+//    var obj =this.toObject();
+//    return obj;
+//};
 
 module.exports = mongoose.model('User', UserSchema);

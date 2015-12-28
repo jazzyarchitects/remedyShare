@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": {
+    "__v": 0,
+    "author": "567a2a77cee754f80f74240e",
+    "title": "Hello Remedy",
+    "description": "Some random description",
+    "image": {
+      "path": "uploads\Remedies\ec808b71f0b7075ea644f1b6ff4bb810",
+      "filename": "ec808b71f0b7075ea644f1b6ff4bb810"
+    },
+    "_id": "567b8ac70ddeed8027f7e09c",
+    "deletedComments": [],
+    "active": true,
+    "comments": [],
+    "downvote": [],
+    "upvote": [],
+    "publishedOn": "2015-12-24T06:03:51.046Z",
+    "stats": {
+      "comments": 0,
+      "views": 0,
+      "downvote": 0,
+      "upvote": 0
+    },
+    "rankIndex": 1450937031077,
+    "diseases": [
+      "d1",
+      "d2",
+      "d3"
+    ],
+    "tags": [
+      "tag1",
+      " tag2",
+      " tag3"
+    ],
+    "references": [
+      "ref1",
+      " ref2",
+      " ref2"
+    ]
+  }
+}

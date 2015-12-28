@@ -3,21 +3,21 @@
  */
 'use strict';
 
-var RemedyOperations = requireFromModule('remedy/operations');
+var RemedyOperations = require('./operations');
 var UserOperations = requireFromModule('users/operations');
 var CommentOperations = requireFromModule('comments/operations');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 var insert = function (user, remedy, callback) {
     RemedyOperations.insert(user, remedy, function (result) {
-        //Link to user
         if (result.success) {
             UserOperations.linkRemedy(user, result.remedy, function (success) {
-                if (success) {
-                    callback(successJSON(result.remedy));
-                } else {
+                if (!success) {
                     RemedyOperations.removeRemedy(remedy._id);
                     callback(errorJSON(501, "Error Linking remedy to user"));
+                } else {
+                    callback(successJSON(result.remedy));
                 }
             });
         } else {
@@ -103,7 +103,48 @@ var insertComment = function (user_id, remedy_id, comment, callback) {
     //Link comment to user
 };
 
+var findRemedyByDisease = function (disease, page, callback) {
+    RemedyOperations.findRemedyByDisease(disease, page, function (result) {
+        callback(result);
+    });
+};
 
+var search = function (query, page, callback) {
+    RemedyOperations.search(query, page, function (result) {
+        callback(result);
+    });
+};
+
+var getAllRemedies = function (page, callback) {
+    RemedyOperations.getAllRemedies(page, function (result) {
+        callback(result);
+    });
+};
+
+var registerView = function (_id) {
+    RemedyOperations.registerView(_id);
+};
+
+var importFromJSON = function (user, file, callback) {
+    fs.readFile(file.path, function (err, content) {
+        if (err) {
+            callback(errorJSON(501, "GENERAL_ERROR", err));
+        } else {
+            //content=(content.toString()).replace(/\\/g,"\\\\");
+            content = JSON.parse(content);
+            RemedyOperations.importFromJSON(user, content.data, function (result) {
+                callback(result);
+            });
+        }
+    });
+};
+
+var getCommentList = function (remedy_id, callback) {
+    RemedyOperations.getCommentList(remedy_id, function (result) {
+        callback(result);
+    })
+    ;
+};
 
 exports.insert = insert;
 exports.update = update;
@@ -112,3 +153,9 @@ exports.upvote = upvote;
 exports.downvote = downvote;
 exports.insertComment = insertComment;
 exports.getRemedy = getRemedy;
+exports.searchRemedy = search;
+exports.findRemedyByDisease = findRemedyByDisease;
+exports.getAllRemedies = getAllRemedies;
+exports.registerView = registerView;
+exports.importFromJSON = importFromJSON;
+exports.getCommentList = getCommentList;

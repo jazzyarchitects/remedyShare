@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "data": {
+    "_id": "567a2a77cee754f80f74240e",
+    "remedies": [
+      {
+        "_id": "567a2aafcee754f80f742410",
+        "title": "Test Remedy 002",
+        "publishedOn": "2015-12-23T05:01:35.332Z",
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        },
+        "diseases": []
+      },
+      {
+        "_id": "567a2b3eedf16dc826986928",
+        "title": "Test Remedy 002",
+        "publishedOn": "2015-12-23T05:03:58.326Z",
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        },
+        "diseases": [
+          " hail"
+        ]
+      },
+      {
+        "_id": "567a46c1f292b044177169bb",
+        "title": "Test Remedy 002",
+        "publishedOn": "2015-12-23T07:01:21.175Z",
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        },
+        "diseases": [
+          "death",
+          " hail"
+        ]
+      },
+      {
+        "_id": "567ad7f6526990f80ddb5a31",
+        "title": "Hello Remedy",
+        "image": {
+          "filename": "c2987ee815a6850bea84d0932e1ee594",
+          "path": "uploads\Remedies\c2987ee815a6850bea84d0932e1ee594"
+        },
+        "publishedOn": "2015-12-23T17:20:54.901Z",
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        },
+        "diseases": [
+          "d1",
+          "d2",
+          "d3"
+        ]
+      },
+      {
+        "_id": "567adca1d35495b0211c0019",
+        "title": "Hello Remedy",
+        "publishedOn": "2015-12-23T17:40:49.884Z",
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        },
+        "diseases": [
+          "d1",
+          "d2",
+          "d3"
+        ]
+      }
+    ]
+  }
+}

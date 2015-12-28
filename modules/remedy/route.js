@@ -4,14 +4,30 @@
 var Remedy = requireFromModule('remedy/views');
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
 
-router.get('/', function (req, res) {
-    //TODO: Send default feed screen
+var uploadImage = multer({
+    'dest': './uploads/images/remedy/'
+}).single('image');
+
+//router.use(uploadImage);
+
+router.get('/all', function (req, res) {
+    Remedy.getAll(req, res);
+});
+router.get('/all/:page', function (req, res) {
+    Remedy.getAll(req, res);
 });
 
-
+/**
+ * Checked
+ */
 router.get('/:id', function (req, res) {
     Remedy.get(req, res);
+});
+
+router.get('/:id/comments', function (req, res) {
+    Remedy.getCommentList(req, res);
 });
 
 router.use(function (req, res, next) {
@@ -22,29 +38,88 @@ router.use(function (req, res, next) {
     }
 });
 
-router.post('/', function (req, res) {
+/**
+ * Checked
+ */
+router.post('/', uploadImage, function (req, res) {
     Remedy.insert(req, res);
 });
 
-
-router.put('/:id', function (req, res) {
+/**
+ * Checked
+ */
+router.put('/:id', uploadImage, function (req, res) {
     Remedy.update(req, res);
 });
 
+
+/**
+ * Checked
+ */
 router.delete('/:id', function (req, res) {
     Remedy.delete(req, res);
 });
 
-router.put('/upvote/:id', function (req, res) {
+/**
+ * Checked
+ */
+router.put('/:id/upvote', function (req, res) {
     Remedy.upvote(req, res);
 });
 
-router.put('/downvote/:id', function (req, res) {
+/**
+ * Checked
+ */
+router.put('/:id/downvote', function (req, res) {
     Remedy.downvote(req, res);
 });
 
+/**
+ * Checked
+ */
 router.post('/:id/comment', function (req, res) {
     Remedy.insertComment(req, res);
+});
+
+/**
+ * Checked
+ */
+router.get('/diseases/:disease', function (req, res) {
+    Remedy.findByDisease(req, res);
+});
+
+
+/**
+ * Checked
+ */
+router.get('/diseases/:disease/:page', function (req, res) {
+    Remedy.findByDisease(req, res);
+});
+
+/**
+ * Checked
+ */
+router.get('/search/:query', function (req, res) {
+    Remedy.searchRemedy(req, res);
+});
+
+/**
+ * Checked
+ */
+router.get('/search/:query/:page', function (req, res) {
+    Remedy.searchRemedy(req, res);
+});
+
+router.get('/image/:filename', function (req, res) {
+    Remedy.sendPicture(req, res);
+});
+
+router.put('/viewed/:id', function (req, res) {
+    Remedy.registerView(req, res);
+});
+
+router.post('/import', multer({'dest': './uploads/backups/'}).single('backup'), function (req, res) {
+    Remedy.importFromJSON(req, res);
 });
 
 

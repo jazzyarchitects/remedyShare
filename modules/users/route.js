@@ -4,8 +4,10 @@
 var user = requireFromModule('users/views');
 var path = require('path');
 var express = require('express');
+var remedy = requireFromModule('remedy/views');
 var router = express.Router();
-
+var multer=require('multer');
+router.use(multer({'dest': './uploads/images/users/'}).single('image'));
 
 router.post('/signup', function (req, res) {
     //console.log('User Signup: '+JSON.stringify(req.body));
@@ -45,6 +47,10 @@ router.delete('/', function (req, res) {
     user.delete(req, res);
 });
 
+router.get('/logout', function(req, res){
+   user.logout(req, res);
+});
+
 
 
 
@@ -62,6 +68,14 @@ router.get('/remedy/all', function(req, res){
 
 router.get('/remedy/:page', function (req, res) {
     user.remedyList(req, res);
+});
+
+router.put('/profilePicture', function(req, res){
+   user.uploadProfilePicture(req, res);
+});
+
+router.get('/profilePicture', function(req, res){
+   remedy.sendPicture(req, res);
 });
 
 

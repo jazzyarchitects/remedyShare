@@ -6,12 +6,19 @@
 var path = requireFromModule('path');
 var control = requireFromModule('users/controller');
 var fs = require('fs');
-var handlebars = require('handlebars');
 
 var getUserObject = function (req, signup) {
     var user = {};
     user.name = req.body.name;
-    user.age = req.body.age;
+    user.dob={};
+    var dob=req.body.dob;
+    if(dob) {
+        var days = dob.split(",");
+        //console.log("Days: "+days);
+        user.dob.dd = days[0];
+        user.dob.mm = days[1];
+        user.dob.yyyy = days[2];
+    }
     user.sex = req.body.sex;
     user.email = req.body.email;
     user.mobile = req.body.mobile;
@@ -89,8 +96,22 @@ var otherRemedyList = function (req, res) {
     });
 };
 
-var getUserData=function(req, res){
-    control.getUserData(req.params.id, function(result){
+var getUserData = function (req, res) {
+    control.getUserData(req.params.id, function (result) {
+        res.json(result);
+    });
+};
+
+var uploadProfilePicture = function (req, res) {
+    //console.log("Files: "+JSON.stringify(req.file));
+    //console.log("Body: "+JSON.stringify(req.body));
+    control.uploadProfilePicture(req.user, req.file, function(result){
+       res.json(result);
+    });
+};
+
+var logout = function(req, res){
+    control.logout(req.user, function(result){
        res.json(result);
     });
 };
@@ -103,4 +124,6 @@ exports.sendLoginForm = loginForm;
 exports.sendSignUpForm = signupForm;
 exports.remedyList = remedyList;
 exports.othersRemedyList = otherRemedyList;
-exports.getUser= getUserData;
+exports.getUser = getUserData;
+exports.uploadProfilePicture = uploadProfilePicture;
+exports.logout= logout;

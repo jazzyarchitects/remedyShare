@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": {
+    "remedies": [
+      {
+        "_id": "567a2af1edf16dc826986927",
+        "author": "567a2a77cee754f80f74240e",
+        "title": "Test Remedy 002",
+        "description": "Second remedy... Not writing much as u know from previous remedy that i am very lazy. :P",
+        "comments": [],
+        "stats": {
+          "upvote": 0,
+          "downvote": 0,
+          "views": 0,
+          "comments": 0
+        }
+      }
+    ],
+    "count": 1,
+    "page": 1
+  }
+}

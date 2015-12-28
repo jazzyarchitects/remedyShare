@@ -1,0 +1,277 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "567a2aafcee754f80f742410",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Test Remedy 002",
+      "description": "Second remedy... Not writing much as u know from previous remedy that i am very lazy. :P",
+      "publishedOn": "2015-12-23T05:01:35.332Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [],
+      "tags": [],
+      "references": [
+        "Book of life",
+        " hello world"
+      ]
+    },
+    {
+      "_id": "567a2af1edf16dc826986927",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Test Remedy 002",
+      "description": "Second remedy... Not writing much as u know from previous remedy that i am very lazy. :P",
+      "publishedOn": "2015-12-23T05:02:41.933Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "death",
+        " hail"
+      ],
+      "tags": [
+        "remedy",
+        "  life",
+        " world"
+      ],
+      "references": [
+        "Book of life",
+        " hello world"
+      ]
+    },
+    {
+      "_id": "567a2b3eedf16dc826986928",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Test Remedy 002",
+      "description": "Second remedy... Not writing much as u know from previous remedy that i am very lazy. :P",
+      "publishedOn": "2015-12-23T05:03:58.326Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        " hail"
+      ],
+      "tags": [
+        "remedy",
+        "  life",
+        " world"
+      ],
+      "references": [
+        "Book of life",
+        " hello world"
+      ]
+    },
+    {
+      "_id": "567a46c1f292b044177169bb",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Test Remedy 002",
+      "description": "not a damn thing of other",
+      "publishedOn": "2015-12-23T07:01:21.175Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "death",
+        " hail"
+      ],
+      "tags": [
+        "remedy",
+        "  life",
+        " world"
+      ],
+      "references": [
+        "Book of life",
+        " hello world"
+      ]
+    },
+    {
+      "_id": "567ad7f6526990f80ddb5a31",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "image": {
+        "filename": "c2987ee815a6850bea84d0932e1ee594",
+        "path": "uploads\Remedies\c2987ee815a6850bea84d0932e1ee594"
+      },
+      "publishedOn": "2015-12-23T17:20:54.901Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    },
+    {
+      "_id": "567adca1d35495b0211c0019",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "publishedOn": "2015-12-23T17:40:49.884Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [
+        "tag1",
+        " tag2",
+        " tag3"
+      ],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    },
+    {
+      "_id": "567b8773dde771fc1d4b6d7f",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "publishedOn": "2015-12-24T05:49:39.358Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [
+        "tag1",
+        " tag2",
+        " tag3"
+      ],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    },
+    {
+      "_id": "567b87a68b02a8081b42f51b",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "publishedOn": "2015-12-24T05:50:30.166Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [
+        "tag1",
+        " tag2",
+        " tag3"
+      ],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    },
+    {
+      "_id": "567b8848fa7f7d8423e419d1",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "image": {
+        "filename": "6c880a2e6a4b4c1ab7a5bdb5f22b8cd0",
+        "path": "uploads\Remedies\6c880a2e6a4b4c1ab7a5bdb5f22b8cd0"
+      },
+      "publishedOn": "2015-12-24T05:53:12.048Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [
+        "tag1",
+        " tag2",
+        " tag3"
+      ],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    },
+    {
+      "_id": "567b889cbd04ff181abf233e",
+      "author": "567a2a77cee754f80f74240e",
+      "title": "Hello Remedy",
+      "description": "Some random description",
+      "image": {
+        "filename": "deb0222d9749dab7aadac40e0839f33b",
+        "path": "uploads\Remedies\deb0222d9749dab7aadac40e0839f33b"
+      },
+      "publishedOn": "2015-12-24T05:54:36.394Z",
+      "stats": {
+        "upvote": 0,
+        "downvote": 0,
+        "views": 0,
+        "comments": 0
+      },
+      "diseases": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "tags": [
+        "tag1",
+        " tag2",
+        " tag3"
+      ],
+      "references": [
+        "ref1",
+        " ref2",
+        " ref2"
+      ]
+    }
+  ]
+}

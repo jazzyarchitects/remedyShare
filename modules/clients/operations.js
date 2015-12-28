@@ -57,7 +57,7 @@ var authorize = function (id, key, callback) {
     Client.findOne({id: id, key: key}, function (err, doc) {
         if (doc) {
             // authorized
-            callback(true, doc.user);
+            callback(true, doc);
         } else {
             console.log(err +" "+doc);
             callback(false, errorJSON(602, "AUTHENTICATION_ERROR", "INVALID_KEY"));
@@ -70,7 +70,29 @@ var logout = function (user, callback) {
         if (!doc) {
             callback(errorJSON(501, err));
         }else{
-            callback(true);
+            callback({success: true});
+        }
+    });
+};
+
+var exportForBackup = function(callback){
+  Client.find({}, function(err, doc){
+     if(err){
+         console.log("Error exporting clients:" +err);
+         callback(errorJSON(501, "GENERAL_ERROR_-_CLIENT_EXPORT", err));
+     } else{
+         callback(successJSON(doc));
+     }
+  });
+};
+
+var importBackup = function(clients, callback){
+    Client.create(clients, function(err, doc){
+        if(err){
+            console.log("Erorr importing clients: "+JSON.stringify(err));
+            callback(errorJSON(501,"ERROR_IMPORTING_CLIENT_BACKUP", err));
+        } else{
+            callback({success: true});
         }
     });
 };
@@ -78,3 +100,5 @@ var logout = function (user, callback) {
 exports.authenticate = authorize;
 exports.createNewClient = newClient;
 exports.logout = logout;
+exports.exportForBackup = exportForBackup;
+exports.importBackup = importBackup;

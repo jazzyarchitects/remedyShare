@@ -40,6 +40,7 @@ module.exports = function(config) {
 		requireFromModule('users/route')(app);
 		requireFromModule('remedy/route')(app);
 		requireFromModule('comments/route')(app);
+		requireFromModule('admin/route')(app);
     }
 
     bootstrapRoutes();

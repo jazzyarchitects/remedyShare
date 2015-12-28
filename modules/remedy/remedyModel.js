@@ -11,6 +11,10 @@ var RemedySchema = new Schema({
         required: true,
         ref: 'User'
     },
+    oldId: {
+        type:Schema.Types.ObjectId,
+        select: false
+    },
     title: {
         type: String,
         required: true
@@ -22,6 +26,19 @@ var RemedySchema = new Schema({
     references: {
         type: [String],
         required: false
+    },
+    tags: [String],
+    diseases: [String],
+    image: {
+        type: {
+            filename: String,
+            path: String
+        }
+    },
+    rankIndex: {
+        type: Number,
+        required: true,
+        'default': 0
     },
     stats: {
         type: {
@@ -69,12 +86,70 @@ var RemedySchema = new Schema({
     active: {
         type: Boolean,
         required: true,
-        'default': true
+        'default': true,
+        select: false
     },
     deletedComments: [{
         type: Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'Comment',
+        select: false
     }]
 });
+
+RemedySchema.index({
+    title: 'text',
+    description: 'text',
+    references: 'text',
+    tags: 'text',
+    diseases: 'text'
+}, {
+    name: "best_match_index",
+    weights: {
+        references: 1,
+        title: 5,
+        description: 4,
+        tags: 13,
+        diseases: 15
+    }
+});
+
+RemedySchema.pre('save', function (next) {
+    var diseases = this.diseases;
+    for (var i = 0; i < diseases.length; i++) {
+        diseases[i] = diseases[i].toLowerCase();
+    }
+    this.rankIndex = (new Date()).getTime();
+    next();
+});
+
+RemedySchema.static.registerView = function (_id) {
+    this.findOne({_id: _id}, function (err, doc) {
+        if (err) {
+            console.log("Error in registeringView for remedy: " + JSON.stringify(err));
+        } else {
+            var p = (doc.rankIndex + (new Date()).getTime()) / 2;
+            this.update({_id: _id}, {
+                $set: {
+                    $inc: {"stats.views": 1},
+                    rankIndex: p
+                }
+            })
+        }
+    });
+};
+
+RemedySchema.static.updateRankingIndex = function (_id, control) {
+    control = control > 0 ? 1 : -1;
+    this.findOne({_id: _id}, function (err, doc) {
+        if (err) {
+            console.log("Error in updatingRankingIndex for remedy: " + JSON.stringify(err));
+        } else {
+            var p = ((doc.rankIndex + (new Date()).getTime()) / 2) + ((control) * ((new Date()).getTime()) / 3);
+            this.update({_id: _id}, {
+                $set: {rankIndex: p}
+            });
+        }
+    });
+};
 
 module.exports = mongoose.model('Remedy', RemedySchema);

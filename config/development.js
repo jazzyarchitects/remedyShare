@@ -18,12 +18,5 @@ module.exports = {
     },
     server: {
         port: Number(process.env.PORT || 3000)
-    },
-    keys: {
-		token: 'jazziness'
-    },
-	image: {
-		cdnURL: 'https://upload.uploadcare.com/base/',
-		imageBaseURL: 'https://ucarecdn.com/'
-	}
+    }
 };

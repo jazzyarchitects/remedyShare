@@ -1,15 +1,14 @@
 body{
-    background: #EEEEEE;
-    background: url("../images/back.jpg");
-    width: 100%;
-    background-size: cover;
-    background-position-y: -75px;
-    height: 100%;
+    background: #000000;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .page-content{
 }
+
+/*
+ActionBar Color #3F51B5
+*/
 
 .appScreenshot-card-wide{
     width: 320px;
@@ -18,6 +17,38 @@ body{
     top: 50px;
     margin-bottom: 50px;
     display: block
+}
+
+.section{
+    text-align:center;
+}
+
+
+
+#section0,
+#section1,
+#section2,
+#section3{
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#section0{
+    background-image: url("../images/back.jpg");
+    background-position-y: -75px;
+    color: #FFFFFF;
+}
+
+#section1{
+    background-image: url("../images/back-empty.jpg");
+}
+
+#section2{
+    background: #3F51B5;
+}
+
+#section3{
+    background: #FFFFFF;
 }
 
 
@@ -67,34 +98,25 @@ body{
     background: rgba(255,0,0,0.4);
 }
 
-.largeScreen{
-    display: none;
-}
+/*.largeScreen{*/
+    /*display: none;*/
+/*}*/
 
-.smallscreen{
-    display: block;
+/*.smallscreen{*/
+    /*display: block;*/
+/*}*/
+#appTitle{
+    margin-left: 0px;
 }
 
 @media screen and (min-width: 767px){
-    .appScreenshot-card-wide{
-        display: none;
-    }
-
-    .detailsCard{
-        display:none;
-    }
-
-    .largeScreen{
-        display: block;
-    }
-
-    .smallscreen{
-        display: none;
+    #appTitle{
+        margin-left: 150px;
     }
 }
 
 @media screen and (max-height: 443px){
-    body{
-        background-position-y: 0px;
+    #appTitle{
+        margin-left: 0px;
     }
 }

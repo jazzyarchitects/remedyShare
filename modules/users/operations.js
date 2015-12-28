@@ -112,7 +112,7 @@ var insertRemedy = function (user_id, remedy, callback) {
             safe: true,
             upsert: true
         }, function (err, doc) {
-            console.log("Linking Remedy: " + JSON.stringify(doc) + " Error: " + JSON.stringify(err));
+            //console.log("Linking Remedy: " + JSON.stringify(doc) + " Error: " + JSON.stringify(err));
             if (doc.nModified === 1) {
                 callback(true);
             } else {
@@ -128,9 +128,11 @@ var remedyList = function (user_id, page, callback) {
         .populate({
             path: "remedies",
             match: {active: true},
-            select: 'title publishedOn stats',
-            options: {limit: PAGE_LIMIT, skip: (page - 1) * PAGE_LIMIT}
+            select: 'title publishedOn stats image diseases',
+            options: {limit: PAGE_LIMIT, skip: (page - 1) * PAGE_LIMIT},
+            sort: {publishedOn: 1}
         })
+        .select("_id remedies")
         .exec(function (err, doc) {
             if (doc) {
                 callback(successJSON(doc));
@@ -274,6 +276,55 @@ var deleteComment = function (user_id, comment_id, callback) {
     })
 };
 
+var linkProfilePicture = function (user, file, callback) {
+    User.update({
+        _id: user
+    }, {
+        $set: {
+            "image.filename": file.filename,
+            "image.path": file.path
+        }
+    }, {
+        safe: true,
+        upsert: false
+    }, function (err, doc) {
+        if (doc) {
+            User.findOne({_id: user}).select("_id email image").exec(function (err, doc) {
+                if (doc) {
+                    callback(successJSON(doc));
+                } else {
+                    callback(errorJSON(501, "GENERAL_ERROR", err));
+                }
+            });
+        } else {
+            callback(errorJSON(501, "GENERAL_ERROR", err));
+        }
+    });
+};
+
+var exportForBackup = function (callback) {
+    User.find({},"+password", function (err, doc) {
+        if (err) {
+            console.log("Error exporting users: " + JSON.stringify(err));
+            callback(errorJSON(501, "GENERAL_ERROR_-_MONGOOSE_ERROR", err));
+        } else {
+            callback(successJSON(doc));
+        }
+    });
+};
+
+
+var importBackup = function(users, callback){
+    User.create(users, function(err, doc){
+        if(err){
+            console.log("Erorr importing users: "+JSON.stringify(err));
+            callback(errorJSON(501,"ERROR_IMPORTING_USER_BACKUP", err));
+        } else{
+            callback({success: true});
+        }
+    });
+};
+
 exports.signUp = signUp;
 exports.loginWithEmail = loginWithEmail;
 exports.loginWithMobile = loginWithMobile;
@@ -287,3 +338,6 @@ exports.upvoteRemedy = upvoteRemedy;
 exports.downvoteRemedy = downvoteRemedy;
 exports.addComment = addComment;
 exports.deleteComment = deleteComment;
+exports.linkProfilePicture = linkProfilePicture;
+exports.exportForBackup = exportForBackup;
+exports.importBackup = importBackup;

@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "detail": {
+      "__v": 0,
+      "name": "Jazzy Architects",
+      "age": 19,
+      "sex": "M",
+      "email": "q21343s@gmail.com",
+      "mobile": "2132454",
+      "_id": "5674439617f5b0e01845e439",
+      "stats": {
+        "remedyVotes": {
+          "downvotes": 0,
+          "upvotes": 0
+        },
+        "deleted": {
+          "comments": 0,
+          "medicines": 0,
+          "remedies": 0
+        },
+        "medicines": 0,
+        "comments": 0,
+        "remedies": 0
+      },
+      "created_at": "2015-12-18T17:34:14.283Z",
+      "medicines": [],
+      "comments": [],
+      "remedies": [],
+      "admin": false
+    },
+    "client": {
+      "__v": 0,
+      "user": "5674439617f5b0e01845e439",
+      "key": "709cdb7c6e51247dfdcdcd27a4b6e27b830fd145",
+      "id": "993775d1-319c-48e1-bd5b-dbedf46eb45f",
+      "_id": "5674439717f5b0e01845e43a",
+      "created_at": "2015-12-18T17:34:15.248Z"
+    }
+  }
+}

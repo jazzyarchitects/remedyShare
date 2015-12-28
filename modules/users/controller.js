@@ -4,11 +4,11 @@
 'use strict';
 
 var path = requireFromModule('path');
-var userOperations = requireFromModule('users/operations');
+var UserOperations = requireFromModule('users/operations');
 var ClientOperations = requireFromModule('clients/operations');
 
 var signUp = function (user, callback) {
-    userOperations.signUp(user, function (resultUser) {
+    UserOperations.signUp(user, function (resultUser) {
         //console.log(result);
         if (resultUser.success) {
             ClientOperations.createNewClient(resultUser.data, function (result) {
@@ -40,12 +40,12 @@ function loginCallback(result1, callback) {
 
 var login = function (user, callback) {
     if (user.email) {
-        userOperations.loginWithEmail(user, function (result) {
+        UserOperations.loginWithEmail(user, function (result) {
             //console.log(result);
             loginCallback(result, callback);
         });
     } else if (user.mobile) {
-        userOperations.loginWithMobile(user, function (result) {
+        UserOperations.loginWithMobile(user, function (result) {
             loginCallback(result, callback);
         });
     } else {
@@ -54,38 +54,50 @@ var login = function (user, callback) {
 };
 
 var update = function (user, callback) {
-    userOperations.updateUser(user, function (result) {
+    UserOperations.updateUser(user, function (result) {
         callback(result);
     });
 };
 
 var del = function (user, callback) {
-    userOperations.delete(user, function (result) {
+    UserOperations.delete(user, function (result) {
         if (result.success) {
-            ClientOperations.logout(user, function (success) {
-                if (success) {
-                    callback(result);
+            ClientOperations.logout(user, function (result) {
+                if (result.success) {
+                    callback(successJSON({deleted: true}));
                 } else {
-                    callback(errorJSON(501, success));
+                    callback(result);
                 }
             });
         }
     });
-    //Delete user from all other links - remedy, likes, shares
 };
 
 var remedyList = function (user_id, page, callback) {
-    userOperations.getRemedyList(user_id, page, function (result) {
+    UserOperations.getRemedyList(user_id, page, function (result) {
         callback(result);
     });
 };
 
 var getUserData = function(user_id, callback){{
-   userOperations.getUserData(user_id, function(result){
+   UserOperations.getUserData(user_id, function(result){
         callback(result);
    });
 }};
 
+var logout = function(user, callback){
+    ClientOperations.logout(user, function(result){
+        if(result.success){
+            callback(successJSON({logout: true}));
+        }
+    });
+};
+
+var uploadProfilePicture = function(user, file, callback){
+    UserOperations.linkProfilePicture(user, file, function(result){
+       callback(result);
+    });
+};
 
 exports.signUp = signUp;
 exports.login = login;
@@ -93,3 +105,5 @@ exports.update = update;
 exports.delete = del;
 exports.remedyList = remedyList;
 exports.getUserData=getUserData;
+exports.logout=logout;
+exports.uploadProfilePicture = uploadProfilePicture;
