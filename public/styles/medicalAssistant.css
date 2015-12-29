@@ -15,7 +15,6 @@ ActionBar Color #3F51B5
     height: 480px;
     padding: 2px;
     top: 50px;
-    margin-bottom: 50px;
     display: block
 }
 
@@ -23,11 +22,25 @@ ActionBar Color #3F51B5
     text-align:center;
 }
 
+.activeMenu{
+    font-weight: bold;
+    font-size: 1.2em;
+    text-decoration: underline;
+    transition-duration: 500ms;
+}
 
+.defaultMenu{
+    transition-duration: 500ms;
+}
+
+.defaultMenu:hover{
+    text-decoration: underline;
+}
 
 #section0,
 #section1,
 #section2,
+#section15,
 #section3{
     background-size: cover;
     background-attachment: fixed;
@@ -73,10 +86,9 @@ ActionBar Color #3F51B5
     font-size: 1em;
 }
 
-.appDetails p{
-    padding: 10px;
+#fullpage{
+    margin-top: 64px;
 }
-
 
 .appDetails::-webkit-scrollbar {
     width: 6px;
@@ -106,12 +118,71 @@ ActionBar Color #3F51B5
     /*display: block;*/
 /*}*/
 #appTitle{
-    margin-left: 0px;
+    margin-left: 0;
+}
+
+.screenshots{
+    display: none;
+    left:-50%;
+}
+
+.appDetailsCard{
+    margin-top: 20px;
+    left:150%;
+}
+
+.features-image{
+    height: 150px;
+}
+
+.feature-description{
+    display: block;
+}
+
+.row2{
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 1028px){
+    #fullpage{
+        margin-top: 56px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .features-image{
+        height: 120px;
+    }
+    .feature-description{
+        display:none;
+    }
+
+    .row2{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .features-image{
+        height: 90px;
+    }
+}
+@media screen and (max-width: 200px){
+    .features-image{
+        height: 60px;
+    }
 }
 
 @media screen and (min-width: 767px){
     #appTitle{
         margin-left: 150px;
+    }
+
+    .smallscreen{
+        display: inline;
+    }
+    .appDetails p{
+        padding: 5px;
     }
 }
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <title>Medical Assistant</title>
 
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts/jquery-ui.min.js" ></script>
+    <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 
     <!-- Material Theme -->
     <link href="styles/material.min.css" rel="stylesheet"/>
@@ -22,28 +22,12 @@
     <!-- Cuidar references -->
     <link href="styles/medicalAssistant.css" rel="stylesheet"/>
     <script src="scripts/medicalAssistant.js"></script>
-
-    <style>
-    </style>
-    <script>
-        $(document).ready(function () {
-            $('#fullpage').fullpage({
-//                verticalCentered: false,
-                anchors: ['home', 'details', 'features' ,'contact'],
-                //to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
-                css3: false
-            });
-        });
-
-    </script>
-
 </head>
 <body>
 
 <div id="header">
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header menu"
-         style="z-index:19999; position: fixed; top:0; left:0;">
-        <header class="mdl-layout__header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header menu">
+        <header class="mdl-layout__header" style="z-index:19999; position: fixed; top:0; left:0;">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">Medical Assistant</span>
@@ -57,8 +41,10 @@
                             text-decoration: none;
                         }
                     </style>
-                    <a href="/login">Login</a>
-                    <a href="/signup">Sign Up</a>
+                    <a href="#home" class="defaultMenu">Home</a>&nbsp; | &nbsp;
+                    <a href="#details" class="defaultMenu">Details</a>&nbsp; |&nbsp;
+                    <a href="#features" class="defaultMenu">Features</a>&nbsp; |&nbsp;
+                    <a href="#contact" class="defaultMenu">Contact</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder">
                         <img alt="Get it on Google Play"
                              src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
@@ -82,19 +68,18 @@
 
         </main>
     </div>
+
     <div class="section" id="section1">
 
         <div class="container-fluid">
-            <div class="row" style="margin-top: 75px;">
-                <div class="col-lg-4 col-md-3 col-sm-6 smallscreen" align="center">
+            <div class="row">
+                <div class="col-lg-4 col-md-3 col-sm-6 screenshots smallscreen" align="center">
                     <div class="appScreenshot-card-wide mdl-card mdl-shadow--4dp ">
                         <img src="images/screenshots/dashboard.jpg" alt="Dashboard screen" width="100%"
                              id="screenshot">
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-9 col-sm-6 smallscreen" align="center">
-
-
+                <div class="col-lg-7 col-md-9 col-sm-6 smallscreen appDetailsCard" align="center">
                     <div class="mdl-card mdl-shadow--6dp detailsCard">
                         <div class="mdl-card__actions mdl-card--border">
                             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -105,52 +90,22 @@
                             <center><i><b>"Health is Wealth"</b></i></center>
 
                             <p>
-                                We take these words very seriously and hence we have come with an app to act
-                                as
-                                your
-                                nurse
-                                or care
-                                taker. This app brings you a simple yet beautiful interface. So boring
-                                reminders
-                                are
-                                a
-                                thing
-                                of
-                                past.
+                                We take these words very seriously and hence we have come with an app to act as your
+                                nurse or care taker. This app brings you a simple yet beautiful interface. So
+                                boring reminders are a
+                                thing of past.
                                 <br/><br/>
-                                We also believe that keeping you updated with latest news in the medical
-                                field
-                                is
-                                important
-                                for
-                                getting knowledge about better treatment and prevention from new diseases.
-                                Hence
-                                we
-                                also
-                                bring you
-                                the latest news from the field of medical science right at your finger tips.
+                                We also believe that keeping you updated with latest news in the medical field is
+                                important for getting knowledge about better treatment and prevention from new diseases.
+                                Hence we also bring you the latest news from the field of medical science right at your
+                                finger tips.
                                 <br/><br/>
-                                The app also provides an option to search anything related to field of
-                                medical
-                                science.
-                                So
-                                whether
-                                you want to know about any medicine or any disease, we are here.
-                                <br/><br/>
-                                And even after taking precautions there are chances of medical emergencies.
-                                So
-                                now
-                                we
-                                even
-                                keep your
-                                doctors at your finger tips. Medical Assistant helps keeping record of your
-                                doctors
-                                and
-                                medicines
-                                prescribed by them. One tap emergency calling is under development and will
-                                be
-                                out
-                                soon.
+                                The app also provides an option to search anything related to field of medical science.
+                                So whether you want to know about any medicine or any disease, we are here. <br/><br/>
+                                And even after taking precautions there are chances of medical emergencies. So now
+                                we even keep your doctors at your finger tips. Medical Assistant helps keeping record of
+                                your doctors and medicines prescribed by them. One tap emergency calling is under
+                                development and will be out soon.
                                 <br/><br/>
 
                                 <!--Medical Assistant - Your perfect assistant-->
@@ -196,49 +151,139 @@
 
         <div class="container-fluid" style="color:#FFFFFF">
 
-            <div class="row" style="margin-top: 75px;">
+            <div class="row row1">
                 <h1>Features</h1>
 
-                <table width="80%" align="center">
-                    <tr>
-                        <td>
-                            <img src="images/app-features/web-features-alarm.png" height="150px">
-                        </td>
-                        <td>
-                            <img src="images/app-features/web-features-icons.png" height="150px">
-                        </td>
-                        <td>
-                            <img src="images/app-features/web-features-backup.png" height="150px">
-                        </td>
-                        <td>
-                            <img src="images/app-features/web-features-Notifications.png" height="150px">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <b style="font-size: 1.1em;">Custom Times</b> <br />
-                            <small><i>Providing a hassle free setting of reminders. <br />Not much work for you</i></small>
-                        </td>
-                        <td>
-                            <b style="font-size: 1.1em;">Icons</b> <br />
-                            <small><i>Various icons to distinguish your medicine by image. <br />No need to read the medicine names</i></small>
-                        </td>
-                        <td>
-                            <b>Backup and Restore</b> <br />
-                            <small><i>Switching a phone? No problem. <br />Just backup and restore the medicines</i></small>
-                        </td>
-                        <td>
-                            <b>Alarms</b> <br />
-                            <small><i>Notification, Popup screen and <br />Lock Screen Popup for alarms</i></small>
-                        </td>
-                    </tr>
-                </table>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-alarm.png" class="features-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">Custom Times</b> <br/>
+                                <small class="feature-description"><i>Providing a hassle free setting of reminders. Not
+                                    much work for you</i>
+                                </small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-icons.png" class="features-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">Icons</b> <br/>
+                                <small class="feature-description"><i>Various icons to distinguish your medicine by
+                                    image. No need to read the
+                                    medicine names</i></small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-backup.png" class="features-image">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">Backup and Restore</b> <br/>
+                                <small class="feature-description"><i>Switching a phone? No problem. Just backup and
+                                    restore the medicines</i>
+                                </small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-Notifications.png"
+                                     class="features-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">Alarms</b> <br/>
+                                <small class="feature-description"><i>Notification, Popup screen and Lock Screen Popup
+                                    for alarms</i></small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
+            <!--Second row!-->
+            <div class="row row2">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-news.png" class="features-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">News</b> <br/>
+                                <small class="feature-description"><i>Latest news from medical science at your
+                                    fingertips</i>
+                                </small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-search.png" class="features-image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">Search</b> <br/>
+                                <small class="feature-description"><i>Search any query. Get answers from experts from
+                                    all over the globe.</i></small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <table width="80%" align="center">
+                        <tr>
+                            <td>
+                                <img src="images/app-features/web-features-ui.png" class="features-image">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="feature-title">UI</b> <br/>
+                                <small class="feature-description"><i>An interface you will love to use.</i>
+                                </small>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
         </div>
 
 
@@ -248,15 +293,28 @@
 
         <div class="container-fluid" style="color:#222222">
 
-            <div class="row" style="margin-top: 75px;">
-                <h1>Contact Us <br /> Email at: <a href="mailto: jazzyarchitects@gmail.com">jazzyarchitects@gmail.com</a></h1>
+            <div class="row">
+                <h1>Contact Us</h1>
 
+                <img src="images/JA_logo.png" height="120px">
+            </div>
+            <div class="row" style="margin-top: 25px;">
+                <div class="content">
+                    <img src="images/ic_action_gmail.png" height="60px" style="margin-bottom: 5px;" /><span style="font-size: 2em">Mail us at: <a href="mailto:jazzyarchitects@gmail.com">jazzyarchitects@gmail.com</a></span>
+                </div>
             </div>
 
+
+            <div class="row" style="margin-top:25px; cursor: pointer;" id="meetUsDiv">
+                <img src="images/ic_action_emo_basic.png" id="smileImage1" height="60px" />
+                <span id="meetUs" style="font-size: 1.8em">Meet the architects</span>
+                <img src="images/ic_action_emo_basic.png" id="smileImage2" height="60px" />
+            </div>
         </div>
 
-
     </div>
+
+
 </div>
 
 </body>
