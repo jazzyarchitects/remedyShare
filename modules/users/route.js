@@ -20,12 +20,12 @@ router.post('/login', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    user.sendLoginForm(req, res);
+        user.getUser(req.user, res);
 });
 
 
 router.get('/:id', function(req, res){
-    user.getUser(req, res);
+    user.getUser(req.params.id, res);
 });
 
 router.use(function (req, res, next) {
@@ -82,19 +82,7 @@ router.get('/profilePicture', function(req, res){
 
 
 
-
-var defaultRouter = express.Router();
-
-defaultRouter.get('/signup', function (req, res) {
-    user.sendSignUpForm(req, res);
-});
-
-defaultRouter.get('/login', function (req, res) {
-    user.sendLoginForm(req, res);
-});
-
 module.exports = function (app) {
     app.use('/user', router);
-    app.use(defaultRouter);
 };
 

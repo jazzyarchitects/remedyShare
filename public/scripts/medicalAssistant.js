@@ -5,6 +5,7 @@
 var screenshots = [
     'dashboard.jpg', 'doctor.jpg', 'news.jpg', 'search.jpg', 'medicines.jpg'
 ];
+
 var currentImageIndex = 0;
 var imgTag;
 
@@ -41,9 +42,7 @@ $(document).ready(function (e) {
         $("#smileImage2").prop("src", "images/ic_action_emo_basic.png");
     }).click(function (e) {
         window.open("http://www.facebook.com/jibin.mathews7","_blank");
-        //window.focus();
         window.location="http://www.facebook.com/aanisha.ismd";
-        //chrome.windows.create({url: ['http://www.facebook.com/jibin.mathews7','http://www.facebook.com/aanisha.ismd']});
     });
 
 });

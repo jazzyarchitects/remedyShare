@@ -7,8 +7,8 @@ textarea.form-control {
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #f8f8f8;
-    border: 3px solid #ddd;
+    background: #fafaff;
+    border: 1px solid #ccc;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 300;
@@ -32,8 +32,19 @@ textarea:focus,
 textarea.form-control:focus {
 	outline: 0;
 	background: #fff;
-    border: 3px solid #ccc;
+    border: 1px solid rgba(53, 68, 147, 0.45); /*#354493*/
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+
+.radioSpan{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.radioSpan input[type="radio"]{
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Roboto', sans-serif;
 }
 
 input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder, 
@@ -52,7 +63,8 @@ button.btn {
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #de995e;
+    background: #3F51B5;
+    /*background: #de995e;*/
     border: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -69,6 +81,6 @@ button.btn:hover { opacity: 0.6; color: #fff; }
 
 button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
 
-button.btn:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
+button.btn:focus { outline: 0; opacity: 0.6; background: #38489b; color: #fff; }
 
-button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #de995e; color: #fff; }
+button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #38489b; color: #fff; }

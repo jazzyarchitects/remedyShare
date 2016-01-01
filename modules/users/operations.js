@@ -40,14 +40,18 @@ var signUp = function (userDetails, callback) {
 };
 
 function __login(query, user, callback) {
-    User.findOne(query, function (err, userDoc) {
+    //console.log("__login: "+JSON.stringify(query)+" "+JSON.stringify(user));
+    User.findOne(query,"+password", function (err, userDoc) {
         if (userDoc) {
             Hash.hash(user, userDoc.created_at.toString(), function (result) {
+                //console.log("Hashing: "+JSON.stringify(result)+" \n"+userDoc.created_at.toString()+" \n"+userDoc.password);
                 if (result.success) {
                     if (userDoc.password == result.hash) {
+                        userDoc.password=undefined;
+                        //console.log("Object: "+JSON.stringify(userDoc));
                         callback(successJSON(userDoc));
                     } else {
-                        callback(errorJSON(602, "AUTHENTICATION_ERROR"));
+                        callback(errorJSON(602, "AUTHENTICATION_ERROR", "EMAIL/MOBILE AND PASSWORD COMBINATION IS INCORRECT"));
                     }
                 } else {
                     callback(errorJSON(501, result.error))
@@ -186,7 +190,11 @@ var unlinkRemedy = function (user, remedy, callback) {
 };
 
 var getUserData = function (user_id, callback) {
-    User.find({_id: user_id}, function (err, doc) {
+    if(!mongoose.Types.ObjectId.isValid(user_id)){
+        user_id=mongoose.Types.ObjectId(user_id);
+    }
+    User.findOne({_id: user_id}, function (err, doc) {
+        //console.log("UserOperations: "+JSON.stringify(doc)+ " \nfor user:"+user_id);
         if (doc) {
             callback(successJSON(doc));
         } else {
@@ -209,11 +217,11 @@ var upvoteRemedy = function (user_id, remedy_id, callback) {
                 $inc: {"stats.remedyVotes.downvote": -1},
                 $pull: {"remedyVotes.downvote": remedy_id}
             }, function (err, doc) {
-                console.log("Updating upvote in user: " + JSON.stringify(err) + " " + JSON.stringify(doc));
+                //console.log("Updating upvote in user: " + JSON.stringify(err) + " " + JSON.stringify(doc));
                 //callback(true);
             });
         } else {
-            console.log("Updating upvote in user (else):" + JSON.stringify(err) + " " + JSON.stringify(doc));
+            //console.log("Updating upvote in user (else):" + JSON.stringify(err) + " " + JSON.stringify(doc));
             //callback(true);
         }
     });

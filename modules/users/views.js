@@ -10,10 +10,10 @@ var fs = require('fs');
 var getUserObject = function (req, signup) {
     var user = {};
     user.name = req.body.name;
-    user.dob={};
-    var dob=req.body.dob;
-    if(dob) {
-        var days = dob.split(",");
+    user.dob = {};
+    var dob = req.body.dob;
+    if (dob) {
+        var days = dob.split("-");
         //console.log("Days: "+days);
         user.dob.dd = days[0];
         user.dob.mm = days[1];
@@ -34,16 +34,27 @@ var getUserObject = function (req, signup) {
 var signup = function (req, res) {
     var user = getUserObject(req, true);
     control.signUp(user, function (result) {
-        //console.log("Signup attempt: "+result);
+
+        if (result.data) {
+            var client = result.data.client;
+            res.cookie("user",JSON.stringify({key: client.key, id: client.id}));
+        }
         res.json(result);
     });
 
 };
 
+
 var login = function (req, res) {
     var user = getUserObject(req);
 
+    //console.log("Login: "+JSON.stringify(req.body));
     control.login(user, function (result) {
+
+        if (result.data) {
+            var client = result.data.client;
+            res.cookie("user",JSON.stringify({key: client.key, id: client.id}));
+        }
         res.json(result);
     });
 
@@ -64,26 +75,6 @@ var del = function (req, res) {
     });
 };
 
-var sendFile = function (res, file, options) {
-    fs.readFile(file, function (err, html) {
-        if (err) {
-            throw err;
-        } else {
-            res.writeHead(200, {'Content-Type': 'text/html', 'Content-Length': html.length});
-            res.write(html);
-            res.end();
-        }
-    });
-};
-
-var loginForm = function (req, res) {
-    sendFile(res, './public/authen/login.html');
-};
-
-var signupForm = function (req, res) {
-    sendFile(res, './public/authen/signup.html');
-};
-
 var remedyList = function (req, res) {
     control.remedyList(req.user, req.params.page || 1, function (result) {
         res.json(result);
@@ -96,8 +87,8 @@ var otherRemedyList = function (req, res) {
     });
 };
 
-var getUserData = function (req, res) {
-    control.getUserData(req.params.id, function (result) {
+var getUserData = function (id, res) {
+    control.getUserData(id, function (result) {
         res.json(result);
     });
 };
@@ -105,14 +96,14 @@ var getUserData = function (req, res) {
 var uploadProfilePicture = function (req, res) {
     //console.log("Files: "+JSON.stringify(req.file));
     //console.log("Body: "+JSON.stringify(req.body));
-    control.uploadProfilePicture(req.user, req.file, function(result){
-       res.json(result);
+    control.uploadProfilePicture(req.user, req.file, function (result) {
+        res.json(result);
     });
 };
 
-var logout = function(req, res){
-    control.logout(req.user, function(result){
-       res.json(result);
+var logout = function (req, res) {
+    control.logout(req.user, function (result) {
+        res.json(result);
     });
 };
 
@@ -120,10 +111,8 @@ exports.signUp = signup;
 exports.login = login;
 exports.update = update;
 exports.delete = del;
-exports.sendLoginForm = loginForm;
-exports.sendSignUpForm = signupForm;
 exports.remedyList = remedyList;
 exports.othersRemedyList = otherRemedyList;
 exports.getUser = getUserData;
 exports.uploadProfilePicture = uploadProfilePicture;
-exports.logout= logout;
+exports.logout = logout;

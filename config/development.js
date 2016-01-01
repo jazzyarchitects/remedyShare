@@ -18,5 +18,6 @@ module.exports = {
     },
     server: {
         port: Number(process.env.PORT || 3000)
-    }
+    },
+    services:['androidApp1958-2013JE0305', 'webApp1958-2013@ISM']
 };

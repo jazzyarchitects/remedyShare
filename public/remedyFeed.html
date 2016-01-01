@@ -3,8 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/api.js"></script>
+
+    <!--Bootstrap Theme-->
+    <link href="styles/bootstrap.min.css" rel="stylesheet"/>
+    <script src="scripts/bootstrap.min.js"></script>
+
+    <!-- Material Theme -->
+    <link href="styles/material.min.css" rel="stylesheet"/>
+    <!--<script src="scripts/material.min.js"></script>-->
+
+    <link rel="stylesheet" href="./assets/css/form-elements.css">
+
+    <!-- Cuidar references -->
+    <link href="styles/remedyFeed.css" rel="stylesheet"/>
+    <script src="scripts/remedyFeed.js"></script>
+
 </head>
 <body>
+<div class="mdl-layout--fixed-header menu">
+    <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Medical Assistant</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+
+            <div class="mdl-layout__tab-bar-right-button">
+                <style scoped>
+                    .mdl-layout__tab-bar-right-button a {
+                        color: white;
+                        text-decoration: none;
+                    }
+                </style>
+                <a href="#" id="logout">Logout</a>
+                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder">
+                    <img alt="Get it on Google Play"
+                         src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+</div>
+
+<div class="container-fluid" id="mainContent">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="card" id="userDetailsCard">
+                        <div class="card" id="dpframe" style="z-index: 999;">
+                            <img src="images/userlogin.png" id="userDp">
+                        </div>
+                    <div class="userDetails" id="userDetails">
+                        <input type="text" class="userDetailsFormElement" id="username" disabled value="Name">
+                        <input type="text" class="userDetailsFormElement" id="email" disabled value="Email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-9">
+                <div class="card" id="feedCard">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

@@ -1,0 +1,42 @@
+body{
+    background: #EEEEEE;
+    overflow-y: hidden;
+}
+
+.mdl-card{
+    width: 100%;
+}
+
+.userDetailsCard{
+    background: #FFFFFF;
+}
+
+.card{
+    background: #FFFFFF;
+    box-shadow: #AAAAAA 0 0 10px ;
+    border-radius: 3px;
+}
+
+#dpframe{
+    position: absolute;
+}
+.content{
+    width: 80%;
+    margin: auto;
+    margin-top: 64px;
+}
+
+input[type="text"]{
+    padding: 0 20px;
+    height: 35px;
+    line-height: 35px;
+    margin-top: 5px;
+    background: #FFF;
+    border: none;
+}
+
+@media screen and (max-width: 768px){
+    .content{
+        margin-top: 56px;
+    }
+}
