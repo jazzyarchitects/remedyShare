@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Medical Assistant</title>
+
+    <link rel="icon" href="images/small_icon.png"/>
 
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
     <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/angularModules/common/angular.min.js"></script>
+    <script src="scripts/angularModules/common/angular-route-min.js"></script>
+
+    <script src="scripts/angularModules/app.js"></script>
     <script src="scripts/api.js"></script>
 
     <!--Bootstrap Theme-->
@@ -15,7 +21,6 @@
 
     <!-- Material Theme -->
     <link href="styles/material.min.css" rel="stylesheet"/>
-    <!--<script src="scripts/material.min.js"></script>-->
 
     <link rel="stylesheet" href="./assets/css/form-elements.css">
 
@@ -24,7 +29,7 @@
     <script src="scripts/remedyFeed.js"></script>
 
 </head>
-<body>
+<body ng-app="remedyShare" ng-controller="remedyController">
 <div class="mdl-layout--fixed-header menu">
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
@@ -57,9 +62,9 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="card" id="userDetailsCard">
-                        <div class="card" id="dpframe" style="z-index: 999;">
-                            <img src="images/userlogin.png" id="userDp">
-                        </div>
+                    <div class="card" id="dpframe" style="z-index: 999;">
+                        <img src="images/userlogin.png" id="userDp">
+                    </div>
                     <div class="userDetails" id="userDetails">
                         <input type="text" class="userDetailsFormElement" id="username" disabled value="Name">
                         <input type="text" class="userDetailsFormElement" id="email" disabled value="Email">
@@ -67,9 +72,57 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-md-9">
+            <div class="col-lg-8 col-md-8">
                 <div class="card" id="feedCard">
 
+                    <div ng-repeat="remedy in remedies">
+                        <div class="remedyFeed">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <span style="font-size: 1.6em; font-weight: bold; ">{{remedy.title}}</span>
+                                <span style="font-size: 0.9em; margin-left: 15px;"><i>By:
+                                    {{remedy.author.name}}</i></span>
+                                    <br/>
+                                    {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ?
+                                    '...':''}}
+                                    <br/>
+                                    <i>Diseases: {{remedy.diseases.toString()}}</i>
+                                </div>
+                                <div class="col-lg-3">
+                                    <a href="#" class="commentCount">
+                                        <i class="glyphicon glyphicon-comment"></i>
+                                        {{remedy.stats.comments}} Comments
+                                    </a>
+<br />
+                                    <a href="#" class="upvoteCount">
+                                        <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote}}
+                                        Upvotes
+                                    </a>
+                                    <br />
+                                    <a href="#" class="downvoteCount">
+                                        <i class="glyphicon glyphicon-thumbs-down"></i>
+                                        {{remedy.stats.downvote}}
+                                        Downvotes
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-1 col-md-1">
+                <div class="card fab" id="refreshFab">
+                    <img src="images/ic_action_reload.png"/>
+                </div>
+                <div class="card fab" id="addFab">
+                    <img src="images/ic_action_add.png"/>
+                </div>
+                <div class="card fab" id="searchFab">
+                    <img src="images/ic_action_search.png"/>
+                </div>
+                <div class="card fab" id="settingsFab">
+                    <img src="images/ic_action_settings.png"/>
                 </div>
             </div>
 

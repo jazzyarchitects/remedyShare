@@ -1,0 +1,32 @@
+<div class="row blog-holder">
+    <div class="col-md-2 col-sm-3 text-center">
+        <a class="story-img" href="#"><img src="//placehold.it/100" style="width:100px;height:100px" class="img-circle"></a>
+    </div>
+    <div class="col-md-10 col-sm-9">
+        <h3>{{detail.title}}</h3>
+
+        <div class="row">
+            <div class="col-xs-9">
+                <p>{{detail.content | limitTo: 225}}{{detail.content.length > 250 ? '...':''}}</p>
+                <p><i>By: {{detail.author.name}}</i></p>
+                <p class="lead">
+                    <button class="btn btn-default read-more">Read More</button>
+                </p>
+                <ul class="list-inline">
+                    <a href="#" class="commentCount">
+                        <i class="glyphicon glyphicon-comment"></i>
+                        {{detail.stats.comments}} Comments
+                    </a>
+                    </li>
+                    <li>
+                        <a href="#" class="likeCount">
+                            <i class="glyphicon glyphicon-thumbs-up"></i> {{detail.stats.likes}} Likes
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <br><br>
+    </div>
+</div>

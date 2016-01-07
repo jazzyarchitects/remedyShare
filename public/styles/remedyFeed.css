@@ -1,33 +1,102 @@
-body{
+body {
     background: #EEEEEE;
     overflow-y: hidden;
 }
 
-.mdl-card{
+.mdl-card {
     width: 100%;
 }
 
-.userDetailsCard{
+.userDetailsCard {
     background: #FFFFFF;
 }
 
-.card{
+.card {
     background: #FFFFFF;
-    box-shadow: #AAAAAA 0 0 10px ;
+    box-shadow: #AAAAAA 0 0 10px;
     border-radius: 3px;
 }
 
-#dpframe{
+.fab {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /*position: absolute;*/
+    /*top: 40px;*/
+    /*right: 60px;*/
+    margin: 50px auto;
+    transition-duration: 500ms;
+    cursor: pointer;
+}
+
+.fab:hover {
+    transition-duration: 500ms;
+}
+
+#refreshFab {
+    background-color: #fd5eff;
+}
+
+#refreshFab:hover {
+    background-color: #bb45bd;
+}
+
+
+#addFab {
+    background-color: #4b61c5;
+}
+
+#addFab:hover {
+    background-color: #334387;
+}
+
+#searchFab {
+    background-color: #50ff4c;
+}
+
+#searchFab:hover {
+    background-color: #3eb43b;
+}
+
+#settingsFab {
+    background-color: #ff4a40;
+}
+
+#settingsFab:hover {
+    background-color: #b5362e;
+}
+
+.fab img {
+    position: static;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.remedyFeed {
+    border-bottom: rgba(150,150,150,0.2) 1px ridge;
+    padding: 15px 5px 10px;
+}
+
+#feedCard {
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#dpframe {
     position: absolute;
 }
-.content{
-    width: 80%;
+
+.content {
+    width: 85%;
     margin: auto;
     margin-top: 64px;
 }
 
-input[type="text"]{
-    padding: 0 20px;
+input[type="text"] {
+    padding: 0 5px;
     height: 35px;
     line-height: 35px;
     margin-top: 5px;
@@ -35,8 +104,8 @@ input[type="text"]{
     border: none;
 }
 
-@media screen and (max-width: 768px){
-    .content{
+@media screen and (max-width: 768px) {
+    .content {
         margin-top: 56px;
     }
 }

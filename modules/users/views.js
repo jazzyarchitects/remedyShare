@@ -23,11 +23,11 @@ var getUserObject = function (req, signup) {
     user.email = req.body.email;
     user.mobile = req.body.mobile;
     user.password = req.body.password;
-    if (req.body.admin) {
-        user.admin = req.body.admin;
-    } else {
+    //if (req.body.admin) {
+    //    user.admin = req.body.admin;
+    //} else {
         user.admin = false;
-    }
+    //}
     return user;
 };
 
