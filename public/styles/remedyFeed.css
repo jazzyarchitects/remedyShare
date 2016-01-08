@@ -77,6 +77,10 @@ body {
 .remedyFeed {
     border-bottom: rgba(150,150,150,0.2) 1px ridge;
     padding: 15px 5px 10px;
+    background-size: cover;
+    min-height: 175px;
+    margin-bottom: 3px;
+    vertical-align: bottom;
 }
 
 #feedCard {
@@ -93,6 +97,23 @@ body {
     width: 85%;
     margin: auto;
     margin-top: 64px;
+}
+
+.remedyCard{
+    width:75%;
+    margin: auto;
+    padding: 10px 5px;
+    box-shadow: none;
+}
+
+.diseaseSpan{
+    color: #555555;
+    font-size: 0.8em;
+}
+
+.glyphicon, .stats{
+    color: #06bbe7;
+    text-decoration: none;
 }
 
 input[type="text"] {

@@ -110,10 +110,6 @@ router.get('/search/:query/:page', function (req, res) {
     Remedy.searchRemedy(req, res);
 });
 
-router.get('/image/:filename', function (req, res) {
-    Remedy.sendPicture(req, res);
-});
-
 router.put('/viewed/:id', function (req, res) {
     Remedy.registerView(req, res);
 });

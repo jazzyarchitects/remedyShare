@@ -38,7 +38,7 @@ var successJSON = function (data) {
 };
 
 var errorJSON = function (errorCode, description, message) {
-    return {success: false, error: true, errorCode: errorCode, description: description, message: message};
+    return {success: false, error: true, errorCode: errorCode || 501, description: description || "INTERNAL_USE_ONLY", message: message || "FOR_ADMIN_EMAIL_AT_:_JAZZY.ARCHITECTS@GMAIL.COM"};
 };
 
 var authenticateUser = function (req, res, callback) {
@@ -62,7 +62,11 @@ var authenticateUser = function (req, res, callback) {
     if (key && id) {
         ClientOperations.authenticate(id, key, function (success, doc) {
             req.authenticated = success;
-            callback(successJSON({user: doc.user, admin: doc.admin}));
+            if(success) {
+                callback(successJSON({user: doc.user, admin: doc.admin}));
+            }else{
+                callback(errorJSON({}));
+            }
         });
     } else {
         callback(errorJSON(601, "AUTHENTICATION_ERROR", "NOT_LOGGED_IN"));

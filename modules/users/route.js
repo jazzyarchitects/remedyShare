@@ -15,7 +15,7 @@ router.post('/signup', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    console.log('User Login');
+    //console.log('User Login');
     user.login(req, res);
 });
 
@@ -38,12 +38,12 @@ router.use(function (req, res, next) {
 
 
 router.put('/', function (req, res) {
-    console.log("User data Edit...");
+    //console.log("User data Edit...");
     user.update(req, res);
 });
 
 router.delete('/', function (req, res) {
-    console.log("Delete User...");
+    //console.log("Delete User...");
     user.delete(req, res);
 });
 
@@ -73,14 +73,6 @@ router.get('/remedy/:page', function (req, res) {
 router.put('/profilePicture', function(req, res){
    user.uploadProfilePicture(req, res);
 });
-
-router.get('/profilePicture', function(req, res){
-   remedy.sendPicture(req, res);
-});
-
-
-
-
 
 module.exports = function (app) {
     app.use('/user', router);

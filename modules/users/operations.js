@@ -241,11 +241,11 @@ var downvoteRemedy = function (user_id, remedy_id, callback) {
                 $inc: {"stats.remedyVotes.upvote": -1},
                 $pull: {"remedyVotes.upvote": remedy_id}
             }, function (err, doc) {
-                console.log("Updating downvote in user: " + JSON.stringify(err) + " " + JSON.stringify(doc));
+                //console.log("Updating downvote in user: " + JSON.stringify(err) + " " + JSON.stringify(doc));
                 //callback(true);
             });
         } else {
-            console.log("Updating downvote in user (else):" + JSON.stringify(err) + " " + JSON.stringify(doc));
+            //console.log("Updating downvote in user (else):" + JSON.stringify(err) + " " + JSON.stringify(doc));
             //callback(true);
         }
     });

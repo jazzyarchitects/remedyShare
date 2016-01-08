@@ -122,7 +122,11 @@ RemedySchema.pre('save', function (next) {
     next();
 });
 
-RemedySchema.static.registerView = function (_id) {
+RemedySchema.statics.registerView = function (_id) {
+    //console.log("Registering View static: "+_id.toString());
+    if(!mongoose.Types.ObjectId.isValid(_id)){
+        _id=mongoose.Types.ObjectId(_id);
+    }
     this.findOne({_id: _id}, function (err, doc) {
         if (err) {
             console.log("Error in registeringView for remedy: " + JSON.stringify(err));
@@ -138,7 +142,7 @@ RemedySchema.static.registerView = function (_id) {
     });
 };
 
-RemedySchema.static.updateRankingIndex = function (_id, control) {
+RemedySchema.statics.updateRankingIndex = function (_id, control) {
     control = control > 0 ? 1 : -1;
     this.findOne({_id: _id}, function (err, doc) {
         if (err) {

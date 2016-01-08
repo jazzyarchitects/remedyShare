@@ -85,11 +85,12 @@ module.exports = function(config) {
 
 
     function bootstrapRoutes() {
+		var router = express.Router();
 		requireFromModule('web/route')(app);
+		requireFromModule('images/route')(app);
 
 		apiAuthentication(app);
 
-		var router = express.Router();
 		requireFromModule('users/route')(router);
 		requireFromModule('remedy/route')(router);
 		requireFromModule('comments/route')(router);

@@ -3,8 +3,8 @@
  */
 
 var Remedy = requireFromModule('remedy/remedyModel');
+var mongoose = require('mongoose');
 var PAGE_LIMIT = 10;
-
 
 
 var insert = function (user, remedy, callback) {
@@ -25,8 +25,7 @@ var remove = function (remedy_id) {
     });
 };
 
-var getRemedy = function (remedy_id, callback) {
-    //Remedy.update({_id: remedy_id}, {$set: {$inc: {"stats.views": 1}}});
+var getRemedy = function (user, remedy_id, callback) {
     Remedy.registerView(remedy_id);
     Remedy.findOne({_id: remedy_id})
         .populate([{
@@ -34,11 +33,22 @@ var getRemedy = function (remedy_id, callback) {
             select: "name"
         }, {
             path: "comments",
-            select: "author comment publishedOn",
-            options: {limit: 10}
+            select: "author comment publishedOn"
+            //options: {limit: 10}
         }])
         .exec(function (err, doc) {
             if (doc) {
+                doc=doc.toJSON();
+                doc.upvoted = false;
+                doc.downvoted = false;
+                if(user){
+                    if (JSON.stringify(doc.upvote).indexOf(user) != -1) {
+                        doc.upvoted = true;
+                    }
+                    if (JSON.stringify(doc.downvote).indexOf(user) != -1) {
+                        doc.downvoted = true;
+                    }
+                }
                 callback(successJSON(doc));
             } else {
                 callback(errorJSON(501, err));
@@ -54,7 +64,6 @@ var update = function (remedy, callback) {
             references: remedy.references
         }
     }, {safe: true, upsert: true}, function (err, doc) {
-        //console.log("Hello: " + JSON.stringify(doc) + " " + JSON.stringify(err));
         if (doc.nModified !== 0) {
             callback(successJSON(remedy));
         } else {
@@ -69,19 +78,40 @@ var deactivateRemedy = function (remedy_id) {
     });
 };
 
-var getAllRemedies = function (page, callback) {
+var getAllRemedies = function (user, page, callback) {
     Remedy.find({active: true}, "_id", function (err, countQueryDoc) {
         if (countQueryDoc) {
             Remedy.find({active: true})
-                .select("-comments -downvote -upvote -rankIndex -__v")
+                .select("-comments -rankIndex -__v")
                 .populate("author", "name _id")
                 .skip((page - 1) * PAGE_LIMIT)
                 .limit(PAGE_LIMIT)
                 .sort({publishedOn: 1})
                 .exec(function (err, doc) {
                     if (doc) {
+                        var remedies =[];
+                        for(var i=0;i<doc.length;i++){
+                            remedies.push(doc[i].toJSON());
+                            remedies[i].upvoted = false;
+                            remedies[i].downvoted = false;
+                        }
+                        if (user) {
+                            for (i = 0; i < remedies.length; i++) {
+                                //console.log("Remedy #"+i+" "+JSON.stringify(remedies[i]));
+                                if (JSON.stringify(remedies[i].upvote).indexOf(user) != -1) {
+                                    remedies[i].upvoted = true;
+                                }
+                                if (JSON.stringify(remedies[i].downvote).indexOf(user) != -1) {
+                                    remedies[i].downvoted = true;
+                                }
+                            }
+                        }
+                        for(i=0;i<doc.length;i++){
+                            delete remedies[i].upvote;
+                            delete remedies[i].downvote;
+                        }
                         callback(successJSON({
-                            remedies: doc,
+                            remedies: remedies,
                             page: Number(page),
                             totalCount: countQueryDoc.length,
                             pageLimit: PAGE_LIMIT

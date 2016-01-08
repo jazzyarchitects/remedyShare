@@ -92,7 +92,7 @@ var exportDatabase = function (callback) {
             callback(errorJSON(501, "GENERAL_ERROR_-_ERROR_EXPORTING", err));
         } else {
             var data = {};
-            console.log("Controller backupObject: "+JSON.stringify(results)+"\nErrors:"+err);
+            //console.log("Controller backupObject: "+JSON.stringify(results)+"\nErrors:"+err);
             for (var i = 0; i < results.length; i++) {
                 data[results[i].key] = results[i].value;
             }

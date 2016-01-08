@@ -76,33 +76,33 @@
                 <div class="card" id="feedCard">
 
                     <div ng-repeat="remedy in remedies">
-                        <div class="remedyFeed">
-                            <div class="row">
-                                <div class="col-lg-9">
+                        <div class="remedyFeed" ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
+                            <div class="row card remedyCard">
+                                <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
+
+                                <div class="col-lg-10">
                                     <span style="font-size: 1.6em; font-weight: bold; ">{{remedy.title}}</span>
                                 <span style="font-size: 0.9em; margin-left: 15px;"><i>By:
                                     {{remedy.author.name}}</i></span>
                                     <br/>
-                                    {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ?
-                                    '...':''}}
-                                    <br/>
-                                    <i>Diseases: {{remedy.diseases.toString()}}</i>
+                                    <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
+                                    {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ? '...':''}}
+                                    </p>
+                                    <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
                                 </div>
-                                <div class="col-lg-3">
-                                    <a href="#" class="commentCount">
+                                <div class="col-lg-2">
+                                    <a href="#" class="commentCount stats">
                                         <i class="glyphicon glyphicon-comment"></i>
-                                        {{remedy.stats.comments}} Comments
+                                        {{remedy.stats.comments}}
                                     </a>
-<br />
-                                    <a href="#" class="upvoteCount">
+                                    <br/>
+                                    <a href="#" ng-click="upvote(remedy._id)" class="upvoteCount stats">
                                         <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote}}
-                                        Upvotes
                                     </a>
-                                    <br />
-                                    <a href="#" class="downvoteCount">
+                                    <br/>
+                                    <a href="#" ng-click="downvote(remedy._id)"  class="downvoteCount stats">
                                         <i class="glyphicon glyphicon-thumbs-down"></i>
                                         {{remedy.stats.downvote}}
-                                        Downvotes
                                     </a>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
             </div>
 
             <div class="col-lg-1 col-md-1">
-                <div class="card fab" id="refreshFab">
+                <div class="card fab" id="refreshFab" ng-click="refresh()">
                     <img src="images/ic_action_reload.png"/>
                 </div>
                 <div class="card fab" id="addFab">

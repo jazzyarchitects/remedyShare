@@ -53,7 +53,7 @@ var insert = function (req, res) {
 };
 
 var getRemedy = function (req, res) {
-    control.getRemedy(req.params.id, function (result) {
+    control.getRemedy(req.user, req.params.id, function (result) {
         res.json(result);
     });
 };
@@ -103,20 +103,8 @@ var searchRemedy = function (req, res) {
 };
 
 var getAllRemedies = function (req, res) {
-    control.getAllRemedies(req.params.page || 1, function (result) {
+    control.getAllRemedies(req.user, req.params.page || 1, function (result) {
         res.json(result);
-    });
-};
-
-var sendPicture = function (req, res) {
-    fs.readFile("./uploads/images/" + req.params.filename, function (err, file) {
-        if (err) {
-            throw err;
-        } else {
-            res.writeHead(200, {'Content-Type': 'image/png', 'Content-Length': file.length});
-            res.write(file);
-            res.end();
-        }
     });
 };
 
@@ -148,7 +136,6 @@ exports.get = getRemedy;
 exports.findByDisease = findRemedyByDisease;
 exports.searchRemedy = searchRemedy;
 exports.getAll = getAllRemedies;
-exports.sendPicture = sendPicture;
 exports.registerView = registerView;
 exports.importFromJSON = importFromJSON;
 exports.getCommentList = getCommentList;

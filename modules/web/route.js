@@ -27,7 +27,6 @@ noPrefixRouter.get('/', function (req, res) {
 router.get('/', function (req, res) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
-            //TODO: send remedy feed
             view.sendUserFeed(req, res);
         } else {
             res.redirect('/app/login');

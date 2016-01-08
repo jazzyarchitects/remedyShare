@@ -26,8 +26,8 @@ var insert = function (user, remedy, callback) {
     });
 };
 
-var getRemedy = function (remedy_id, callback) {
-    RemedyOperations.getRemedy(remedy_id, function (result) {
+var getRemedy = function (user, remedy_id, callback) {
+    RemedyOperations.getRemedy(user, remedy_id, function (result) {
         callback(result);
     });
 };
@@ -115,8 +115,8 @@ var search = function (query, page, callback) {
     });
 };
 
-var getAllRemedies = function (page, callback) {
-    RemedyOperations.getAllRemedies(page, function (result) {
+var getAllRemedies = function (user, page, callback) {
+    RemedyOperations.getAllRemedies(user, page, function (result) {
         callback(result);
     });
 };
