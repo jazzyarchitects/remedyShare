@@ -7,6 +7,7 @@ var BASE_URL = window.location.protocol + "//" + window.location.host + "/api";
 var REMEDY_FEED_URL = BASE_URL + "/remedy/all/";
 
 var app = angular.module('remedyShare', []);
+var userGlobal;
 
 app.directive('remedy-feed', function () {
     return {
@@ -26,11 +27,16 @@ app.controller('remedyController', function ($scope) {
     //   $scope.remedies = response.data.remedies;
     //});
 
-    $scope.loadRemedies = function (page) {
+    $scope.loadRemedies = function (page, user) {
         page = page || 1;
+        userGlobal=user;
+        var url='/remedy/all/'+page;
+        if(user){
+            url='/'+user+'/remedy/all/'+page;
+        }
         apiAjax({
             method: 'GET',
-            url: '/remedy/all/' + page,
+            url: url,
             success: function (result) {
                 $scope.$apply(function () {
                     $scope.remedies = result.data.remedies;
@@ -98,10 +104,10 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.refresh = function () {
-        $scope.loadRemedies();
+        $scope.loadRemedies(undefined, userGlobal);
     };
 
-    $scope.loadRemedies();
+    //$scope.loadRemedies();
 
 })
 ;

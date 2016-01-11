@@ -37,7 +37,7 @@ var signup = function (req, res) {
 
         if (result.data) {
             var client = result.data.client;
-            res.cookie("user",JSON.stringify({key: client.key, id: client.id}));
+            res.cookie("user",JSON.stringify({key: client.key, id: client.id}),{expires: new Date(Date.now()+365*24*60*60*1000), httpOnly: true});
         }
         res.json(result);
     });
@@ -53,7 +53,7 @@ var login = function (req, res) {
 
         if (result.data) {
             var client = result.data.client;
-            res.cookie("user",JSON.stringify({key: client.key, id: client.id}));
+            res.cookie("user",JSON.stringify({key: client.key, id: client.id}),{expires: new Date(Date.now()+365*24*60*60*1000), httpOnly: true});
         }
         res.json(result);
     });

@@ -6,8 +6,7 @@
 var express = require('express');
 var router = express.Router();
 var noPrefixRouter = express.Router();
-var view = requireFromModule('web/views');
-var cookieParser = require('cookie-parser');
+var view = requireFromModule('web/views')
 var fs = require('fs');
 
 router.use(express.static('public'));
@@ -24,35 +23,31 @@ noPrefixRouter.get('/', function (req, res) {
     });
 });
 
-router.get('/', function (req, res) {
+router.use(function (req, res, next) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
-            view.sendUserFeed(req, res);
+            next();
         } else {
             res.redirect('/app/login');
         }
     });
 });
 
+router.get('/', function (req, res) {
+    view.sendUserFeed(req, res);
+});
+
 router.get('/signup', function (req, res) {
-    authenticateUser(req, res, function (result) {
-        if (result.success) {
-            res.redirect('/app');
-        } else {
-            view.sendSignUpForm(req, res);
-        }
-    });
+    view.sendSignUpForm(req, res);
 });
 
 router.get('/login', function (req, res) {
-    authenticateUser(req, res, function (result) {
-        if (result.success) {
-            res.redirect('/app');
-        } else {
-            view.sendLoginForm(req, res);
-        }
-    });
+    view.sendLoginForm(req, res);
 });
+
+router.get('/insertRemedy', function(req, res){
+   view.sendNewRemedyForm(req, res);
+});;
 
 module.exports = function (app) {
     app.use('/app', router);

@@ -24,11 +24,16 @@ var signupForm = function (req, res) {
     sendFile(res, './public/authen/signup.html');
 };
 
-var sendUserFeed = function(req, res){
+var sendUserFeed = function (req, res) {
     sendFile(res, './public/remedyFeed.html');
+};
+
+var sendNewRemedyForm = function (req, res) {
+    sendFile(res, './public/newRemedy.html')
 };
 
 
 exports.sendLoginForm = loginForm;
 exports.sendSignUpForm = signupForm;
 exports.sendUserFeed = sendUserFeed;
+exports.sendNewRemedyForm = sendNewRemedyForm;
