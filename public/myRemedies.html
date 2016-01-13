@@ -39,6 +39,7 @@
             cursor: pointer;
             transition-duration: 500ms;
         }
+
         .remedyCard:hover {
             background: #DDDDDD;
             transition-duration: 350ms;
@@ -85,7 +86,7 @@
             <div class="col-lg-3 col-md-3">
                 <div class="card newRemedy" id="newRemedy" style="margin: 3px 0 5px 0;">
                     <img src="images/ic_action_add_dark.png" id="addIcon" height="50" style="margin: 5px 0px 5px 5px"/>
-                    <span style="font-size: 1.6em; line-height: 50px;">New Remedy</span>
+                    <span style="font-size: 1.2em; line-height: 50px;">New Remedy</span>
                 </div>
                 <div class="card scrollContainer" id="userDetailsCard">
                     <center>
@@ -120,7 +121,43 @@
             <div class="col-lg-8 col-md-8">
                 <div class="card" id="feedCard">
 
-                    <input type="text" class="editText" placeholder="Title" value="{{remedy.title}}">
+                    <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
+                           value="{{remedy.title}}">
+                    <textarea placeholder="Remedy description" id="form_description" name="description"
+                              class="remedyForm" rows="10">{{remedy.description}}</textarea>
+                    <input type="text" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm" name="tags"
+                           value="{{remedy.tags.toString()}}">
+                    <input type="text" placeholder="Diseases (Seperated by comma ',')" id="form_diseases" class="remedyForm"
+                           name="tags" value="{{remedy.diseases.toString()}}">
+                    <input type="text" placeholder="References (Seperated by comma ',')" id="form_references" class="remedyForm"
+                           name="tags" value="{{remedy.references.toString()}}">
+
+
+                    <table width="75%" style="margin-top:10px; margin-left:12.5%;" >
+                        <tr>
+                            <td><a href="#" class="commentCount stats">
+                                <i class="glyphicon glyphicon-comment"></i>
+                                {{remedy.stats.comments || 0}}&nbsp;&nbsp;&nbsp;Comments
+                            </a>
+                            </td>
+                            <td>
+                                <a href="#" class="upvoteCount stats">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote || 0}}&nbsp;&nbsp;&nbsp;Upvotes
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="downvoteCount stats">
+                                    <i class="glyphicon glyphicon-thumbs-down"></i>
+                                    {{remedy.stats.downvote || 0}}&nbsp;&nbsp;&nbsp;Downvotes
+                                </a>
+                            </td>
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td colspan="3" align="center"><button class="remedyForm">Submit</button></td>
+                        </tr>
+                    </table>
+
 
                 </div>
             </div>

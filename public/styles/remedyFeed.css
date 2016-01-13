@@ -135,6 +135,61 @@ body {
     color: #FFFFFF;
     transition-duration: 350ms;
 }
+
+input[type="text"].remedyForm, textarea.remedyForm{
+    transition-duration: 500ms;
+    width: 100%;
+    margin: 0 auto;
+    border: none;
+    border-bottom: solid 2px #cbcbcb;
+    padding: 10px 5px 5px;
+    color: #888888;
+    box-shadow: none;
+}
+
+
+input[type="text"].remedyForm:focus, textarea.remedyForm:focus{
+    transition-duration: 500ms;
+    color: #334387;
+    border-bottom: solid 2px #4b61c5;
+    outline: none;
+}
+
+#form_title{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#form_description{
+    margin-top: 10px;
+    background: #FCFCFF;
+}
+
+.remedyForm > a:hover{
+    text-decoration: none;
+}
+
+button.remedyForm, button{
+    background: #FFFFFF;
+    color: #444444;
+    border: none;
+    padding: 10px 20px;
+    transition-duration: 250ms;
+    outline: none;
+    text-transform: uppercase;
+}
+
+button.remedyForm:hover{
+    background: #EEEEFF;
+    color: #222222;
+}
+button.remedyForm:focus{
+    background: #DDDDFF;
+    color: #222222;
+}
+
+
+
 @media screen and (max-width: 768px) {
     .content {
         margin-top: 56px;
