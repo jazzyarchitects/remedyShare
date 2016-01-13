@@ -66,6 +66,7 @@ module.exports = function(config) {
 						if (success) {
 							req.user = doc.user;
 							req.admin = doc.admin;
+							req.service = serviceToken;
 						}
 						next();
 					});

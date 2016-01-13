@@ -2,10 +2,7 @@
  * Created by Jibin_ism on 20-Jun-15.
  */
 
-var BASE_URL = window.location.protocol + "//" + window.location.host + "/api";
-//var BASE_URL = window.location.protocol + "//" + window.location.hostname + "/api";
-var REMEDY_FEED_URL = BASE_URL + "/remedy/all/";
-
+var url;
 var app = angular.module('remedyShare', []);
 var userGlobal;
 
@@ -22,28 +19,48 @@ app.directive('remedy-feed', function () {
 
 app.controller('remedyController', function ($scope) {
     $scope.remedies = [];
-    //remedyRetrieverService.getRemedies().success(function(response){
-    //    console.log("Success: (APP Controller)"+JSON.stringify(response));
-    //   $scope.remedies = response.data.remedies;
-    //});
+    $scope.user = undefined;
 
-    $scope.loadRemedies = function (page, user) {
-        page = page || 1;
-        userGlobal=user;
-        var url='/remedy/all/'+page;
-        if(user){
-            url='/'+user+'/remedy/all/'+page;
-        }
+    $scope.loadUserDetails = function(){
+        apiAjax({
+            method: 'GET',
+            url: '/user/',
+            success: function(result){
+             $scope.$apply(function(){
+                $scope.user = result.data;
+             });
+            }
+        });
+    };
+
+    $scope.__loadRemedies = function (url) {
         apiAjax({
             method: 'GET',
             url: url,
             success: function (result) {
                 $scope.$apply(function () {
                     $scope.remedies = result.data.remedies;
-                    //console.log("Remedies: " + JSON.stringify(result.data.remedies));
                 });
             }
         });
+    };
+
+    $scope.loadMyRemedies = function (page) {
+        page = page || 1;
+        url='/user/remedy/'+page;
+        $scope.__loadRemedies(url);
+    };
+
+    $scope.loadRemedies = function (page) {
+        page = page || 1;
+        url = '/remedy/all/' + page;
+        $scope.__loadRemedies(url);
+    };
+
+    $scope.loadUserRemedies = function(page, user){
+      page = page || 1;
+       url = '/user/'+user+'/remedy/'+page;
+        $scope.__loadRemedies(url);
     };
 
     $scope.upvote = function (_id) {
@@ -60,9 +77,9 @@ app.controller('remedyController', function ($scope) {
                                     $scope.remedies[i].stats.upvote++;
                                 }
                                 $scope.remedies[i].upvoted = !$scope.remedies[i].upvoted;
-                                if($scope.remedies[i].upvoted){
-                                    if($scope.remedies[i].downvoted) {
-                                        $scope.remedies[i].stats.downvote --;
+                                if ($scope.remedies[i].upvoted) {
+                                    if ($scope.remedies[i].downvoted) {
+                                        $scope.remedies[i].stats.downvote--;
                                     }
                                     $scope.remedies[i].downvoted = false;
                                 }
@@ -89,9 +106,9 @@ app.controller('remedyController', function ($scope) {
                                 }
                                 $scope.remedies[i].downvoted = !$scope.remedies[i].downvoted;
 
-                                if($scope.remedies[i].downvoted){
-                                    if($scope.remedies[i].upvoted) {
-                                        $scope.remedies[i].stats.upvote --;
+                                if ($scope.remedies[i].downvoted) {
+                                    if ($scope.remedies[i].upvoted) {
+                                        $scope.remedies[i].stats.upvote--;
                                     }
                                     $scope.remedies[i].upvoted = false;
                                 }
@@ -102,6 +119,19 @@ app.controller('remedyController', function ($scope) {
             }
         )
     };
+
+    $scope.showRemedy = function(id){
+        apiAjax({
+            method: 'GET',
+            url: '/remedy/'+id,
+            success: function(result){
+              $scope.$apply(function(){
+                  $scope.remedy = result.data;
+              });
+            }
+        })
+    };
+
 
     $scope.refresh = function () {
         $scope.loadRemedies(undefined, userGlobal);

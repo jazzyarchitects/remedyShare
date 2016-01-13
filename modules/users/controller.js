@@ -7,11 +7,11 @@ var path = requireFromModule('path');
 var UserOperations = requireFromModule('users/operations');
 var ClientOperations = requireFromModule('clients/operations');
 
-var signUp = function (user, callback) {
+var signUp = function (user, service, callback) {
     UserOperations.signUp(user, function (resultUser) {
         //console.log(result);
         if (resultUser.success) {
-            ClientOperations.createNewClient(resultUser.data, function (result) {
+            ClientOperations.createNewClient(resultUser.data, service, function (result) {
                 if (result.error) {
                     callback(errorJSON(501, result.err));
                 } else {
@@ -24,9 +24,9 @@ var signUp = function (user, callback) {
     });
 };
 
-function loginCallback(result1, callback) {
+function loginCallback(result1, service, callback) {
     if (result1.success) {
-        ClientOperations.createNewClient(result1.data, function (result) {
+        ClientOperations.createNewClient(result1.data, service, function (result) {
             if (result.error) {
                 callback(errorJSON(501, result.err));
             } else {
@@ -38,15 +38,15 @@ function loginCallback(result1, callback) {
     }
 }
 
-var login = function (user, callback) {
+var login = function (user, service, callback) {
     if (user.email) {
         UserOperations.loginWithEmail(user, function (result) {
             //console.log(result);
-            loginCallback(result, callback);
+            loginCallback(result, service, callback);
         });
     } else if (user.mobile) {
         UserOperations.loginWithMobile(user, function (result) {
-            loginCallback(result, callback);
+            loginCallback(result, service, callback);
         });
     } else {
         callback(errorJSON(601, "INVALID_DATA_PASSED", "NO_EMAIL_FOR_LOGIN"));
@@ -79,23 +79,25 @@ var remedyList = function (user_id, page, callback) {
     });
 };
 
-var getUserData = function(user_id, callback){{
-   UserOperations.getUserData(user_id, function(result){
-        callback(result);
-   });
-}};
+var getUserData = function (user_id, callback) {
+    {
+        UserOperations.getUserData(user_id, function (result) {
+            callback(result);
+        });
+    }
+};
 
-var logout = function(user, callback){
-    ClientOperations.logout(user, function(result){
-        if(result.success){
+var logout = function (user, callback) {
+    ClientOperations.logout(user, function (result) {
+        if (result.success) {
             callback(successJSON({logout: true}));
         }
     });
 };
 
-var uploadProfilePicture = function(user, file, callback){
-    UserOperations.linkProfilePicture(user, file, function(result){
-       callback(result);
+var uploadProfilePicture = function (user, file, callback) {
+    UserOperations.linkProfilePicture(user, file, function (result) {
+        callback(result);
     });
 };
 
@@ -104,6 +106,6 @@ exports.login = login;
 exports.update = update;
 exports.delete = del;
 exports.remedyList = remedyList;
-exports.getUserData=getUserData;
-exports.logout=logout;
+exports.getUserData = getUserData;
+exports.logout = logout;
 exports.uploadProfilePicture = uploadProfilePicture;

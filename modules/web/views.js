@@ -29,7 +29,7 @@ var sendUserFeed = function (req, res) {
 };
 
 var sendNewRemedyForm = function (req, res) {
-    sendFile(res, './public/newRemedy.html')
+    sendFile(res, './public/myRemedies.html')
 };
 
 

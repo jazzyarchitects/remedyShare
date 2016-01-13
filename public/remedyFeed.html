@@ -35,7 +35,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Medical Assistant</span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -66,9 +66,17 @@
                     <div class="card" id="dpframe" style="z-index: 999;">
                         <img src="images/userlogin.png" id="userDp">
                     </div>
-                    <div class="userDetails" id="userDetails">
-                        <input type="text" class="userDetailsFormElement" id="username" disabled value="Name">
-                        <input type="text" class="userDetailsFormElement" id="email" disabled value="Email">
+                    <div class="userDetails" id="userDetails" ng-init="loadUserDetails()">
+                        <input type="text" class="userDetailsFormElement" id="username" disabled value="{{user.name}}">
+                        <input type="text" class="userDetailsFormElement" id="email" disabled value="{{user.email}}">
+                        <input type="text" class="userDetailsFormElement" id="mobile" disabled
+                               value="{{user.mobile}}"><br/>
+                        <!--<input type="radio" class="userDetailsFormElement" name="sex" ng-model="user.sex"-->
+                               <!--ng-value="user.sex" disabled value="M">Male-->
+                        <!--<input type="radio" class="userDetailsFormElement" name="sex" ng-model="user.sex"-->
+                               <!--ng-value="user.sex" disabled value="F">Female<br/>-->
+                        <input type="text" class="userDetailsFormElement" id="dob" disabled
+                               value="{{user.dob.dd}} - {{user.dob.mm}} - {{user.dob.yyyy}}">
                     </div>
                 </div>
             </div>
@@ -77,7 +85,8 @@
                 <div class="card" id="feedCard">
 
                     <div ng-repeat="remedy in remedies">
-                        <div class="remedyFeed" ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
+                        <div class="remedyFeed"
+                             ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
                             <div class="row card remedyCard">
                                 <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
 
@@ -86,8 +95,10 @@
                                 <span style="font-size: 0.9em; margin-left: 15px;"><i>By:
                                     {{remedy.author.name}}</i></span>
                                     <br/>
+
                                     <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
-                                    {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ? '...':''}}
+                                        {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ?
+                                        '...':''}}
                                     </p>
                                     <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
                                 </div>
@@ -101,7 +112,7 @@
                                         <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote}}
                                     </a>
                                     <br/>
-                                    <a href="#" ng-click="downvote(remedy._id)"  class="downvoteCount stats">
+                                    <a href="#" ng-click="downvote(remedy._id)" class="downvoteCount stats">
                                         <i class="glyphicon glyphicon-thumbs-down"></i>
                                         {{remedy.stats.downvote}}
                                     </a>
@@ -130,6 +141,20 @@
         </div>
     </div>
 </div>
+
+<style>
+
+
+    input[type="text"] {
+        padding: 0 5px;
+        height: 35px;
+        line-height: 35px;
+        margin-top: 5px;
+        background: #FFF;
+        border: none;
+    }
+
+</style>
 
 
 </body>

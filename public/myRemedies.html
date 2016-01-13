@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Insert Remedy</title>
+    <title>My Remedies</title>
 
     <link rel="icon" href="images/small_icon.png"/>
 
@@ -22,12 +22,33 @@
     <!-- Material Theme -->
     <link href="styles/material.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="./assets/css/form-elements.css">
+    <!--<link rel="stylesheet" href="./assets/css/form-elements.css">-->
 
     <!-- Cuidar references -->
     <script src="scripts/layouts.js"></script>
     <link href="styles/remedyFeed.css" rel="stylesheet"/>
     <script src="scripts/remedyFeed.js"></script>
+
+    <style>
+        .scrollContainer {
+            overflow-y: auto;
+        }
+
+        .remedyCard {
+            width: 100%;
+            cursor: pointer;
+            transition-duration: 500ms;
+        }
+        .remedyCard:hover {
+            background: #DDDDDD;
+            transition-duration: 350ms;
+        }
+
+        .remedyFeed {
+            padding: 3px 3px;
+            min-height: 0;
+        }
+    </style>
 
 </head>
 <body ng-app="remedyShare" ng-controller="remedyController">
@@ -35,7 +56,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Medical Assistant</span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -58,17 +79,40 @@
 
 </div>
 
-<div class="container-fluid" id="mainContent">
+<div class="container-fluid" id="mainContent" ng-init="loadMyRemedies()">
     <div class="content">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <div class="card" id="userDetailsCard">
-                    <div class="card" id="dpframe" style="z-index: 999;">
-                        <img src="images/userlogin.png" id="userDp">
-                    </div>
+                <div class="card newRemedy" id="newRemedy" style="margin: 3px 0 5px 0;">
+                    <img src="images/ic_action_add_dark.png" id="addIcon" height="50" style="margin: 5px 0px 5px 5px"/>
+                    <span style="font-size: 1.6em; line-height: 50px;">New Remedy</span>
+                </div>
+                <div class="card scrollContainer" id="userDetailsCard">
+                    <center>
+                    <span style="padding-left: 5px; line-height: 35px; font-size: 1.5em; text-align: center">M<span
+                            style="font-size: 0.8em">Y</span> R<span style="font-size: 0.8em">EMEDIES</span></span>
+                    </center>
+                    <hr style="margin: 0"/>
+
                     <div class="userDetails" id="userDetails">
-                        <input type="text" class="userDetailsFormElement" id="username" disabled value="Name">
-                        <input type="text" class="userDetailsFormElement" id="email" disabled value="Email">
+                        <div ng-repeat="remedy in remedies" class="scrollContainer" id="myRemedies">
+                            <div class="remedyFeed">
+                                <div class="row card remedyCard" ng-click="showRemedy(remedy._id)">
+                                    <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
+
+                                    <span style="font-size: 1.3em; font-weight: bold; ">{{remedy.title}}</span>
+                                    <br/>
+
+                                    <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
+                                        {{remedy.description | limitTo: 60}}{{remedy.description.length > 55 ?
+                                        '...':''}}
+                                    </p>
+                                    <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -76,48 +120,14 @@
             <div class="col-lg-8 col-md-8">
                 <div class="card" id="feedCard">
 
-                    <div ng-repeat="remedy in remedies">
-                        <div class="remedyFeed" ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
-                            <div class="row card remedyCard">
-                                <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
+                    <input type="text" class="editText" placeholder="Title" value="{{remedy.title}}">
 
-                                <div class="col-lg-10">
-                                    <span style="font-size: 1.6em; font-weight: bold; ">{{remedy.title}}</span>
-                                <span style="font-size: 0.9em; margin-left: 15px;"><i>By:
-                                    {{remedy.author.name}}</i></span>
-                                    <br/>
-                                    <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
-                                    {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ? '...':''}}
-                                    </p>
-                                    <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
-                                </div>
-                                <div class="col-lg-2">
-                                    <a href="#" class="commentCount stats">
-                                        <i class="glyphicon glyphicon-comment"></i>
-                                        {{remedy.stats.comments}}
-                                    </a>
-                                    <br/>
-                                    <a href="#" ng-click="upvote(remedy._id)" class="upvoteCount stats">
-                                        <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote}}
-                                    </a>
-                                    <br/>
-                                    <a href="#" ng-click="downvote(remedy._id)"  class="downvoteCount stats">
-                                        <i class="glyphicon glyphicon-thumbs-down"></i>
-                                        {{remedy.stats.downvote}}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="col-lg-1 col-md-1">
-                <div class="card fab" id="refreshFab" ng-click="refresh()">
-                    <img src="images/ic_action_reload.png"/>
-                </div>
-                <div class="card fab" id="addFab">
-                    <img src="images/ic_action_add.png"/>
+                <div class="card fab" id="homeFab">
+                    <img src="images/ic_action_home.png"/>
                 </div>
                 <div class="card fab" id="searchFab">
                     <img src="images/ic_action_search.png"/>

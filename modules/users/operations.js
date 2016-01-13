@@ -128,16 +128,20 @@ var insertRemedy = function (user_id, remedy, callback) {
 
 var remedyList = function (user_id, page, callback) {
     page = page || 1;
+    if(!mongoose.Types.ObjectId.isValid(user_id)){
+        user_id=mongoose.Types.ObjectId(user_id);
+    }
     User.findOne({_id: user_id})
         .populate({
             path: "remedies",
             match: {active: true},
-            select: 'title publishedOn stats image diseases',
+            select: 'title description publishedOn stats diseases',
             options: {limit: PAGE_LIMIT, skip: (page - 1) * PAGE_LIMIT},
             sort: {publishedOn: 1}
         })
         .select("_id remedies")
         .exec(function (err, doc) {
+             //console.log("UserOperations: result:"+JSON.stringify(err)+" "+JSON.stringify(doc));
             if (doc) {
                 callback(successJSON(doc));
             } else {

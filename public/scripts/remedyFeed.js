@@ -5,23 +5,19 @@
 var toolbarHeight, windowHeight, contentHeight, padding, dpHolder, userDetailsCard, userDp, dpFrame;
 var fraction = 0.5;
 $(document).ready(function(){
-    apiAjax({
-        url: '/user/',
-        method: "GET",
-        success: function(result){
-            //console.log("Success: "+JSON.stringify(result));
-            $("#username").val(result.data.name);
-            $("#email").val(result.data.email);
-        },
-        error: function(result){
-            //console.log("error"+ JSON.stringify(result));
-            $("#modalHeader").html("Error");
-            $("#modalBody").html(err.message.replace(/_/g," "));
-        }
+
+    $(".newRemedy").hover(function(e){
+       $("#addIcon").attr("src","images/ic_action_add.png");
+    }, function(e){
+        $("#addIcon").attr("src","images/ic_action_add_dark.png");
     });
 
     $("#addFab").click(function(e){
-       window.open('/app/insertRemedy',"_parent");
+       window.open('/app/my/remedy',"_parent");
+    });
+
+    $("#homeFab").click(function(e){
+       window.open('/app','_parent');
     });
 });
 

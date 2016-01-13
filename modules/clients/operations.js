@@ -6,8 +6,8 @@ var Client = requireFromModule('clients/clientModel');
 var uuid = require('node-uuid');
 var Hash = requireFromModule('clients/cryptoOperations');
 
-var newClient = function (user, callback) {
-    Client.findOne({user: user._id}, function (err, doc) {
+var newClient = function (user, service, callback) {
+    Client.findOne({user: user._id, service: service}, function (err, doc) {
         var id = uuid.v4();
         var api_key = uuid.v4();
         if (doc) {
@@ -16,7 +16,8 @@ var newClient = function (user, callback) {
                     var client = {
                         user: user._id,
                         key: result.hash,
-                        id: id
+                        id: id,
+                        service: service
                     };
                     Client.update({user: user._id},client,function(err, doc){
                        if(doc){
@@ -35,7 +36,8 @@ var newClient = function (user, callback) {
                     var client = new Client({
                         user: user._id,
                         key: result.hash,
-                        id: id
+                        id: id,
+                        service: service
                     });
                     client.save(function (err) {
                         if (err) {

@@ -1,6 +1,7 @@
 body {
     background: #EEEEEE;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
+    min-height: 0;
 }
 
 .mdl-card {
@@ -42,11 +43,11 @@ body {
 }
 
 
-#addFab {
+#addFab, #homeFab {
     background-color: #4b61c5;
 }
 
-#addFab:hover {
+#addFab:hover,#homeFab:hover {
     background-color: #334387;
 }
 
@@ -115,16 +116,25 @@ body {
     color: #06bbe7;
     text-decoration: none;
 }
-
-input[type="text"] {
-    padding: 0 5px;
-    height: 35px;
-    line-height: 35px;
-    margin-top: 5px;
-    background: #FFF;
-    border: none;
+.mdl-layout-title a{
+    color: #FFF;
+}
+.mdl-layout-title a:hover{
+    color: #FFF;
+    text-decoration: none;
 }
 
+.newRemedy{
+    color: #000;
+    cursor: pointer;
+    transition-duration: 500ms;
+}
+
+.newRemedy:hover{
+    background: #334387;
+    color: #FFFFFF;
+    transition-duration: 350ms;
+}
 @media screen and (max-width: 768px) {
     .content {
         margin-top: 56px;

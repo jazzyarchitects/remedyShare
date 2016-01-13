@@ -2,6 +2,7 @@
  * Created by Jibin_ism on 11-Jan-16.
  */
 
+var h;
 $(document).ready(function (e) {
 
     toolbarHeight = $("#header").height();
@@ -18,6 +19,11 @@ $(document).ready(function (e) {
     dpFrame = $("#dpframe");
 
     var imageWidth = userDetailsCard.width() * fraction;
+    h=(contentHeight - 2 * padding - 0.6 * imageWidth) + "px";
+    if(userDp.length==0){
+        imageWidth = 0;
+        h=(contentHeight - 2 * padding - 0.6 * imageWidth-$("#newRemedy").height()-8) + "px";
+    }
     userDp.css({
         width: imageWidth + "px",
         height: imageWidth + "px",
@@ -34,9 +40,10 @@ $(document).ready(function (e) {
     });
     userDetailsCard.css({
         "margin-top": imageWidth * 0.6 + "px",
-        height: (contentHeight - 2 * padding - 0.6 * imageWidth) + "px"
+        height: h
     });
     $("#userDetails").css({padding: 5 + "px", "padding-top": 0.55 * imageWidth + "px"});
+
 
     $("#logout").click(function (e) {
         e.preventDefault();
@@ -47,5 +54,6 @@ $(document).ready(function (e) {
 
 function logout(e) {
     $.removeCookie("user", {path: '/'});
+    $.removeCookie("accessToken", {path: '/'});
     window.location.replace('/app');
 }

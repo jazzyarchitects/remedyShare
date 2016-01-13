@@ -6,7 +6,7 @@
 var express = require('express');
 var router = express.Router();
 var noPrefixRouter = express.Router();
-var view = requireFromModule('web/views')
+var view = requireFromModule('web/views');
 var fs = require('fs');
 
 router.use(express.static('public'));
@@ -23,6 +23,14 @@ noPrefixRouter.get('/', function (req, res) {
     });
 });
 
+router.get('/signup', function (req, res) {
+    view.sendSignUpForm(req, res);
+});
+
+router.get('/login', function (req, res) {
+    view.sendLoginForm(req, res);
+});
+
 router.use(function (req, res, next) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
@@ -37,19 +45,16 @@ router.get('/', function (req, res) {
     view.sendUserFeed(req, res);
 });
 
-router.get('/signup', function (req, res) {
-    view.sendSignUpForm(req, res);
-});
 
-router.get('/login', function (req, res) {
-    view.sendLoginForm(req, res);
-});
+var myRouter = express.Router();
+myRouter.use(express.static('public'));
 
-router.get('/insertRemedy', function(req, res){
+myRouter.get('/remedy', function(req, res){
    view.sendNewRemedyForm(req, res);
-});;
+});
 
 module.exports = function (app) {
+    router.use('/my', myRouter);
     app.use('/app', router);
     app.use(noPrefixRouter);
 };
