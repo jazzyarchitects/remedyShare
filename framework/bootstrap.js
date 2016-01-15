@@ -60,13 +60,13 @@ module.exports = function(config) {
 
 			//console.log("Service id: " + serviceToken);
 			if (serviceToken && config.services.indexOf(serviceToken) != -1) {
+				req.service = serviceToken;
 				if (key && id) {
 					ClientOperations.authenticate(id, key, function (success, doc) {
 						req.authenticated = success;
 						if (success) {
 							req.user = doc.user;
 							req.admin = doc.admin;
-							req.service = serviceToken;
 						}
 						next();
 					});

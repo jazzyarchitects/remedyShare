@@ -26,17 +26,21 @@ var getUserObject = function (req, signup) {
     //if (req.body.admin) {
     //    user.admin = req.body.admin;
     //} else {
-        user.admin = false;
+    user.admin = false;
     //}
     return user;
 };
 
 var signup = function (req, res) {
     var user = getUserObject(req, true);
-    control.signUp(user,req.service, function (result) {
+    control.signUp(user, req.service, function (result) {
+        //console.log("Service: "+req.service);
         if (result.data) {
             var client = result.data.client;
-            res.cookie("user",JSON.stringify({key: client.key, id: client.id}),{expires: new Date(Date.now()+365*24*60*60*1000)});
+            res.cookie("user", JSON.stringify({
+                key: client.key,
+                id: client.id
+            }), {expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)});
             //res.cookie("accessToken",result.data.detail._id,{expires: new Date(Date.now()+365*24*60*60*1000)});
         }
         res.json(result);
@@ -49,11 +53,14 @@ var login = function (req, res) {
     var user = getUserObject(req);
 
     //console.log("Login: "+JSON.stringify(req.body));
-    control.login(user,req.service,  function (result) {
+    control.login(user, req.service, function (result) {
 
         if (result.data) {
             var client = result.data.client;
-            res.cookie("user",JSON.stringify({key: client.key, id: client.id}),{expires: new Date(Date.now()+365*24*60*60*1000)});
+            res.cookie("user", JSON.stringify({
+                key: client.key,
+                id: client.id
+            }), {expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)});
             //res.cookie("accessToken",result.data.detail._id,{expires: new Date(Date.now()+365*24*60*60*1000)});
         }
         res.json(result);

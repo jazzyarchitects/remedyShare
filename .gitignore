@@ -6,3 +6,5 @@ node_modules/
 uploads/
 ./design
 design
+./config/serverConfig.js
+config/serverConfig.js
