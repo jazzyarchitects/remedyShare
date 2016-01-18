@@ -1,0 +1,9 @@
+deploy:
+  provider: openshift
+  user: jibinmathews7@gmail.com
+  password:
+    secure: rNliiMzL5puH2xyohMhYLpOHdePSwEY5EkKVZQNjwmmou28X+xu7LNQOQx5ZhaCQn5JXuXIu/hMFG01qWnObsWIAiEjfH4e5EdEWdpRRtmYGNkhfRqSHIbCzegs+nXGM+7uRdZZTdWd1Qn2L/F/EELn7I8ivwY9+8GXmc9JDMtdYKLHQTCVPLp5jN18Lpnfh54VrSZqymWZ0Hn7ikGEZOHxCiAxyB2tS/62daaBkNSfIpFe5jM+op6DeaEEoqfaOi07Dd4k+Zj7ok5G7QN1X8rP2pppSA+dF1PiZD8+766JHz6CctaNGwvSHYbz7kxq08yPkdEMZdgqgru2O/CsqxX5MSe92GyjgWa7k5Q4/rgeht+SMmxQMRc6xjCfxd10+422CdY+MQTE3XYtDNFhHtRKGwxzsLekc8b9e1q+jtYT3M6eVAaMbGJFdHxQLZVFOZz9JcjCAVbDlnpylve4fdbzj3aR3/slTlVBkarE23BzrHLkQgbtywnyxD84IOklKddxizHT0boRQZvRl6sY/j+tH/5XixxC1QJkrS1OwtvGPSVdJ9kD22iHv75eTpiQvGFA2RxuIVXYKpPg4Bi6M8TRELgoW9ID+XQMY4oUmzjNNThMmH8dVjgRd4RtFQkirTPhSFURvpGU5PGxXWmkzsK0/oK0SxVi/WQrpDRX2874=
+  app: medicalassistant
+  domain: jazzyarchitect
+  on:
+    repo: jazzyarchitects/remedyShare
