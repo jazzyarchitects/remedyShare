@@ -6,29 +6,18 @@ var url;
 var app = angular.module('remedyShare', []);
 var userGlobal;
 
-app.directive('remedy-feed', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            remedy: '='
-        },
-        templateUrl: '../scripts/remedyFeed.html'
-    }
-});
-
-
 app.controller('remedyController', function ($scope) {
     $scope.remedies = [];
     $scope.user = undefined;
 
-    $scope.loadUserDetails = function(){
+    $scope.loadUserDetails = function () {
         apiAjax({
             method: 'GET',
             url: '/user/',
-            success: function(result){
-             $scope.$apply(function(){
-                $scope.user = result.data;
-             });
+            success: function (result) {
+                $scope.$apply(function () {
+                    $scope.user = result.data;
+                });
             }
         });
     };
@@ -47,7 +36,8 @@ app.controller('remedyController', function ($scope) {
 
     $scope.loadMyRemedies = function (page) {
         page = page || 1;
-        url='/user/remedy/'+page;
+        //$("#remForm")[0].reset();
+        url = '/user/remedy/' + page;
         $scope.__loadRemedies(url);
     };
 
@@ -57,9 +47,9 @@ app.controller('remedyController', function ($scope) {
         $scope.__loadRemedies(url);
     };
 
-    $scope.loadUserRemedies = function(page, user){
-      page = page || 1;
-       url = '/user/'+user+'/remedy/'+page;
+    $scope.loadUserRemedies = function (page, user) {
+        page = page || 1;
+        url = '/user/' + user + '/remedy/' + page;
         $scope.__loadRemedies(url);
     };
 
@@ -120,24 +110,81 @@ app.controller('remedyController', function ($scope) {
         )
     };
 
-    $scope.showRemedy = function(id){
+    $scope.showRemedy = function (id) {
         apiAjax({
             method: 'GET',
-            url: '/remedy/'+id,
-            success: function(result){
-              $scope.$apply(function(){
-                  $scope.remedy = result.data;
-              });
+            url: '/remedy/' + id,
+            success: function (result) {
+                $scope.$apply(function () {
+                    $scope.remedy = result.data;
+                    //console.log("New Remedy: "+JSON.stringify($scope.remedy.description));
+                });
             }
         })
     };
-
 
     $scope.refresh = function () {
         $scope.loadRemedies(undefined, userGlobal);
     };
 
+
+    function checkForm() {
+        if ($("#form_title").val().trim() == "") {
+            alert("Title cannot be empty");
+            return false;
+        }
+        if ($("#form_description").val().trim() == "") {
+            alert("Description cannot be empty");
+            return false;
+        }
+        return true;
+    }
+
+    $scope.saveRemedy = function () {
+        if (!checkForm) {
+            return;
+        }
+
+        var title = $("#form_title").val();
+        var description = $("#form_description").val();
+        var references = $("#form_references").val();
+        var tags = $("#form_tags").val();
+        var diseases = $("#form_diseases").val();
+
+        //$scope.$apply(function(){
+        //   $scope.remedy = {};
+        //});
+
+        apiAjax({
+            method: 'POST',
+            url: '/remedy/',
+            data: {
+                title: title,
+                description: description,
+                tags: tags,
+                references: references,
+                diseases: diseases
+            },
+            success: function (result) {
+                $scope.loadMyRemedies(1);
+            }
+        })
+
+    };
+    $scope.new = function(){
+        $scope.remedy ={}
+    };
+
+
     //$scope.loadRemedies();
 
-})
-;
+});
+
+
+/*
+
+var index=array.map(function(item){
+return item.id
+}).indexOf("abc");
+array.splice(index, 1);
+ */

@@ -29,6 +29,7 @@
     <link href="styles/remedyFeed.css" rel="stylesheet"/>
     <script src="scripts/remedyFeed.js"></script>
 
+
     <style>
         .scrollContainer {
             overflow-y: auto;
@@ -84,7 +85,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <div class="card newRemedy" id="newRemedy" style="margin: 3px 0 5px 0;">
+                <div class="card newRemedy" id="newRemedy" style="margin: 3px 0 5px 0;" ng-click="new()">
                     <img src="images/ic_action_add_dark.png" id="addIcon" height="50" style="margin: 5px 0px 5px 5px"/>
                     <span style="font-size: 1.2em; line-height: 50px;">New Remedy</span>
                 </div>
@@ -120,20 +121,23 @@
 
             <div class="col-lg-8 col-md-8">
                 <div class="card" id="feedCard">
-
+                <form id="remForm">
                     <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
-                           value="{{remedy.title}}">
+                           ng-model="remedy.title">
                     <textarea placeholder="Remedy description" id="form_description" name="description"
-                              class="remedyForm" rows="10">{{remedy.description}}</textarea>
-                    <input type="text" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm" name="tags"
-                           value="{{remedy.tags.toString()}}">
-                    <input type="text" placeholder="Diseases (Seperated by comma ',')" id="form_diseases" class="remedyForm"
-                           name="tags" value="{{remedy.diseases.toString()}}">
-                    <input type="text" placeholder="References (Seperated by comma ',')" id="form_references" class="remedyForm"
-                           name="tags" value="{{remedy.references.toString()}}">
+                              class="remedyForm" rows="10" ng-model="remedy.description"></textarea>
+                    <input type="text" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm"
+                           name="tags"
+                           ng-model="remedy.tags.toString()">
+                    <input type="text" placeholder="Diseases (Seperated by comma ',')" id="form_diseases"
+                           class="remedyForm"
+                           name="tags" ng-model="remedy.diseases.toString()">
+                    <input type="text" placeholder="References (Seperated by comma ',')" id="form_references"
+                           class="remedyForm"
+                           name="tags" ng-model="remedy.references.toString()">
 
 
-                    <table width="75%" style="margin-top:10px; margin-left:12.5%;" >
+                    <table width="75%" style="margin-top:10px; margin-left:12.5%;">
                         <tr>
                             <td><a href="#" class="commentCount stats">
                                 <i class="glyphicon glyphicon-comment"></i>
@@ -152,11 +156,16 @@
                                 </a>
                             </td>
                         </tr>
-                        <tr><td>&nbsp;</td></tr>
                         <tr>
-                            <td colspan="3" align="center"><button class="remedyForm">Submit</button></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <button class="remedyForm" ng-click="saveRemedy()">Save</button>
+                            </td>
                         </tr>
                     </table>
+                </form>
 
 
                 </div>

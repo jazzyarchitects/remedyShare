@@ -19,5 +19,7 @@ $(document).ready(function(){
     $("#homeFab").click(function(e){
        window.open('/app','_parent');
     });
+
+
 });
 
