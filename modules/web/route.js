@@ -26,9 +26,9 @@ noPrefixRouter.get('/', function (req, res) {
 router.get('/signup', function (req, res) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
-            view.sendSignUpForm(req, res);
-        } else {
             res.redirect('/app');
+        } else {
+            view.sendSignUpForm(req, res);
         }
     });
 });
@@ -36,9 +36,9 @@ router.get('/signup', function (req, res) {
 router.get('/login', function (req, res) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
-            view.sendLoginForm(req, res);
-        } else {
             res.redirect('/app');
+        } else {
+            view.sendLoginForm(req, res);
         }
     });
 
