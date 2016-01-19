@@ -85,7 +85,7 @@
                 <div class="card" id="feedCard">
 
                     <div ng-repeat="remedy in remedies">
-                        <div class="remedyFeed"
+                        <div class="remedyFeed" ng-click="openRemedy(remedy._id)"
                              ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
                             <div class="row card remedyCard">
                                 <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
@@ -156,6 +156,9 @@
 
 </style>
 
+<script>
+    $.removeCookie("id");
+</script>
 
 </body>
 </html>

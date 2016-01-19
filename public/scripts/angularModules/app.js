@@ -119,9 +119,13 @@ app.controller('remedyController', function ($scope) {
                     $scope.remedy = result.data;
                     //console.log("New Remedy: "+JSON.stringify($scope.remedy.description));
                 });
+            },
+            preExecute: function(){
+                window.localStorage.removeItem("id");
             }
         })
     };
+
 
     $scope.refresh = function () {
         $scope.loadRemedies(undefined, userGlobal);
@@ -171,20 +175,33 @@ app.controller('remedyController', function ($scope) {
         })
 
     };
-    $scope.new = function(){
-        $scope.remedy ={}
+    $scope.new = function () {
+        $scope.remedy = {}
     };
 
+    $scope.openRemedy = function (id) {
+        $.cookie("id",id);
+        window.open('/app/remedy', "_parent");
+    };
+
+    $scope.loadThisRemedy = function () {
+        var id = $.cookie("id");
+        $scope.showRemedy(id);
+    };
 
     //$scope.loadRemedies();
 
 });
 
 
+function redirectToNew() {
+    window.open('/app/my/remedy', "_parent");
+}
+
 /*
 
-var index=array.map(function(item){
-return item.id
-}).indexOf("abc");
-array.splice(index, 1);
+ var index=array.map(function(item){
+ return item.id
+ }).indexOf("abc");
+ array.splice(index, 1);
  */

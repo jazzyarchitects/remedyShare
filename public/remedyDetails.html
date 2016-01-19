@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Remedies</title>
+
+    <link rel="icon" href="images/small_icon.png"/>
+
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/angularModules/common/angular.min.js"></script>
+    <script src="scripts/angularModules/common/angular-route-min.js"></script>
+
+    <script src="scripts/angularModules/app.js"></script>
+    <script src="scripts/api.js"></script>
+
+    <!--Bootstrap Theme-->
+    <link href="styles/bootstrap.min.css" rel="stylesheet"/>
+    <script src="scripts/bootstrap.min.js"></script>
+
+    <!-- Material Theme -->
+    <link href="styles/material.min.css" rel="stylesheet"/>
+
+    <!--<link rel="stylesheet" href="./assets/css/form-elements.css">-->
+
+    <!-- Cuidar references -->
+    <script src="scripts/layouts.js"></script>
+    <link href="styles/remedyFeed.css" rel="stylesheet"/>
+    <script src="scripts/remedyFeed.js"></script>
+
+
+    <style>
+        .scrollContainer {
+            overflow-y: auto;
+        }
+
+        .remedyCard {
+            width: 100%;
+            cursor: pointer;
+            transition-duration: 500ms;
+        }
+
+        .remedyCard:hover {
+            background: #DDDDDD;
+            transition-duration: 350ms;
+        }
+
+        .remedyFeed {
+            padding: 3px 3px;
+            min-height: 0;
+        }
+    </style>
+
+</head>
+<body ng-app="remedyShare" ng-controller="remedyController">
+<div class="mdl-layout--fixed-header menu">
+    <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant</a></span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+
+            <div class="mdl-layout__tab-bar-right-button">
+                <style scoped>
+                    .mdl-layout__tab-bar-right-button a {
+                        color: white;
+                        text-decoration: none;
+                    }
+                </style>
+                <a href="#" id="logout">Logout</a>
+                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder">
+                    <img alt="Get it on Google Play"
+                         src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+</div>
+
+<div class="container-fluid" id="mainContent" ng-init="loadRemedies()">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="card newRemedy" id="newRemedy" style="margin: 3px 0 5px 0;" onclick="redirectToNew()">
+                    <img src="images/ic_action_add_dark.png" id="addIcon" height="50" style="margin: 5px 0px 5px 5px"/>
+                    <span style="font-size: 1.2em; line-height: 50px;">New Remedy</span>
+                </div>
+                <div class="card scrollContainer" id="userDetailsCard">
+                    <div class="userDetails" id="userDetails">
+                        <div ng-repeat="remedy in remedies" class="scrollContainer" id="myRemedies">
+                            <div class="remedyFeed">
+                                <div class="row card remedyCard" ng-click="showRemedy(remedy._id)">
+                                    <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
+
+                                    <span style="font-size: 1.3em; font-weight: bold; ">{{remedy.title}}</span>
+                                    <br/>
+
+                                    <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
+                                        {{remedy.description | limitTo: 60}}{{remedy.description.length > 55 ?
+                                        '...':''}}
+                                    </p>
+                                    <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8" ng-init="loadThisRemedy()">
+                <div class="card" id="feedCard">
+                <form id="remForm">
+                    <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
+                           ng-model="remedy.title">
+                    <textarea placeholder="Remedy description" id="form_description" name="description"
+                              class="remedyForm" rows="10" ng-model="remedy.description"></textarea>
+                    <input type="text" placeholder="Tags" id="form_tags" class="remedyForm"
+                           name="tags"
+                           ng-model="remedy.tags.toString()">
+                    <input type="text" placeholder="Diseases" id="form_diseases"
+                           class="remedyForm"
+                           name="tags" ng-model="remedy.diseases.toString()">
+                    <input type="text" placeholder="References" id="form_references"
+                           class="remedyForm"
+                           name="tags" ng-model="remedy.references.toString()">
+
+
+                    <table width="75%" style="margin-top:10px; margin-left:12.5%;">
+                        <tr>
+                            <td><a href="#" class="commentCount stats">
+                                <i class="glyphicon glyphicon-comment"></i>
+                                {{remedy.stats.comments || 0}}&nbsp;&nbsp;&nbsp;Comments
+                            </a>
+                            </td>
+                            <td>
+                                <a href="#" class="upvoteCount stats">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote || 0}}&nbsp;&nbsp;&nbsp;Upvotes
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="downvoteCount stats">
+                                    <i class="glyphicon glyphicon-thumbs-down"></i>
+                                    {{remedy.stats.downvote || 0}}&nbsp;&nbsp;&nbsp;Downvotes
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <button class="remedyForm" ng-click="saveRemedy()">Save</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-1 col-md-1">
+                <div class="card fab" id="homeFab">
+                    <img src="images/ic_action_home.png"/>
+                </div>
+                <div class="card fab" id="searchFab">
+                    <img src="images/ic_action_search.png"/>
+                </div>
+                <div class="card fab" id="settingsFab">
+                    <img src="images/ic_action_settings.png"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

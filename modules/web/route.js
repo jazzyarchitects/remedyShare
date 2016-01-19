@@ -24,11 +24,24 @@ noPrefixRouter.get('/', function (req, res) {
 });
 
 router.get('/signup', function (req, res) {
-    view.sendSignUpForm(req, res);
+    authenticateUser(req, res, function (result) {
+        if (result.success) {
+            view.sendSignUpForm(req, res);
+        } else {
+            res.redirect('/app');
+        }
+    });
 });
 
 router.get('/login', function (req, res) {
-    view.sendLoginForm(req, res);
+    authenticateUser(req, res, function (result) {
+        if (result.success) {
+            view.sendLoginForm(req, res);
+        } else {
+            res.redirect('/app');
+        }
+    });
+
 });
 
 router.use(function (req, res, next) {
@@ -45,12 +58,16 @@ router.get('/', function (req, res) {
     view.sendUserFeed(req, res);
 });
 
+router.get('/remedy', function(req, res){
+   view.sendRemedyList(req, res);
+});
+
 
 var myRouter = express.Router();
 myRouter.use(express.static('public'));
 
-myRouter.get('/remedy', function(req, res){
-   view.sendNewRemedyForm(req, res);
+myRouter.get('/remedy', function (req, res) {
+    view.sendNewRemedyForm(req, res);
 });
 
 module.exports = function (app) {
