@@ -10,7 +10,7 @@
     "async": "1.5.2",
     "bcrypt-nodejs": "latest",
     "body-parser": "1.14.2",
-    "co-parallel": "^1.0.0",
+    "co-parallel": "1.0.0",
     "compression": "^1.0.1",
     "consolidate": "0.13.1",
     "cookie-parser": "^1.1.0",
