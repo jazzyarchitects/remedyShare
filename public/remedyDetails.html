@@ -117,18 +117,18 @@
                 <div class="card" id="feedCard">
                 <form id="remForm">
                     <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
-                           ng-model="remedy.title">
+                           ng-model="remedy.title" readonly>
                     <textarea placeholder="Remedy description" id="form_description" name="description"
-                              class="remedyForm" rows="10" ng-model="remedy.description"></textarea>
+                              class="remedyForm" rows="10" ng-model="remedy.description" readonly></textarea>
                     <input type="text" placeholder="Tags" id="form_tags" class="remedyForm"
-                           name="tags"
-                           ng-model="remedy.tags.toString()">
+                           name="tags" readonly
+                           ng-model="remedy.tags">
                     <input type="text" placeholder="Diseases" id="form_diseases"
-                           class="remedyForm"
-                           name="tags" ng-model="remedy.diseases.toString()">
+                           class="remedyForm" readonly
+                           name="tags" ng-model="remedy.diseases">
                     <input type="text" placeholder="References" id="form_references"
-                           class="remedyForm"
-                           name="tags" ng-model="remedy.references.toString()">
+                           class="remedyForm" readonly
+                           name="tags" ng-model="remedy.references">
 
 
                     <table width="75%" style="margin-top:10px; margin-left:12.5%;">
@@ -153,11 +153,11 @@
                         <tr>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="remedyForm" ng-click="saveRemedy()">Save</button>
-                            </td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td colspan="3" align="center">-->
+                                <!--<button class="remedyForm" ng-click="saveRemedy()">Save</button>-->
+                            <!--</td>-->
+                        <!--</tr>-->
                     </table>
                 </form>
 

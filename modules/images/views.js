@@ -3,14 +3,22 @@
  */
 
 
-var fs=require('fs');
+var fs = require('fs');
 
 
 var sendPicture = function (uploadDirectory, filename, res) {
-    fs.readFile("./uploads/images/"+ uploadDirectory+"/" + filename, function (err, file) {
+    //console.log("Sending image: "+filename);
+    fs.readFile("./uploads/images/" + uploadDirectory + "/" + filename, function (err, file) {
         if (err) {
-            console.log("Error");
-            res.end();
+            fs.readFile("./public/images/stethoscope.jpg", function (err, file) {
+                if (err) {
+                    res.end();
+                } else {
+                    res.writeHead(200, {'Content-Type': 'image/png', 'Content-Length': file.length});
+                    res.write(file);
+                    res.end();
+                }
+            });
         } else {
             //console.log("Got image file: "+file.length);
             //console.log("File: "+file);
@@ -21,11 +29,11 @@ var sendPicture = function (uploadDirectory, filename, res) {
     });
 };
 
-var sendUserPic = function(req, res){
+var sendUserPic = function (req, res) {
     sendPicture('users', req.params.filename, res);
 };
 
-var sendRemedyPic = function(req, res){
+var sendRemedyPic = function (req, res) {
     sendPicture('remedy', req.params.filename, res);
 };
 

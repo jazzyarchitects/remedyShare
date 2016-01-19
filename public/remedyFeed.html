@@ -35,7 +35,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title"><a href="/app">Medical Assistant v0.0.1</a></span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant v19.1.16.2037</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -85,12 +85,12 @@
                 <div class="card" id="feedCard">
 
                     <div ng-repeat="remedy in remedies">
-                        <div class="remedyFeed" ng-click="openRemedy(remedy._id)"
-                             ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename}})'}">
+                        <div class="remedyFeed"
+                             ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename || 'nil'}})'}">
                             <div class="row card remedyCard">
-                                <!--<img ng-src="/images/remedy/{{remedy.image.filename}}"/>-->
+                                <!--<img ng-src="/images/remedy/{{remedy.image.filename || 'nil'}}"/>-->
 
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" ng-click="openRemedy(remedy._id)" style="cursor: pointer;" title="{{remedy.title}}">
                                     <span style="font-size: 1.6em; font-weight: bold; ">{{remedy.title}}</span>
                                 <span style="font-size: 0.9em; margin-left: 15px;"><i>By:
                                     {{remedy.author.name}}</i></span>
@@ -103,16 +103,16 @@
                                     <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="#" class="commentCount stats">
+                                    <a href="#" class="commentCount stats" title="Comments">
                                         <i class="glyphicon glyphicon-comment"></i>
                                         {{remedy.stats.comments}}
                                     </a>
                                     <br/>
-                                    <a href="#" ng-click="upvote(remedy._id)" class="upvoteCount stats">
+                                    <a href="#" ng-click="upvote(remedy._id)" class="upvoteCount stats" title="Upvote">
                                         <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote}}
                                     </a>
                                     <br/>
-                                    <a href="#" ng-click="downvote(remedy._id)" class="downvoteCount stats">
+                                    <a href="#" ng-click="downvote(remedy._id)" class="downvoteCount stats" title="Downvote">
                                         <i class="glyphicon glyphicon-thumbs-down"></i>
                                         {{remedy.stats.downvote}}
                                     </a>
@@ -124,17 +124,17 @@
             </div>
 
             <div class="col-lg-1 col-md-1">
-                <div class="card fab" id="refreshFab" ng-click="refresh()">
-                    <img src="images/ic_action_reload.png"/>
+                <div class="card fab" id="refreshFab" ng-click="refresh()" title="Refresh List">
+                    <img src="images/ic_action_reload.png" alt="Refresh List"/>
                 </div>
-                <div class="card fab" id="addFab">
-                    <img src="images/ic_action_add.png"/>
+                <div class="card fab" id="addFab" title="Add new remedy">
+                    <img src="images/ic_action_add.png" alt="Add new remedy"/>
                 </div>
-                <div class="card fab" id="searchFab">
-                    <img src="images/ic_action_search.png"/>
+                <div class="card fab" id="searchFab" title="Search Remedy">
+                    <img src="images/ic_action_search.png" alt="Search Remedy"/>
                 </div>
-                <div class="card fab" id="settingsFab">
-                    <img src="images/ic_action_settings.png"/>
+                <div class="card fab" id="settingsFab" title="Settings">
+                    <img src="images/ic_action_settings.png" alt="Settings"/>
                 </div>
             </div>
 
@@ -152,6 +152,10 @@
         margin-top: 5px;
         background: #FFF;
         border: none;
+    }
+
+    .remedyFeed:hover{
+        border: 1px #008dff solid;
     }
 
 </style>
