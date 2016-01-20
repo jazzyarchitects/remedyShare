@@ -25,8 +25,10 @@ var remove = function (remedy_id) {
     });
 };
 
-var getRemedy = function (user, remedy_id, callback) {
-    Remedy.registerView(remedy_id);
+var getRemedy = function (user, remedy_id, callback, dontTrack) {
+    if(!dontTrack) {
+        Remedy.registerView(remedy_id);
+    }
     Remedy.findOne({_id: remedy_id})
         .populate([{
             path: "author",
@@ -74,7 +76,7 @@ var update = function (remedy, callback) {
 
 var deactivateRemedy = function (remedy_id) {
     Remedy.update({_id: remedy_id}, {$set: {active: false}}, {safe: true}, function (err, doc) {
-        console.log("Deactivating Remedy: " + remedy_id);
+        //console.log("Deactivating Remedy: " + remedy_id);
     });
 };
 

@@ -65,7 +65,7 @@ var update = function (req, res) {
 };
 
 var del = function (req, res) {
-    control.delete(req.params.id, function (result) {
+    control.delete(req.user, req.params.id, function (result) {
         res.json(result);
     });
 };

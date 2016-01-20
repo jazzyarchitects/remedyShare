@@ -26,6 +26,7 @@ var insertComment = function (commentDetails, user_id, remedy_id, callback) {
     });
     comment.save(function (err) {
         if (err) {
+            console.log("CommentOperations: Error inserting comment:"+JSON.stringify(err));
             callback(errorJSON(501, err));
         } else {
             callback(successJSON(comment));

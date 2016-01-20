@@ -118,9 +118,10 @@ var registerView = function (_id) {
     Remedy.registerView(_id);
 };
 
-function __find(remedy_id, populateOptions, callback) {
+function __find(remedy_id, populateOptions,select, callback) {
     Remedy.findOne({_id: remedy_id, active: true})
         .populate(populateOptions)
+        .select(select)
         .exec(function (err, doc) {
             if (doc) {
                 callback(successJSON(doc));
@@ -130,28 +131,38 @@ function __find(remedy_id, populateOptions, callback) {
         });
 }
 
-function getVotes(remedy_id, path, callback) {
+function getVotes(remedy_id, path,select, callback) {
     __find(remedy_id, {
         path: path,
         match: {active: true},
         select: "name"
-    }, callback);
+    },select, callback);
 }
 
 var getUpvotes = function (remedy_id, callback) {
-    getVotes(remedy_id, "upvote", callback);
+    getVotes(remedy_id, "upvote", "upvote stats", callback);
 };
 
 var getDownVotes = function (remedy_id, callback) {
-    getVotes(remedy_id, "downvote", callback);
+    getVotes(remedy_id, "downvote", "downvote stats", callback);
 };
 
 var getCommentList = function (remedy_id, callback) {
     __find(remedy_id, {
         path: "comments",
         match: {active: true},
-        select: "_id author"
-    }, callback);
+        select: "_id author comment publishedOn"
+    },"comments", function(doc){
+        //console.log("Doc: "+JSON.stringify(doc.data));
+        Remedy.populate(doc.data, {
+            path: 'comments.author',
+            model: "User",
+            select: "name"
+        }, function(err, doc){
+            //console.log("Doc 2: "+JSON.stringify(doc));
+            callback(successJSON(doc));
+        })
+    });
 };
 
 

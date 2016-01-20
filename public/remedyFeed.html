@@ -30,12 +30,12 @@
     <script src="scripts/remedyFeed.js"></script>
 
 </head>
-<body ng-app="remedyShare" ng-controller="remedyController" ng-init="loadRemedies()">
+<body ng-app="remedyShare">
 <div class="mdl-layout--fixed-header menu">s
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title"><a href="/app">Medical Assistant v19.1.16.2037</a></span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant v20.1.16.1808</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -61,7 +61,7 @@
 <div class="container-fluid" id="mainContent">
     <div class="content">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-3 col-md-3" ng-controller="userController">
                 <div class="card" id="userDetailsCard">
                     <div class="card" id="dpframe" style="z-index: 999;">
                         <img src="images/userlogin.png" id="userDp">
@@ -81,8 +81,8 @@
                 </div>
             </div>
 
-            <div class="col-lg-8 col-md-8">
-                <div class="card" id="feedCard">
+            <div class="col-lg-8 col-md-8" ng-controller="remedyController">
+                <div class="card" id="feedCard"  ng-init="loadRemedies()">
 
                     <div ng-repeat="remedy in remedies">
                         <div class="remedyFeed"

@@ -55,5 +55,6 @@ $(document).ready(function (e) {
 function logout(e) {
     $.removeCookie("user", {path: '/'});
     $.removeCookie("accessToken", {path: '/'});
+    window.sessionStorage.removeItem("id");
     window.location.replace('/app');
 }

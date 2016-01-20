@@ -99,7 +99,7 @@ body {
 .content {
     width: 85%;
     margin: auto;
-    margin-top: 64px;
+    margin-top: 60px;
 }
 
 .remedyCard{
@@ -149,11 +149,27 @@ input[type="text"].remedyForm, textarea.remedyForm{
     box-shadow: none;
 }
 
-
 input[type="text"].remedyForm:focus, textarea.remedyForm:focus{
     transition-duration: 500ms;
     color: #334387;
     border-bottom: solid 2px #4b61c5;
+    outline: none;
+}
+
+
+input[type="text"].commentForm, textarea.commentForm{
+    transition-duration: 500ms;
+    width: 100%;
+    margin: 0 auto;
+    border: solid rgba(0,0,0,0.2) 1px;
+    padding: 5px;
+    color: #444444;
+    box-shadow: none;
+}
+
+input[type="text"].commentForm:focus, textarea.commentForm:focus{
+    transition-duration: 500ms;
+    color: #334387;
     outline: none;
 }
 
@@ -171,7 +187,7 @@ input[type="text"].remedyForm:focus, textarea.remedyForm:focus{
     text-decoration: none;
 }
 
-button.remedyForm, button{
+button.remedyForm{
     background: #FFFFFF;
     color: #444444;
     border: none;
@@ -185,12 +201,46 @@ button.remedyForm:hover{
     background: #EEEEFF;
     color: #222222;
 }
+
 button.remedyForm:focus{
     background: #DDDDFF;
     color: #222222;
 }
 
+button.commentForm{
+    background: #4b61c5;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    transition-duration: 250ms;
+    outline: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+button.commentForm:hover{
+    background: #334387;
+}
 
+.commentCard{
+    background: rgba(51, 67, 135, 0.05);
+    margin-top: 3px;
+    padding: 5px 10px;
+}
+
+.commentContent{
+    width: 85%;
+    margin-left: 5%;
+}
+
+.commentCard p{
+    padding: 5px 5px 2px 5px;
+    background: #FFFFFF;
+    border: rgba(0,0,0,0.1) 1px solid;
+}
+hr{
+    margin: 2px 0;
+}
 
 @media screen and (max-width: 768px) {
     .content {

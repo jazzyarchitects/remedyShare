@@ -6,6 +6,7 @@
 var RemedyOperations = require('./operations');
 var UserOperations = requireFromModule('users/operations');
 var CommentOperations = requireFromModule('comments/operations');
+var Comment = requireFromModule('comments/commentModel');
 var mongoose = require('mongoose');
 var fs = require('fs');
 
@@ -44,8 +45,8 @@ var update = function (user_id, remedy, callback) {
     });
 };
 
-var del = function (remedy_id, callback) {
-    RemedyOperations.getRemedy(remedy_id, function (result) {
+var del = function (user, remedy_id, callback) {
+    RemedyOperations.getRemedy(user, remedy_id, function (result) {
         if (result.success) {
             var remedy = result.data;
             var user = remedy.author._id;
@@ -60,7 +61,7 @@ var del = function (remedy_id, callback) {
         } else {
             callback(result);
         }
-    });
+    }, true);
 };
 
 var upvote = function (user_id, remedy_id, callback) {
@@ -85,7 +86,13 @@ var insertComment = function (user_id, remedy_id, comment, callback) {
                 if (result.success) {
                     UserOperations.addComment(user_id, finalComment._id, function (result) {
                         if (result.success) {
-                            callback(successJSON(finalComment));
+                            Comment.populate(finalComment,{
+                                path: "author",
+                                model: "User",
+                                select: "name"
+                            }, function(err, doc){
+                                callback(successJSON(doc));
+                            });
                         } else {
                             callback(result);
                         }

@@ -9,18 +9,7 @@ var userGlobal;
 app.controller('remedyController', function ($scope) {
     $scope.remedies = [];
     $scope.user = undefined;
-
-    $scope.loadUserDetails = function () {
-        apiAjax({
-            method: 'GET',
-            url: '/user/',
-            success: function (result) {
-                $scope.$apply(function () {
-                    $scope.user = result.data;
-                });
-            }
-        });
-    };
+    $scope.comments = [];
 
     $scope.__loadRemedies = function (url) {
         apiAjax({
@@ -116,16 +105,17 @@ app.controller('remedyController', function ($scope) {
             url: '/remedy/' + id,
             success: function (result) {
                 $scope.$apply(function () {
+                    $scope.comments = [];
                     $scope.remedy = result.data;
-                    //console.log("New Remedy: "+JSON.stringify($scope.remedy.description));
+                    $scope.loadComments(result.data._id);
                 });
             },
-            preExecute: function(){
+            preExecute: function () {
                 window.localStorage.removeItem("id");
+                $("addCommentInput").val("");
             }
         })
     };
-
 
     $scope.refresh = function () {
         $scope.loadRemedies(undefined, userGlobal);
@@ -175,12 +165,13 @@ app.controller('remedyController', function ($scope) {
         })
 
     };
+
     $scope.new = function () {
         $scope.remedy = {}
     };
 
     $scope.openRemedy = function (id) {
-        $.cookie("id",id);
+        $.cookie("id", id);
         window.open('/app/remedy', "_parent");
     };
 
@@ -189,10 +180,83 @@ app.controller('remedyController', function ($scope) {
         $scope.showRemedy(id);
     };
 
+    $scope.addComment = function (id) {
+        var comment = $("#addCommentInput").val().trim();
+        apiAjax({
+            url: '/remedy/' + id + '/comment',
+            method: 'POST',
+            data: {
+                comment: comment
+            },
+            success: function (result) {
+                $scope.$apply(function () {
+                    $scope.comments.push(result.data);
+                });
+            }
+        });
+    };
+
+    $scope.loadComments = function (id) {
+        apiAjax({
+            url: '/remedy/' + id + '/comments',
+            method: 'GET',
+            success: function (result) {
+                $scope.$apply(function () {
+                    $scope.comments = result.data.comments;
+                });
+            }
+        });
+    };
+
+    $scope.deleteComment = function(id){
+      apiAjax({
+          url: '/comment/'+id,
+          method: 'DELETE',
+          success: function(result){
+              $scope.$apply(function(){
+                 var object = $.grep($scope.comments, function(e){
+                     return e._id == id;
+                 });
+                  $scope.comments.splice($scope.comments.indexOf(object[0]),1);
+              });
+          }
+      })
+    };
+
+    $scope.deleteRemedy = function(id){
+      apiAjax({
+          url: '/remedy/'+id,
+          method: 'DELETE',
+          success: function(result){
+              $scope.$apply(function(){
+                 var object = $.grep($scope.remedies, function(e){
+                     return e._id == id;
+                 });
+                  $scope.remedies.splice($scope.remedies.indexOf(object[0]),1);
+              });
+          }
+      })
+    };
+
     //$scope.loadRemedies();
 
 });
 
+app.controller('userController', function ($scope) {
+    $scope.user = undefined;
+    $scope.loadUserDetails = function () {
+        apiAjax({
+            method: 'GET',
+            url: '/user/',
+            success: function (result) {
+                $scope.$apply(function () {
+                    $scope.user = result.data;
+                    window.sessionStorage.setItem("id", result.data._id);
+                });
+            }
+        });
+    };
+});
 
 function redirectToNew() {
     window.open('/app/my/remedy', "_parent");

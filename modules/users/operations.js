@@ -158,7 +158,7 @@ var unlinkRemedy = function (user, remedy, callback) {
         $inc: {"stats.remedyVotes.upvote": -1},
         $pull: {"remedyVotes.upvote": remedy}
     }, function (err, doc) {
-        console.log("Update upvote: " + JSON.stringify(err) + " " + JSON.stringify(doc));
+        //console.log("Update upvote: " + JSON.stringify(err) + " " + JSON.stringify(doc));
     });
     User.update({
         _id: user,
@@ -167,7 +167,7 @@ var unlinkRemedy = function (user, remedy, callback) {
         $inc: {"stats.remedyVotes.downvote": -1},
         $pull: {"remedyVotes.downvote": remedy}
     }, function (err, doc) {
-        console.log("Update downvote: " + JSON.stringify(err) + " " + JSON.stringify(doc));
+        //console.log("Update downvote: " + JSON.stringify(err) + " " + JSON.stringify(doc));
     });
     User.update({
             _id: user,
@@ -183,7 +183,7 @@ var unlinkRemedy = function (user, remedy, callback) {
             safe: true
         },
         function (err, doc) {
-            console.log("Unlinking Remedy from user: " + JSON.stringify(doc) + " " + JSON.stringify(err));
+            //console.log("Unlinking Remedy from user: " + JSON.stringify(doc) + " " + JSON.stringify(err));
             if (doc) {
                 callback(true)
             } else {
