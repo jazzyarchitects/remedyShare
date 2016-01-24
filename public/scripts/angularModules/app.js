@@ -65,6 +65,22 @@ app.controller('remedyController', function ($scope) {
                             });
                         }
                     }
+                    if ($scope.remedy._id.toString() === _id.toString()) {
+                        $scope.$apply(function () {
+                            if ($scope.remedy.upvoted) {
+                                $scope.remedy.stats.upvote--;
+                            } else {
+                                $scope.remedy.stats.upvote++;
+                            }
+                            $scope.remedy.upvoted = !$scope.remedy.upvoted;
+                            if ($scope.remedy.upvoted) {
+                                if ($scope.remedy.downvoted) {
+                                    $scope.remedy.stats.downvote--;
+                                }
+                                $scope.remedy.downvoted = false;
+                            }
+                        });
+                    }
                 }
             }
         )
@@ -93,6 +109,22 @@ app.controller('remedyController', function ($scope) {
                                 }
                             });
                         }
+                    }
+                    if ($scope.remedy._id.toString() === _id.toString()) {
+                        $scope.$apply(function () {
+                            if ($scope.remedy.downvoted) {
+                                $scope.remedy.stats.downvote--;
+                            } else {
+                                $scope.remedy.stats.downvote++;
+                            }
+                            $scope.remedy.downvoted = !$scope.remedy.downvoted;
+                            if ($scope.remedy.downvoted) {
+                                if ($scope.remedy.upvoted) {
+                                    $scope.remedy.stats.upvote--;
+                                }
+                                $scope.remedy.upvoted = false;
+                            }
+                        });
                     }
                 }
             }
@@ -208,34 +240,34 @@ app.controller('remedyController', function ($scope) {
         });
     };
 
-    $scope.deleteComment = function(id){
-      apiAjax({
-          url: '/comment/'+id,
-          method: 'DELETE',
-          success: function(result){
-              $scope.$apply(function(){
-                 var object = $.grep($scope.comments, function(e){
-                     return e._id == id;
-                 });
-                  $scope.comments.splice($scope.comments.indexOf(object[0]),1);
-              });
-          }
-      })
+    $scope.deleteComment = function (id) {
+        apiAjax({
+            url: '/comment/' + id,
+            method: 'DELETE',
+            success: function (result) {
+                $scope.$apply(function () {
+                    var object = $.grep($scope.comments, function (e) {
+                        return e._id == id;
+                    });
+                    $scope.comments.splice($scope.comments.indexOf(object[0]), 1);
+                });
+            }
+        })
     };
 
-    $scope.deleteRemedy = function(id){
-      apiAjax({
-          url: '/remedy/'+id,
-          method: 'DELETE',
-          success: function(result){
-              $scope.$apply(function(){
-                 var object = $.grep($scope.remedies, function(e){
-                     return e._id == id;
-                 });
-                  $scope.remedies.splice($scope.remedies.indexOf(object[0]),1);
-              });
-          }
-      })
+    $scope.deleteRemedy = function (id) {
+        apiAjax({
+            url: '/remedy/' + id,
+            method: 'DELETE',
+            success: function (result) {
+                $scope.$apply(function () {
+                    var object = $.grep($scope.remedies, function (e) {
+                        return e._id == id;
+                    });
+                    $scope.remedies.splice($scope.remedies.indexOf(object[0]), 1);
+                });
+            }
+        })
     };
 
     //$scope.loadRemedies();

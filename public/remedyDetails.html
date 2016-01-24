@@ -137,12 +137,12 @@
                                 </a>
                                 </td>
                                 <td>
-                                    <a href="#" class="upvoteCount stats">
+                                    <a href="#" class="upvoteCount stats" ng-click="upvote(remedy._id)">
                                         <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote || 0}}&nbsp;&nbsp;&nbsp;Upvotes
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="#" class="downvoteCount stats">
+                                    <a href="#" class="downvoteCount stats" ng-click="downvote(remedy._id)">
                                         <i class="glyphicon glyphicon-thumbs-down"></i>
                                         {{remedy.stats.downvote || 0}}&nbsp;&nbsp;&nbsp;Downvotes
                                     </a>
