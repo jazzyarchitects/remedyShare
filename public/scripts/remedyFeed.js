@@ -20,6 +20,10 @@ $(document).ready(function(){
        window.open('/app','_parent');
     });
 
+    $("#editUserButton").click(function(e){
+       window.open('/app/my/details','_parent');
+    });
+
 
 });
 

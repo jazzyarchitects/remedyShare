@@ -35,7 +35,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title"><a href="/app">Medical Assistant v24.1.16.1048</a></span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant v27.1.16.2357</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -47,7 +47,7 @@
                     }
                 </style>
                 <a href="#" id="logout">Logout</a>
-                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder">
+                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder" target="_blank">
                     <img alt="Get it on Google Play"
                          src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
                 </a>
@@ -67,16 +67,9 @@
                         <img src="images/userlogin.png" id="userDp">
                     </div>
                     <div class="userDetails" id="userDetails" ng-init="loadUserDetails()">
+                        Welcome <br />
                         <input type="text" class="userDetailsFormElement" id="username" disabled value="{{user.name}}">
-                        <input type="text" class="userDetailsFormElement" id="email" disabled value="{{user.email}}">
-                        <input type="text" class="userDetailsFormElement" id="mobile" disabled
-                               value="{{user.mobile}}"><br/>
-                        <!--<input type="radio" class="userDetailsFormElement" name="sex" ng-model="user.sex"-->
-                               <!--ng-value="user.sex" disabled value="M">Male-->
-                        <!--<input type="radio" class="userDetailsFormElement" name="sex" ng-model="user.sex"-->
-                               <!--ng-value="user.sex" disabled value="F">Female<br/>-->
-                        <input type="text" class="userDetailsFormElement" id="dob" disabled
-                               value="{{user.dob.dd}} - {{user.dob.mm}} - {{user.dob.yyyy}}">
+                        <button style="bottom: 0;" id="editUserButton">Edit</button>
                     </div>
                 </div>
             </div>

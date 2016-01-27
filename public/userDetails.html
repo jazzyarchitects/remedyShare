@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Details</title>
+
+    <link rel="icon" href="images/small_icon.png"/>
+
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery.cookie.js"></script>
+    <script src="scripts/angularModules/common/angular.min.js"></script>
+    <script src="scripts/angularModules/common/angular-route-min.js"></script>
+
+    <script src="scripts/angularModules/app_userDetails.js"></script>
+    <script src="scripts/api.js"></script>
+
+    <!--Bootstrap Theme-->
+    <link href="styles/bootstrap.min.css" rel="stylesheet"/>
+    <script src="scripts/bootstrap.min.js"></script>
+
+    <!-- Material Theme -->
+    <link href="styles/material.min.css" rel="stylesheet"/>
+
+    <!--<link rel="stylesheet" href="./assets/css/form-elements.css">-->
+
+    <!-- Cuidar references -->
+    <script src="scripts/layouts.js"></script>
+    <link href="styles/remedyFeed.css" rel="stylesheet"/>
+    <script src="scripts/remedyFeed.js"></script>
+
+
+
+</head>
+<body ng-app="remedyShare" ng-controller="userDetailsController">
+<div class="mdl-layout--fixed-header menu">
+    <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant</a></span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+
+            <div class="mdl-layout__tab-bar-right-button">
+                <style scoped>
+                    .mdl-layout__tab-bar-right-button a {
+                        color: white;
+                        text-decoration: none;
+                    }
+                </style>
+                <a href="#" id="logout">Logout</a>
+                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder" target="_blank">
+                    <img alt="Get it on Google Play"
+                         src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+</div>
+
+<div class="container-fluid" id="mainContent" ng-init="loadMyRemedies()">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="card" id="feedCard">
+                    <form id="remForm">
+                        <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
+                               ng-model="remedy.title">
+                    <textarea placeholder="Remedy description" id="form_description" name="description"
+                              class="remedyForm" rows="10" ng-model="remedy.description"></textarea>
+                        <input type="text" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm"
+                               name="tags"
+                               ng-model="remedy.tags">
+                        <input type="text" placeholder="Diseases (Seperated by comma ',')" id="form_diseases"
+                               class="remedyForm"
+                               name="tags" ng-model="remedy.diseases">
+                        <input type="text" placeholder="References (Seperated by comma ',')" id="form_references"
+                               class="remedyForm"
+                               name="tags" ng-model="remedy.references">
+
+
+                        <table width="75%" style="margin-top:10px; margin-left:12.5%;">
+                            <tr>
+                                <td><a href="#" class="commentCount stats">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                    {{remedy.stats.comments || 0}}&nbsp;&nbsp;&nbsp;Comments
+                                </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="upvoteCount stats" ng-click="downvote">
+                                        <i class="glyphicon glyphicon-thumbs-up"></i> {{remedy.stats.upvote || 0}}&nbsp;&nbsp;&nbsp;Upvotes
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="downvoteCount stats">
+                                        <i class="glyphicon glyphicon-thumbs-down"></i>
+                                        {{remedy.stats.downvote || 0}}&nbsp;&nbsp;&nbsp;Downvotes
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <button class="remedyForm" ng-click="saveRemedy()">Save</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <h6 style="margin-bottom:0;">Comments</h6>
+                        <hr style="margin: 4px 0;"/>
+
+                        <div class="commentContent">
+                            <div class="commentsHolder">
+                                <div class="row">
+                                    <div class="col-lg-9" ng-controller="userController" ng-init="loadUserDetails()">
+                                        <i class="glyphicon glyphicon-user"></i>&nbsp; &nbsp;{{user.name}}<br/>
+                                        <textarea class="commentForm" rows="2" placeholder="Add Comment"
+                                                  id="addCommentInput"></textarea>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <br/>
+                                        <button class="commentForm" ng-click="addComment(remedy._id)">Add Comment
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="comments" ng-repeat="comment in comments">
+                                    <div class="commentCard">
+                                        <img src="images/ic_action_cancel.png"
+                                             style="float: right; cursor: pointer;"
+                                             ng-click="deleteComment(comment._id)" height="15px"/>
+                                        <i class="glyphicon glyphicon-user"></i>&nbsp;
+                                        &nbsp;{{comment.author.name}}&nbsp;&nbsp;|&nbsp;&nbsp; <span
+                                            style="font-size: 0.8em"> Published on: {{comment.publishedOn}}</span><br/>
+
+                                        <p>{{comment.comment}}</p>
+
+                                    </div>
+                                    <hr/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-1 col-md-1">
+                <div class="card fab" id="homeFab">
+                    <img src="images/ic_action_home.png"/>
+                </div>
+                <div class="card fab" id="searchFab">
+                    <img src="images/ic_action_search.png"/>
+                </div>
+                <div class="card fab" id="settingsFab">
+                    <img src="images/ic_action_settings.png"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

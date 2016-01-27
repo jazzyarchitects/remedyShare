@@ -19,6 +19,15 @@ router.post('/login', function (req, res) {
     user.login(req, res);
 });
 
+router.post('/login/google', function(req, res){
+    //console.log("Google login");
+   user.loginSocial("google", req, res);
+});
+
+router.post('/login/fb', function(req, res){
+   user.loginSocial("facebook", req, res);
+});
+
 router.get('/', function (req, res) {
         user.getUser(req.user, res);
 });

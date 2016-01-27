@@ -70,6 +70,10 @@ myRouter.get('/remedy', function (req, res) {
     view.sendNewRemedyForm(req, res);
 });
 
+myRouter.get('/details', function(req, res){
+   view.sendUserDetails(req, res);
+});
+
 module.exports = function (app) {
     router.use('/my', myRouter);
     app.use('/app', router);

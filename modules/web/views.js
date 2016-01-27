@@ -36,9 +36,14 @@ var sendRemedyList = function (req, res) {
     sendFile(res, './public/remedyDetails.html');
 };
 
+var sendUserDetails = function (req, res) {
+    sendFile(res, './public/userDetails.html');
+};
+
 
 exports.sendLoginForm = loginForm;
 exports.sendSignUpForm = signupForm;
 exports.sendUserFeed = sendUserFeed;
 exports.sendNewRemedyForm = sendNewRemedyForm;
 exports.sendRemedyList = sendRemedyList;
+exports.sendUserDetails = sendUserDetails;

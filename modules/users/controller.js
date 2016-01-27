@@ -13,7 +13,7 @@ var signUp = function (user, service, callback) {
         if (resultUser.success) {
             ClientOperations.createNewClient(resultUser.data, service, function (result) {
                 if (result.error) {
-                    callback(errorJSON(501, result.err));
+                    callback(errorJSON(501, "ERROR_ASSIGNING_KEY_TO_CLIENT", result.err));
                 } else {
                     callback(successJSON({detail: resultUser.data, client: result}));
                 }
@@ -101,6 +101,23 @@ var uploadProfilePicture = function (user, file, callback) {
     });
 };
 
+var loginSocial = function(stream, accessToken, callback ){
+    UserOperations.loginSocial(stream, accessToken, function(resultUser){
+        if(resultUser.success){
+            ClientOperations.createNewClient(resultUser.data, "social", function(result){
+                if (result.error) {
+                    callback(errorJSON(501, "ERROR_ASSIGNING_KEY_TO_CLIENT", result.err));
+                } else {
+                    callback(successJSON({detail: resultUser.data, client: result}));
+                }
+            });
+        }else{
+            callback(resultUser);
+        }
+       //callback(result);
+    });
+};
+
 exports.signUp = signUp;
 exports.login = login;
 exports.update = update;
@@ -109,3 +126,4 @@ exports.remedyList = remedyList;
 exports.getUserData = getUserData;
 exports.logout = logout;
 exports.uploadProfilePicture = uploadProfilePicture;
+exports.loginSocial = loginSocial;

@@ -115,6 +115,21 @@ var logout = function (req, res) {
     });
 };
 
+var loginSocial = function (stream, req, res) {
+    control.loginSocial(stream, req.body.accessToken, function(result){
+        if (result.data) {
+            var client = result.data.client;
+            res.cookie("user", JSON.stringify({
+                key: client.key,
+                id: client.id
+            }), {expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)});
+            //res.cookie("accessToken",result.data.detail._id,{expires: new Date(Date.now()+365*24*60*60*1000)});
+        }
+        res.json(result);
+    });
+};
+
+
 exports.signUp = signup;
 exports.login = login;
 exports.update = update;
@@ -124,3 +139,4 @@ exports.othersRemedyList = otherRemedyList;
 exports.getUser = getUserData;
 exports.uploadProfilePicture = uploadProfilePicture;
 exports.logout = logout;
+exports.loginSocial = loginSocial;
