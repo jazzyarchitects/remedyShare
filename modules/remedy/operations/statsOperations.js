@@ -77,7 +77,40 @@ var downvote = function (user_id, remedy_id, callback) {
             });
         }
     });
+};
 
+
+var bookmark = function (user_id, remedy_id, callback) {
+    if (!mongoose.Types.ObjectId.isValid(remedy_id)) {
+        user_id = mongoose.Types.ObjectId(remedy_id);
+    }
+    Remedy.update({_id: remedy_id, bookmarked_by: user_id}, {
+        $inc: {"stats.bookmarked_by": -1},
+        $pull: {"bookmarked_by": user_id}
+    }, function (err, doc) {
+        if (err) {
+            callback(false);
+        } else {
+            if (doc.nModified === 1) {
+                //Bookmark Removed
+                callback(true);
+            } else {
+                Remedy.update({
+                    _id: remedy_id,
+                    bookmarked_by: {$ne: user_id}
+                }, {
+                    $inc: {"stats.bookmarked_by": 1},
+                    $push: {bookmarked_by: user_id}
+                }, function (err, doc) {
+                    if (err) {
+                        callback(false);
+                    } else {
+                        callback(true);
+                    }
+                });
+            }
+        }
+    });
 };
 
 var insertComment = function (comment_id, remedy_id, callback) {
@@ -118,7 +151,7 @@ var registerView = function (_id) {
     Remedy.registerView(_id);
 };
 
-function __find(remedy_id, populateOptions,select, callback) {
+function __find(remedy_id, populateOptions, select, callback) {
     Remedy.findOne({_id: remedy_id, active: true})
         .populate(populateOptions)
         .select(select)
@@ -131,12 +164,12 @@ function __find(remedy_id, populateOptions,select, callback) {
         });
 }
 
-function getVotes(remedy_id, path,select, callback) {
+function getVotes(remedy_id, path, select, callback) {
     __find(remedy_id, {
         path: path,
         match: {active: true},
         select: "name"
-    },select, callback);
+    }, select, callback);
 }
 
 var getUpvotes = function (remedy_id, callback) {
@@ -152,13 +185,13 @@ var getCommentList = function (remedy_id, callback) {
         path: "comments",
         match: {active: true},
         select: "_id author comment publishedOn"
-    },"comments", function(doc){
+    }, "comments", function (doc) {
         //console.log("Doc: "+JSON.stringify(doc.data));
         Remedy.populate(doc.data, {
             path: 'comments.author',
             model: "User",
             select: "name"
-        }, function(err, doc){
+        }, function (err, doc) {
             //console.log("Doc 2: "+JSON.stringify(doc));
             callback(successJSON(doc));
         })
@@ -174,3 +207,4 @@ exports.InsertComment = insertComment;
 exports.DeleteComment = deleteComment;
 exports.RegisterView = registerView;
 exports.GetCommentList = getCommentList;
+exports.BookmarkRemedy = bookmark;

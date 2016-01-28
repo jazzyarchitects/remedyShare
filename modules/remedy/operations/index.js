@@ -23,6 +23,7 @@ exports.insertComment = Stats.InsertComment;
 exports.deleteComment = Stats.DeleteComment;
 exports.registerView = Stats.RegisterView;
 exports.getCommentList = Stats.GetCommentList;
+exports.bookmarkRemedy = Stats.BookmarkRemedy;
 
 exports.search = Search.Search;
 exports.findRemedyByDisease = Search.FindByDisease;

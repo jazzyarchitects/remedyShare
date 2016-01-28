@@ -9,6 +9,7 @@ var CommentOperations = requireFromModule('comments/operations');
 var Comment = requireFromModule('comments/commentModel');
 var mongoose = require('mongoose');
 var fs = require('fs');
+var async = require('async');
 
 var insert = function (user, remedy, callback) {
     RemedyOperations.insert(user, remedy, function (result) {
@@ -153,6 +154,25 @@ var getCommentList = function (remedy_id, callback) {
     ;
 };
 
+var bookmarkRemedy = function(user_id, remedy_id, callback){
+  var remedyBookmark = function(callback) {
+      RemedyOperations.bookmarkRemedy(user_id, remedy_id, callback);
+  };
+    var userBookmark = function(callback){
+        UserOperations.bookmarkRemedy(user_id, remedy_id, callback);
+    };
+
+    async.parallel([remedyBookmark, userBookmark], function(errs, results){
+       if(results[0] || results[1]){
+           callback(true);
+       }else if(errs[0] || errs[1]){
+           callback(false)
+       }else{
+           callback(true);
+       }
+    });
+};
+
 exports.insert = insert;
 exports.update = update;
 exports.delete = del;
@@ -166,3 +186,4 @@ exports.getAllRemedies = getAllRemedies;
 exports.registerView = registerView;
 exports.importFromJSON = importFromJSON;
 exports.getCommentList = getCommentList;
+exports.bookmarkRemedy= bookmarkRemedy;

@@ -42,25 +42,19 @@ var RemedySchema = new Schema({
     },
     stats: {
         type: {
-            upvote: {
-                type: Number
-            },
-            downvote: {
-                type: Number
-            },
-            views: {
-                type: Number
-            },
-            comments: {
-                type: Number
-            }
+            upvote: Number,
+            downvote: Number,
+            views: Number,
+            comments: Number,
+            bookmarked_by: Number
         },
         required: false,
         'default': {
             upvote: 0,
             downvote: 0,
             views: 0,
-            comments: 0
+            comments: 0,
+            bookmarked_by:0
         }
     },
     publishedOn: {
@@ -93,6 +87,10 @@ var RemedySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Comment',
         select: false
+    }],
+    bookmarked_by:[{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }]
 });
 

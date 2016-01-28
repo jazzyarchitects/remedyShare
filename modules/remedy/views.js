@@ -126,6 +126,16 @@ var getCommentList = function (req, res) {
     ;
 };
 
+var bookmarkRemedy = function(req, res){
+  control.bookmarkRemedy(req.user, req.params.id, function(result){
+      if(result){
+          res.json(successJSON({upvoted: true}));
+      }else{
+          res.json(errorJSON({upvoted: false}));
+      }
+  });
+};
+
 exports.insert = insert;
 exports.update = update;
 exports.delete = del;
@@ -139,3 +149,4 @@ exports.getAll = getAllRemedies;
 exports.registerView = registerView;
 exports.importFromJSON = importFromJSON;
 exports.getCommentList = getCommentList;
+exports.bookmarkRemedy = bookmarkRemedy;

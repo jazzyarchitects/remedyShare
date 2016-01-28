@@ -7,6 +7,21 @@ var app = angular.module('remedyShare', []);
 var userGlobal;
 
 app.controller('userDetailsController', function ($scope) {
+    $scope.loadUser = function () {
+        apiAjax({
+            url: '/user/full',
+            method: 'GET',
+            success: function (response) {
+                console.log("Reponse: " + JSON.stringify(response));
+                $scope.$apply(function(){
+                   $scope.user = response.data;
+                });
+            },
+            error: function (err) {
+                console.log("Error: " + JSON.stringify(err));
+            }
+        })
+    };
 
 });
 

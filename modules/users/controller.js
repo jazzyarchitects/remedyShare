@@ -80,11 +80,9 @@ var remedyList = function (user_id, page, callback) {
 };
 
 var getUserData = function (user_id, callback) {
-    {
         UserOperations.getUserData(user_id, function (result) {
             callback(result);
         });
-    }
 };
 
 var logout = function (user, callback) {
@@ -101,21 +99,25 @@ var uploadProfilePicture = function (user, file, callback) {
     });
 };
 
-var loginSocial = function(stream, accessToken, callback ){
-    UserOperations.loginSocial(stream, accessToken, function(resultUser){
-        if(resultUser.success){
-            ClientOperations.createNewClient(resultUser.data, "social", function(result){
+var loginSocial = function (stream, accessToken, callback) {
+    UserOperations.loginSocial(stream, accessToken, function (resultUser) {
+        if (resultUser.success) {
+            ClientOperations.createNewClient(resultUser.data, "social", function (result) {
                 if (result.error) {
                     callback(errorJSON(501, "ERROR_ASSIGNING_KEY_TO_CLIENT", result.err));
                 } else {
                     callback(successJSON({detail: resultUser.data, client: result}));
                 }
             });
-        }else{
+        } else {
             callback(resultUser);
         }
-       //callback(result);
+        //callback(result);
     });
+};
+
+var getUserProfile = function (user_id, callback) {
+    UserOperations.getUserProfile(user_id, callback);
 };
 
 exports.signUp = signUp;
@@ -127,3 +129,4 @@ exports.getUserData = getUserData;
 exports.logout = logout;
 exports.uploadProfilePicture = uploadProfilePicture;
 exports.loginSocial = loginSocial;
+exports.getUserProfile = getUserProfile;

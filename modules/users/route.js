@@ -34,8 +34,14 @@ router.get('/', function (req, res) {
 
 
 router.get('/:id', function(req, res){
-    user.getUser(req.params.id, res);
+    if(req.params.id.toString() === "full"){
+        user.getSelfProfile(req, res);
+    }else {
+        user.getUser(req.params.id, res);
+    }
 });
+
+
 
 router.use(function (req, res, next) {
     if (req.authenticated === false) {
@@ -45,6 +51,8 @@ router.use(function (req, res, next) {
     }
 });
 
+//router.get('/full', function(req, res){
+//});
 
 router.put('/', function (req, res) {
     //console.log("User data Edit...");

@@ -38,8 +38,6 @@ var UserSchema = new Schema({
     },
     mobile: {
         type: String,
-        required: true,
-        unique: true
     },
     password: {
         type: String,
@@ -98,6 +96,11 @@ var UserSchema = new Schema({
                     upvote: Number,
                     downvote: Number
                 }
+            },
+            bookmarks:{
+                type:{
+                    remedies: Number
+                }
             }
         },
         required: true,
@@ -113,6 +116,9 @@ var UserSchema = new Schema({
             remedyVotes: {
                 upvotes: 0,
                 downvotes: 0
+            },
+            bookmarks:{
+                remedies:0
             }
         }
     },
@@ -121,6 +127,14 @@ var UserSchema = new Schema({
             filename: String,
             path: String
         }
+    },
+    bookmarks:{
+      type:{
+          remedies: [{
+              type:Schema.Types.ObjectId,
+              ref: 'Remedy'
+          }]
+      }
     },
     remedyVotes: {
         type: {
@@ -158,17 +172,5 @@ var UserSchema = new Schema({
 });
 
 
-//UserSchema.methods.toJSON = function () {
-//    var obj = this.toObject();
-//    delete obj.password;
-//    //delete obj.deleted;
-//    //delete obj."stats.deleted";
-//    return obj;
-//};
-
-//UserSchema.methods.completeData = function(){
-//    var obj =this.toObject();
-//    return obj;
-//};
 
 module.exports = mongoose.model('User', UserSchema);

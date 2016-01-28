@@ -113,7 +113,7 @@ function __login_google(accesstoken, callback) {
             callback(errorJSON(err, "GOOGLE_SIGNIN_ERROR", err));
         } else {
             body = JSON.parse(body);
-            //console.log("User crud operations: body:" + JSON.stringify(body));
+            console.log("User crud operations: body:" + JSON.stringify(body));
             //console.log("Email of user: " + body.email);
             User.findOne({email: body.email}, function (err, doc) {
                 if (doc) {

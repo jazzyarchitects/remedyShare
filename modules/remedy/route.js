@@ -74,6 +74,10 @@ router.put('/:id/downvote', function (req, res) {
     Remedy.downvote(req, res);
 });
 
+router.put('/:id/bookmark', function (req, res) {
+    Remedy.bookmarkRemedy(req, res);
+});
+
 /**
  * Checked
  */

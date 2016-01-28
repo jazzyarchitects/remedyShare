@@ -129,6 +129,17 @@ var loginSocial = function (stream, req, res) {
     });
 };
 
+var getSelfProfile = function(req, res){
+    if(!req.user){
+        res.json(errorJSON(501, "UNAUTHORISED", "LOGIN_TO_VIEW"));
+        res.end();
+        return;
+    }
+  control.getUserProfile(req.user, function(result){
+        res.json(result);
+  });
+};
+
 
 exports.signUp = signup;
 exports.login = login;
@@ -140,3 +151,4 @@ exports.getUser = getUserData;
 exports.uploadProfilePicture = uploadProfilePicture;
 exports.logout = logout;
 exports.loginSocial = loginSocial;
+exports.getSelfProfile = getSelfProfile;

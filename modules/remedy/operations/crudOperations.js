@@ -26,7 +26,7 @@ var remove = function (remedy_id) {
 };
 
 var getRemedy = function (user, remedy_id, callback, dontTrack) {
-    if(!dontTrack) {
+    if (!dontTrack) {
         Remedy.registerView(remedy_id);
     }
     Remedy.findOne({_id: remedy_id})
@@ -40,10 +40,10 @@ var getRemedy = function (user, remedy_id, callback, dontTrack) {
         }])
         .exec(function (err, doc) {
             if (doc) {
-                doc=doc.toJSON();
+                doc = doc.toJSON();
                 doc.upvoted = false;
                 doc.downvoted = false;
-                if(user){
+                if (user) {
                     if (JSON.stringify(doc.upvote).indexOf(user) != -1) {
                         doc.upvoted = true;
                     }
@@ -91,11 +91,12 @@ var getAllRemedies = function (user, page, callback) {
                 .sort({publishedOn: 1})
                 .exec(function (err, doc) {
                     if (doc) {
-                        var remedies =[];
-                        for(var i=0;i<doc.length;i++){
+                        var remedies = [];
+                        for (var i = 0; i < doc.length; i++) {
                             remedies.push(doc[i].toJSON());
                             remedies[i].upvoted = false;
                             remedies[i].downvoted = false;
+                            remedies[i].bookmarked = false;
                         }
                         if (user) {
                             for (i = 0; i < remedies.length; i++) {
@@ -106,11 +107,15 @@ var getAllRemedies = function (user, page, callback) {
                                 if (JSON.stringify(remedies[i].downvote).indexOf(user) != -1) {
                                     remedies[i].downvoted = true;
                                 }
+                                if (JSON.stringify(remedies[i].bookmarked_by).indexOf(user) != -1) {
+                                    remedies[i].bookmarked = true;
+                                }
                             }
                         }
-                        for(i=0;i<doc.length;i++){
+                        for (i = 0; i < doc.length; i++) {
                             delete remedies[i].upvote;
                             delete remedies[i].downvote;
+                            delete remedies[i].bookmarked_by;
                         }
                         callback(successJSON({
                             remedies: remedies,

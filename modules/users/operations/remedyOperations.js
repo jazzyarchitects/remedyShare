@@ -145,8 +145,44 @@ var downvoteRemedy = function (user_id, remedy_id, callback) {
     });
 };
 
+var bookmarkRemedy = function(user_id, remedy_id, callback){
+    if(!mongoose.Types.ObjectId(remedy_id)){
+        remedy_id=mongoose.Types.ObjectId(remedy_id);
+    }
+    User.update({
+        _id: user_id,
+        "bookmarks.remedies": remedy_id
+    },{
+        $inc: {"stats.bookmarks.remedies": -1},
+        $pull: {"bookmarks.remedies": remedy_id}
+    }, function(err, doc){
+       if(err){
+           callback(false);
+       } else{
+           if(doc.nModified === 1){
+               callback(true);
+           }else{
+               User.update({
+                   _id:user_id,
+                   "bookmarks.remedies": {$ne: remedy_id}
+               },{
+                   $inc: {"stats.bookmarks.remedies": 1},
+                   $push: {"bookmarks.remedies": remedy_id}
+               }, function(err, doc){
+                  if(err){
+                      callback(false);
+                  } else{
+                      callback(true);
+                  }
+               });
+           }
+       }
+    });
+};
+
 exports.linkRemedy = insertRemedy;
 exports.getRemedyList = remedyList;
 exports.unlinkRemedy = unlinkRemedy;
 exports.upvoteRemedy = upvoteRemedy;
 exports.downvoteRemedy = downvoteRemedy;
+exports.bookmarkRemedy = bookmarkRemedy;

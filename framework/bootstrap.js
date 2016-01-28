@@ -75,11 +75,14 @@ module.exports = function(config) {
 				}
 			}
 			else {
-				res.json({
-					success: false,
-					error: 601,
-					message: "Service UnAuthorised. Please contact system admin at jazzyarchitects@gmail.com"
-				})
+				/**UnComment the following before deployment TODO:*/
+				//res.json({
+				//	success: false,
+				//	error: 601,
+				//	message: "Service UnAuthorised. Please contact system admin at jazzyarchitects@gmail.com"
+				//})
+				req.service="unauthorised";
+				next();
 			}
 		});
 	}

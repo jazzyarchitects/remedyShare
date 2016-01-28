@@ -25,6 +25,23 @@ var getUserData = function (user_id, callback) {
     });
 };
 
+var getUserProfile = function(user_id, callback){
+  User.findOne({_id: user_id})
+      .populate([{
+          path: "remedies",
+          select: "title description stats"
+      },{
+          path: "bookmarks.remedies",
+          select: "title description"
+      }]).exec(function(err, doc){
+          if(err){
+              callback(errorJSON(601, "MONGO_ERROR_GETTING_USER_PROFILE", err));
+          }else{
+              callback(successJSON(doc));
+          }
+      })
+};
+
 
 var addComment = function (user_id, comment_id, callback) {
     User.update({
@@ -91,3 +108,4 @@ exports.getUserData = getUserData;
 exports.addComment = addComment;
 exports.deleteComment = deleteComment;
 exports.linkProfilePicture = linkProfilePicture;
+exports.getUserProfile = getUserProfile;

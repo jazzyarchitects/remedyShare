@@ -19,6 +19,7 @@ exports.getRemedyList = Remedy.getRemedyList;
 exports.unlinkRemedy = Remedy.unlinkRemedy;
 exports.upvoteRemedy = Remedy.upvoteRemedy;
 exports.downvoteRemedy = Remedy.downvoteRemedy;
+exports.bookmarkRemedy = Remedy.bookmarkRemedy;
 
 
 var Operations = requireFromModule('users/operations/operations');
@@ -27,6 +28,7 @@ exports.getUserData = Operations.getUserData;
 exports.addComment = Operations.addComment;
 exports.deleteComment = Operations.deleteComment;
 exports.linkProfilePicture = Operations.linkProfilePicture;
+exports.getUserProfile = Operations.getUserProfile;
 
 var Backup = requireFromModule('users/operations/backupOperations');
 
