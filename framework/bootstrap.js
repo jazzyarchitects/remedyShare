@@ -76,13 +76,13 @@ module.exports = function(config) {
 			}
 			else {
 				/**UnComment the following before deployment TODO:*/
-				//res.json({
-				//	success: false,
-				//	error: 601,
-				//	message: "Service UnAuthorised. Please contact system admin at jazzyarchitects@gmail.com"
-				//})
-				req.service="unauthorised";
-				next();
+				res.json({
+					success: false,
+					error: 601,
+					message: "Service UnAuthorised. Please contact system admin at jazzyarchitects@gmail.com"
+				});
+				//req.service="unauthorised";
+				//next();
 			}
 		});
 	}
@@ -99,6 +99,7 @@ module.exports = function(config) {
 		requireFromModule('remedy/route')(router);
 		requireFromModule('comments/route')(router);
 		requireFromModule('admin/route')(router);
+		requireFromModule('medicine/route')(router);
 		app.use('/api', router);
     }
 
