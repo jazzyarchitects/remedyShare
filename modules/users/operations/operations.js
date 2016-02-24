@@ -17,10 +17,10 @@ var getUserData = function (user_id, callback) {
     }
     User.findOne({_id: user_id}, function (err, doc) {
         //console.log("UserOperations: "+JSON.stringify(doc)+ " \nfor user:"+user_id);
-        if (doc) {
-            callback(successJSON(doc));
+        if (err) {
+            callback(errorJSON(601, "MONGO_ERROR", err));
         } else {
-            callback(errorJSON(err));
+            callback(successJSON(doc==null?{}:doc));
         }
     });
 };
@@ -37,7 +37,7 @@ var getUserProfile = function(user_id, callback){
           if(err){
               callback(errorJSON(601, "MONGO_ERROR_GETTING_USER_PROFILE", err));
           }else{
-              callback(successJSON(doc));
+              callback(successJSON(doc==null?{}:doc));
           }
       })
 };
@@ -51,10 +51,10 @@ var addComment = function (user_id, comment_id, callback) {
         $inc: {"stats.comments": 1},
         $push: {comments: comment_id}
     }, function (err, doc) {
-        if (doc) {
-            callback(successJSON(doc));
-        } else {
+        if (err) {
             callback(errorJSON(err));
+        } else {
+            callback(successJSON(doc==null?{}:doc));
         }
     });
 };

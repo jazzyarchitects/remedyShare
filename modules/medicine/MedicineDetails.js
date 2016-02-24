@@ -6,17 +6,11 @@ var Schema = mongoose.Schema;
 
 /**
  * Timing Convention:
- * 00 - None
- * 01 - Before
- * 10 - After
+ * -1 - None
+ * 0 - Before
+ * 1 - After
  * @type {Schema}
  */
-
-var TimeSchema = new Schema({
-    breakfast: String,
-    lunch: String,
-    dinner: String
-});
 
 
 var MedicineDetailSchema = new Schema({
@@ -43,8 +37,41 @@ var MedicineDetailSchema = new Schema({
         required: true,
         'default': '1111111'
     },
-    breakfast: {}
+    timings: {
+        type: {
+            breakfast: {
+                type: Number,
+                'default': -1
+            },
+            lunch: {
+                type: Number,
+                'default': -1
+            },
+            dinner: {
+                type: Number,
+                'default': -1
+            },
+            custom:{
+                type: String,
+                'default': "none"
+            }
+        }
+    }
 });
+
+
+MedicineDetailSchema.statics.getBeforeAfterString = function (timingField) {
+    switch (timingField) {
+        case -1:
+            return "none";
+        case 0:
+            return "before";
+        case 1:
+            return "after";
+        default :
+            return "none";
+    }
+};
 
 module.exports = mongoose.model('MedicineDetail', MedicineDetailSchema);
 

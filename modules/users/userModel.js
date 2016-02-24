@@ -168,6 +168,42 @@ var UserSchema = new Schema({
             }]
         },
         select: false
+    },
+    settings:{
+        notification:{
+            type: Boolean,
+            'default': false
+        },
+        popup:{
+            type: Boolean,
+            'default': false
+        },
+        timings:{
+            beforeBreakfast:{
+                type: String,
+                'default': "08:00"
+            },
+            afterBreakfast:{
+                type: String,
+                'default': "10:00"
+            },
+            beforeLunch: {
+                type: String,
+                'default': "12:00"
+            },
+            afterLunch: {
+                type: String,
+                'default': "14:00"
+            },
+            beforeDinner:{
+                type: String,
+                'default': "20:00"
+            },
+            afterDinner:{
+                type: String,
+                'default': "22:00"
+            }
+        }
     }
 });
 

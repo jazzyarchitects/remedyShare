@@ -24,7 +24,17 @@
 
     <style>
         body {
-            overflow-y: hidden;
+            overflow-y: auto;
+        }
+        .jumbotron{
+            color:#222;
+            transition-duration: 300ms;
+            border: 1px solid rgba(0,0,0,0);
+        }
+        .jumbotron:hover{
+            background: #334387;
+            color: #EEE;
+            border: 1px solid rgba(255,255,255,0.6);
         }
     </style>
 
@@ -183,7 +193,7 @@
                                 <input type="password" name="password" placeholder="Password..."
                                        class="form-password form-control" id="form-password">
                             </div>
-                            <button type="submit" class="btn" id="submitButton" data-target="#progressModal">Sign in!
+                            <button type="submit" class="btn" id="submitButton" data-target="#progressModal">Sign in
                             </button>
                         </form>
 
@@ -203,6 +213,12 @@
                     </div>
                     <div class="lower">
                         Not a member yet? <a href="signup">Register here</a>
+                    </div>
+
+                    <div class="jumbotron" id="skipLogin" style="cursor: pointer; margin:0; padding:0;">
+                        Skip login...Proceed as guest..
+                        &nbsp;&nbsp;&nbsp;
+                        <span><input type="checkbox" checked id="rememberGuest" value="Remember">Remember Selection</span>
                     </div>
                 </div>
             </div>

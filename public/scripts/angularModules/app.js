@@ -11,6 +11,8 @@ app.controller('remedyController', function ($scope) {
     $scope.user = undefined;
     $scope.comments = [];
 
+    $scope.guest= $.cookie("guest") || true;
+
     $scope.__loadRemedies = function (url) {
         apiAjax({
             method: 'GET',
@@ -43,7 +45,8 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.upvote = function (_id) {
-        apiAjax({
+        if($scope.guest){
+            apiAjax({
                 method: 'PUT',
                 url: '/remedy/' + _id + "/upvote",
                 success: function (result) {
@@ -82,12 +85,15 @@ app.controller('remedyController', function ($scope) {
                         });
                     }
                 }
-            }
-        )
+            })
+        }else{
+            showLoginPopup();
+        }
     };
 
     $scope.downvote = function (_id) {
-        apiAjax({
+        if($scope.guest){
+            apiAjax({
                 method: 'PUT',
                 url: '/remedy/' + _id + "/downvote",
                 success: function (result) {
@@ -127,8 +133,10 @@ app.controller('remedyController', function ($scope) {
                         });
                     }
                 }
-            }
-        )
+            })
+        }else{
+            showLoginPopup();
+        }
     };
 
     $scope.showRemedy = function (id) {
@@ -213,6 +221,10 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.addComment = function (id) {
+        if($scope.guest){
+            showLoginPopup();
+            return;
+        }
         var comment = $("#addCommentInput").val().trim();
         apiAjax({
             url: '/remedy/' + id + '/comment',
@@ -292,6 +304,11 @@ app.controller('userController', function ($scope) {
 
 function redirectToNew() {
     window.open('/app/my/remedy', "_parent");
+}
+
+
+function showLoginPopup(){
+    $("#loginModal").modal();
 }
 
 /*

@@ -58,3 +58,8 @@ function logout(e) {
     window.sessionStorage.removeItem("id");
     window.location.replace('/app');
 }
+
+function login(){
+    $.removeCookie("guest",{path: '/'});
+    window.open('/app/login',"_parent");
+}

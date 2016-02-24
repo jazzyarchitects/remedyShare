@@ -53,7 +53,7 @@ var getRemedy = function (user, remedy_id, callback, dontTrack) {
                 }
                 callback(successJSON(doc));
             } else {
-                callback(errorJSON(501, err));
+                callback(errorJSON(501, "MONGO_ERROR" ,err==null?"NO RECORD":err));
             }
         });
 };

@@ -31,6 +31,22 @@
 
 </head>
 <body ng-app="remedyShare">
+
+<div class="modal fade" id="loginModal" role="dialog" style="z-index: 999999;" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                Login required
+            </div>
+            <div class="modal-body" id="modalBody">
+                You need to login before you can perform this operation.
+                <br /><br />
+                <a href="#" onclick="login()">Login Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="mdl-layout--fixed-header menu">s
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
@@ -46,11 +62,7 @@
                         text-decoration: none;
                     }
                 </style>
-                <a href="#" id="logout">Logout</a>
-                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder" target="_blank">
-                    <img alt="Get it on Google Play"
-                         src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
-                </a>
+                <a href="/app/login" id="login">Login</a>
             </div>
         </div>
     </header>
@@ -61,22 +73,31 @@
 <div class="container-fluid" id="mainContent">
     <div class="content">
         <div class="row">
+
             <div class="col-lg-3 col-md-3" ng-controller="userController">
-                <div class="card" id="userDetailsCard">
-                    <div class="card" id="dpframe" style="z-index: 999;">
-                        <img src="images/userlogin.png" id="userDp">
-                    </div>
-                    <div class="userDetails" id="userDetails" ng-init="loadUserDetails()">
-                        Welcome <br />
-                        <input type="text" class="userDetailsFormElement" id="username" disabled value="{{user.name}}">
-                        <button style="bottom: 0;" id="editUserButton">Edit</button>
-                    </div>
+                <div class="card" id="userDetailsCard" style="padding: 10px 5px;">
+                    <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder" align="center" target="_blank">
+                        <img alt="Get it on Google Play"
+                             src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
+                    </a>
+
+                    <p style="text-align: justify">
+                        <h4>About Us</h4>
+                    We are young enthusiast helping share your <strong>Grandma's remedies</strong> (or '<i>Dadi ke nuske</i>').
+                    We believe that natural cure for diseases are better than taking any pills. By this platform we are connecting thousands of Grandmas thus allowings today's youth to stay healthy.
+                    <br /><br />
+                    <center>Cheers to life...!</center>
+                    </p>
+
+
+                    <br /><br /><br />
+                    <p>
+                        <span style="font-size: 0.7em; color: #666; line-height: 10px; text-align: justify">Disclaimer: All the remedies are shared by individuals all over the globe. Medical Assistant does not take any responsibility for any injury or health problems which may arise. Consult your physician before trying the remedies.</span>
+                    </p>
                 </div>
             </div>
-
-            <div class="col-lg-8 col-md-8" ng-controller="remedyController">
+            <div class="col-lg-8" ng-controller="remedyController">
                 <div class="card" id="feedCard"  ng-init="loadRemedies()">
-
                     <div ng-repeat="remedy in remedies">
                         <div class="remedyFeed"
                              ng-style="{'background-image': 'url(/images/remedy/{{remedy.image.filename || 'nil'}})'}">

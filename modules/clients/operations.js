@@ -61,7 +61,6 @@ var authorize = function (id, key, callback) {
             // authorized
             callback(true, doc);
         } else {
-            console.log(err +" "+doc);
             callback(false, errorJSON(602, "AUTHENTICATION_ERROR", "INVALID_KEY"));
         }
     });

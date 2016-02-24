@@ -21,6 +21,15 @@ jQuery(document).ready(function() {
     	});
     	
     });
+
+	$("#skipLogin").click(function(e){
+		e.preventDefault();
+		var remember = $("#rememberGuest").val();
+		if(remember){
+			$.cookie("guest",true);
+		}
+		window.open("/app","_parent");
+	});
     
     
 });

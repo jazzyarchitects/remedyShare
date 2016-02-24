@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 
-var sendFile = function (res, file, options) {
+var sendFile = function (res, file) {
     fs.readFile(file, function (err, html) {
         if (err) {
             throw err;
@@ -47,3 +47,4 @@ exports.sendUserFeed = sendUserFeed;
 exports.sendNewRemedyForm = sendNewRemedyForm;
 exports.sendRemedyList = sendRemedyList;
 exports.sendUserDetails = sendUserDetails;
+exports.sendFile = sendFile;

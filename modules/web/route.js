@@ -46,7 +46,9 @@ router.get('/login', function (req, res) {
 
 router.use(function (req, res, next) {
     authenticateUser(req, res, function (result) {
-        if (result.success) {
+        if (result.success || req.guestUser) {
+            req.loggedIn = result.success;
+            console.log("req.loggedIn: "+req.loggedIn);
             next();
         } else {
             res.redirect('/app/login');
@@ -55,23 +57,37 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
-    view.sendUserFeed(req, res);
+    if (req.loggedIn) {
+        view.sendUserFeed(req, res);
+    } else {
+        view.sendFile(res, './public/remedyFeed_noUser.html');
+    }
 });
 
-router.get('/remedy', function(req, res){
-   view.sendRemedyList(req, res);
+router.get('/remedy', function (req, res) {
+    view.sendRemedyList(req, res);
 });
 
 
 var myRouter = express.Router();
 myRouter.use(express.static('public'));
 
+myRouter.use(function (req, res, next) {
+    authenticateUser(req, res, function (result) {
+        if (result.success) {
+            next();
+        } else {
+            res.redirect('/app/login');
+        }
+    });
+});
+
 myRouter.get('/remedy', function (req, res) {
     view.sendNewRemedyForm(req, res);
 });
 
-myRouter.get('/details', function(req, res){
-   view.sendUserDetails(req, res);
+myRouter.get('/details', function (req, res) {
+    view.sendUserDetails(req, res);
 });
 
 module.exports = function (app) {

@@ -42,7 +42,6 @@ var errorJSON = function (errorCode, description, message) {
 };
 
 var authenticateUser = function (req, res, callback) {
-    //console.log("Authenticating user in util");
     var ckey, cid;
     if (req.cookies) {
         try {
@@ -57,6 +56,9 @@ var authenticateUser = function (req, res, callback) {
 
     var key = req.headers['x-access-key'] || ckey;
     var id = req.headers['x-access-id'] || cid;
+    console.log("Authenticating user in util: "+key+" "+id);
+
+    req.guestUser = req.cookies.guest;
 
     var ClientOperations = requireFromModule('clients/operations');
     if (key && id) {
@@ -69,6 +71,7 @@ var authenticateUser = function (req, res, callback) {
             }
         });
     } else {
+        req.authenticated = false;
         callback(errorJSON(601, "AUTHENTICATION_ERROR", "NOT_LOGGED_IN"));
     }
 };
