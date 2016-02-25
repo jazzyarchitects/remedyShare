@@ -1,16 +1,16 @@
-body{
+body {
     background: #000000;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-.page-content{
+.page-content {
 }
 
 /*
 ActionBar Color #3F51B5
 */
 
-.appScreenshot-card-wide{
+.appScreenshot-card-wide {
     width: 320px;
     height: 480px;
     padding: 2px;
@@ -18,54 +18,62 @@ ActionBar Color #3F51B5
     display: block
 }
 
-.section{
-    text-align:center;
+.section {
+    text-align: center;
 }
 
-.activeMenu{
+.activeMenu {
     font-weight: bold;
     font-size: 1.2em;
     text-decoration: underline;
     transition-duration: 500ms;
 }
 
-.defaultMenu{
+.defaultMenu {
     transition-duration: 500ms;
 }
 
-.defaultMenu:hover{
+.defaultMenu:hover {
     text-decoration: underline;
+}
+
+#section3 {
+    background: linear-gradient(180deg, #3f51b5, #FFFFFF);
 }
 
 #section0,
 #section1,
 #section2,
 #section15,
-#section3{
+#section3 {
     background-size: cover;
     background-attachment: fixed;
 }
 
-#section0{
+#section0, #section3 {
     background-image: url("../images/back.jpg");
     background-position-y: -75px;
     color: #FFFFFF;
 }
+#section3 {
+    background-image: url("../images/stethoscope_back.jpg");
+    background-position-y: -75px;
+    color: #FFFFFF;
+}
 
-#section1{
+#section1 {
     background-image: url("../images/back-empty.jpg");
 }
 
-#section2{
+#section2 {
     background: #3F51B5;
 }
 
-#section3, #section4{
+#section4 {
     background: #FFFFFF;
 }
 
-
-.detailsCard{
+.detailsCard {
     width: 100%;
     max-height: 550px;
     top: 30px;
@@ -74,19 +82,18 @@ ActionBar Color #3F51B5
     overflow-y: auto;
 }
 
-.largeScreenText{
+.largeScreenText {
     color: #FFFFFF;
     position: absolute;
     top: 200px;
 }
 
-
-.appDetails{
+.appDetails {
     overflow-y: auto;
     font-size: 1em;
 }
 
-#fullpage{
+#fullpage {
     margin-top: 64px;
 }
 
@@ -95,7 +102,7 @@ ActionBar Color #3F51B5
 }
 
 .appDetails::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     -webkit-border-radius: 11px;
     border-radius: 11px;
 }
@@ -104,90 +111,98 @@ ActionBar Color #3F51B5
     -webkit-border-radius: 11px;
     border-radius: 11px;
     background: rgba(53, 53, 53, 0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
 .appDetails::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255,0,0,0.4);
+    background: rgba(255, 0, 0, 0.4);
 }
 
 /*.largeScreen{*/
-    /*display: none;*/
+/*display: none;*/
 /*}*/
 
 /*.smallscreen{*/
-    /*display: block;*/
+/*display: block;*/
 /*}*/
-#appTitle{
+#appTitle {
     margin-left: 0;
 }
 
-.screenshots{
+.screenshots {
     display: none;
-    left:-50%;
+    left: -50%;
 }
 
-.appDetailsCard{
+.appDetailsCard {
     margin-top: 20px;
-    left:150%;
+    left: 150%;
 }
 
-.features-image{
+.appDetailsCard2 {
+    margin-top: 20px;
+}
+
+.features-image {
     height: 150px;
 }
 
-.feature-description{
+.feature-description {
     display: block;
 }
 
-.row2{
+.row2 {
     margin-top: 50px;
 }
 
-@media screen and (max-width: 1028px){
-    #fullpage{
+@media screen and (max-width: 1028px) {
+    #fullpage {
         margin-top: 56px;
     }
 }
 
-@media screen and (max-width: 768px){
-    .features-image{
+@media screen and (max-width: 768px) {
+    .features-image {
         height: 120px;
     }
-    .feature-description{
-        display:none;
+
+    .feature-description {
+        display: none;
     }
 
-    .row2{
+    .row2 {
         margin-top: 10px;
     }
 }
 
-@media screen and (max-width: 400px){
-    .features-image{
+@media screen and (max-width: 400px) {
+    .features-image {
         height: 90px;
     }
 }
-@media screen and (max-width: 200px){
-    .features-image{
+
+@media screen and (max-width: 200px) {
+    .features-image {
         height: 60px;
     }
 }
 
-@media screen and (min-width: 767px){
-    #appTitle{
+@media screen and (min-width: 767px) {
+    #appTitle {
         margin-left: 150px;
     }
 
-    .smallscreen{
+    .smallscreen {
         display: inline;
     }
-    .appDetails p{
+
+    .appDetails p {
         padding: 5px;
     }
 }
 
-@media screen and (max-height: 443px){
-    #appTitle{
+@media screen and (max-height: 443px) {
+    #appTitle {
         margin-left: 0px;
     }
 }

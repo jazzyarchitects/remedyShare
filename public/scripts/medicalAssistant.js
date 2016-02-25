@@ -12,7 +12,7 @@ var imgTag;
 $(document).ready(function (e) {
     imgTag = $("#screenshot");
     $('#fullpage').fullpage({
-        anchors: ['home', 'details', 'features', 'remedyShare', 'contact'],
+        anchors: ['home', 'details', 'features', 'remedies', 'contact'],
         //to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
         css3: false,
         continuousVertical: true,
@@ -48,6 +48,7 @@ $(document).ready(function (e) {
 });
 var slider;
 function startImageSlider() {
+    clearInterval(slider);
     slider = setInterval(imageChanger, 5000);
 }
 

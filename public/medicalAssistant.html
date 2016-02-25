@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Medical Assistant</title>
 
-    <link rel="icon" href="images/small_icon.png" />
+    <link rel="icon" href="images/small_icon.png"/>
 
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
@@ -24,6 +24,14 @@
     <!-- Cuidar references -->
     <link href="styles/medicalAssistant.css" rel="stylesheet"/>
     <script src="scripts/medicalAssistant.js"></script>
+
+    <script src="scripts/jquery.cookie.js"></script>
+    <script>
+        function guestLogin(){
+            $.cookie("guest",true);
+            window.open("/app", "_parent");
+        }
+    </script>
 </head>
 <body>
 
@@ -48,11 +56,13 @@
                     <a href="#features" class="defaultMenu">Features</a>&nbsp; |&nbsp;
                     <a href="#remedyShare" class="defaultMenu">Remedies</a>&nbsp; |&nbsp;
                     <a href="#contact" class="defaultMenu">Contact</a> &nbsp; | &nbsp;
-                    <a href="/app" class="defaultMenu">Web App</a><sup>&nbsp;<small>BETA</small></sup> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder">
-                        <img alt="Get it on Google Play"
-                             src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"/>
-                    </a>
+                    <a href="/app" class="defaultMenu">Web App</a><sup>&nbsp;
+                    <small>BETA</small>
+                </sup> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"
+                       target="_blank"><img alt="Get it on Google Play"
+                                            src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+                                            height="45px"/></a>
                 </div>
             </div>
         </header>
@@ -261,11 +271,61 @@
 
     </div>
 
-    <div class="section" id="section3" style="background: linear-gradient(180deg,#3f51b5,#FFFFFF)">
-        <div class="row">
+    <div class="section" id="section3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-7 col-md-9 col-sm-6 smallscreen appDetailsCard2 col-lg-offset-1" align="center">
+                    <div class="mdl-card mdl-shadow--6dp detailsCard">
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button">
+                                Remedy Sharing
+                            </a>
+                        </div>
+                        <div class="mdl-card__supporting-text appDetails" style="text-align: justify">
+                            <p>
+                                Turmeric with Milk... Ginger tea... etc etc...<br/>
+                                Have your mother ever told you any of her home remedies?
+                                Do you have a grandma who always stresses on natural medications? Do you have something
+                                called Grandma's remedies (<i>Dadi ke nuske</i>).
+                                Help other people by sharing those remedies. We provide you a platform to share with
+                                your friends, relatives or any other person those secrets which can improve their
+                                health.
+                                Lets make her remedy famous.
+                                <br/>
+                                With the beta version of our platform available on the web, the mobile version will be
+                                coming soon.
+                                <br/>
+                                <br/><span align="center">Stayed tuned, stay fit and live long. Cheers</span>
 
 
+                                <span>
+                                    <center>
+                                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/app/login">
+                                                Sign In / Register
+                                            </a>
+                                        &nbsp;&nbsp;| &nbsp;&nbsp;
+                                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="guestLogin()">
+                                            Browse as guest
+                                        </a>
+                                    </center>
+                                </span>
 
+                            </p>
+
+
+                            <p>
+                                <span style="font-size: 0.8em; color: #666; line-height: 10px; text-align: justify">Disclaimer: All the remedies shared are sole property of their publishers. Medical Assistant does not take any responsibility for any injury or health problems which may arise. Consult your physician before trying the remedies.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 screenshots2 smallscreen" align="center">
+                    <div class="appScreenshot-card-wide mdl-card mdl-shadow--4dp ">
+                        <img src="images/screenshots/dashboard.jpg" alt="Dashboard screen" width="100%"
+                             id="screenshot2">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -281,15 +341,16 @@
             </div>
             <div class="row" style="margin-top: 25px;">
                 <div class="content">
-                    <img src="images/ic_action_gmail.png" height="60px" style="margin-bottom: 5px;" /><span style="font-size: 2em">Mail us at: <a href="mailto:jazzyarchitects@gmail.com">jazzyarchitects@gmail.com</a></span>
+                    <img src="images/ic_action_gmail.png" height="60px" style="margin-bottom: 5px;"/><span
+                        style="font-size: 2em">Mail us at: <a href="mailto:jazzyarchitects@gmail.com">jazzyarchitects@gmail.com</a></span>
                 </div>
             </div>
 
 
             <div class="row" style="margin-top:25px; cursor: pointer;" id="meetUsDiv">
-                <img src="images/ic_action_emo_basic.png" id="smileImage1" height="60px" />
+                <img src="images/ic_action_emo_basic.png" id="smileImage1" height="60px"/>
                 <span id="meetUs" style="font-size: 1.8em">Meet the architects</span>
-                <img src="images/ic_action_emo_basic.png" id="smileImage2" height="60px" />
+                <img src="images/ic_action_emo_basic.png" id="smileImage2" height="60px"/>
             </div>
         </div>
 
@@ -297,6 +358,8 @@
 
 
 </div>
+
+
 
 </body>
 </html>

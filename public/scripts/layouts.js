@@ -5,6 +5,9 @@
 var h;
 $(document).ready(function (e) {
 
+    $("head").append('<meta name="google-signin-client_id" content="916983181107-fm83ke0018r1uokii6hge864gk9po8tr.apps.googleusercontent.com">'+
+    '<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>');
+
     toolbarHeight = $("#header").height();
     windowHeight = window.innerHeight;
 
@@ -51,8 +54,18 @@ $(document).ready(function (e) {
     });
 });
 
+function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+    
+      });
+    }
 
 function logout(e) {
+    var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
     $.removeCookie("user", {path: '/'});
     $.removeCookie("accessToken", {path: '/'});
     window.sessionStorage.removeItem("id");

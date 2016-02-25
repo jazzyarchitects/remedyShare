@@ -9,6 +9,7 @@
     <title>Medical Assistant | Login</title>
     <meta name="google-signin-client_id"
           content="916983181107-fm83ke0018r1uokii6hge864gk9po8tr.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <link rel="icon" href="../images/small_icon.png"/>
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -16,10 +17,11 @@
     <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/form-elements.css">
     <link rel="stylesheet" href="../styles/jquery-ui.min.css">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <link rel="stylesheet" href="../styles/jquery-ui.structure.min.css">
     <link rel="stylesheet" href="../styles/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
+    <script src="../scripts/jquery.cookie.js"></script>
 
 
     <style>
@@ -38,10 +40,8 @@
         }
     </style>
 
-    <script src="../scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../scripts/jquery-ui.min.js"></script>
     <script src="../scripts/bootstrap.min.js"></script>
-    <script src="../scripts/jquery.cookie.js"></script>
     <script src="../scripts/login.js"></script>
 
 
@@ -132,10 +132,10 @@
 </script>
 <script>
     function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-        });
+        // var auth2 = gapi.auth2.getAuthInstance();
+        // auth2.signOut().then(function () {
+        //     console.log('User signed out.');
+        // });
     }
     signOut();
 </script>
@@ -216,9 +216,7 @@
                     </div>
 
                     <div class="jumbotron" id="skipLogin" style="cursor: pointer; margin:0; padding:0;">
-                        Skip login...Proceed as guest..
-                        &nbsp;&nbsp;&nbsp;
-                        <span><input type="checkbox" checked id="rememberGuest" value="Remember">Remember Selection</span>
+                        Proceed as guest
                     </div>
                 </div>
             </div>
@@ -228,10 +226,19 @@
 </div>
 
 
+
 <!-- Javascript -->
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/scripts.js"></script>
 
+<script>
+
+    var cookies=$.cookie();
+    for(var cookie in cookies){
+        $.removeCookie(cookie);
+    }
+
+</script>
 
 </body>
 

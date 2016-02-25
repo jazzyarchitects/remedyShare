@@ -6,12 +6,13 @@ var url;
 var app = angular.module('remedyShare', []);
 var userGlobal;
 
+
 app.controller('remedyController', function ($scope) {
     $scope.remedies = [];
     $scope.user = undefined;
     $scope.comments = [];
 
-    $scope.guest= $.cookie("guest") || true;
+    $scope.guest= $.cookie("guest") || false;
 
     $scope.__loadRemedies = function (url) {
         apiAjax({

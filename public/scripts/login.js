@@ -8,7 +8,7 @@ document.head.appendChild(sc);
 
 $(document).ready(function (e) {
 
-
+        
 
     $("#login-form").submit(function (e) {
         e.preventDefault();
@@ -71,3 +71,18 @@ function onSignIn(googleUser) {
     $("#fbButton").css({width: $("#gooogleButton").width()+"px", height: $("#googleButton").height()+"px"})
 
 }
+
+function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+            client_id: '916983181107-fm83ke0018r1uokii6hge864gk9po8tr.apps.googleusercontent.com',
+            cookie_policy: 'none'
+
+        });
+    // gapi.signin.render(document.getElementById("googleButton"),{
+            // clientid: '916983181107-fm83ke0018r1uokii6hge864gk9po8tr.apps.googleusercontent.com',
+            // approvalprompt: 'force',
+            // cookiepolicy: 'none'
+        // });
+      });
+    }
