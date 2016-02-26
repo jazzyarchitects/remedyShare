@@ -48,7 +48,7 @@ router.use(function (req, res, next) {
     authenticateUser(req, res, function (result) {
         if (result.success || req.guestUser) {
             req.loggedIn = result.success;
-            console.log("req.loggedIn: "+req.loggedIn);
+            //console.log("req.loggedIn: "+req.loggedIn);
             next();
         } else {
             res.redirect('/app/login');

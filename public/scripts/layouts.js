@@ -62,10 +62,15 @@ function onLoad() {
     }
 
 function logout(e) {
-    var auth2 = gapi.auth2.getAuthInstance();
+    try {
+        var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             console.log('User signed out.');
         });
+    }catch(noInternetException){
+        console.log("Case only when debugging without net. Gapi not defined")
+    }
+
     $.removeCookie("user", {path: '/'});
     $.removeCookie("accessToken", {path: '/'});
     window.sessionStorage.removeItem("id");

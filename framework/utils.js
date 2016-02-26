@@ -56,7 +56,7 @@ var authenticateUser = function (req, res, callback) {
 
     var key = req.headers['x-access-key'] || ckey;
     var id = req.headers['x-access-id'] || cid;
-    console.log("Authenticating user in util: "+key+" "+id);
+    //console.log("Authenticating user in util: "+key+" "+id);
 
     req.guestUser = req.cookies.guest;
 

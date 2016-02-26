@@ -8,8 +8,6 @@ document.head.appendChild(sc);
 
 $(document).ready(function (e) {
 
-        
-
     $("#login-form").submit(function (e) {
         e.preventDefault();
         apiAjax({

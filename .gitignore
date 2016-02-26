@@ -8,3 +8,7 @@ uploads/
 design
 ./config/serverConfig.js
 config/serverConfig.js
+/config/serverConfig.js
+./config/serverConfig
+config/serverConfig
+/config/serverConfig

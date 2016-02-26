@@ -20,7 +20,7 @@ var UserSchema = new Schema({
             mm: Number,
             yyyy: Number
         },
-        required: true,
+        required: false,
         'default': {
             dd: 0,
             mm: 0,
@@ -29,7 +29,7 @@ var UserSchema = new Schema({
     },
     sex: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
@@ -37,11 +37,11 @@ var UserSchema = new Schema({
         unique: true
     },
     mobile: {
-        type: String,
+        type: String
     },
     password: {
         type: String,
-        required: true,
+        required: false,
         select: false
     },
     admin: {
@@ -125,7 +125,13 @@ var UserSchema = new Schema({
     image: {
         type: {
             filename: String,
-            path: String
+            path: String,
+            url: String
+        },
+        'default':{
+            filename: "",
+            path:"",
+            url: ""
         }
     },
     bookmarks:{

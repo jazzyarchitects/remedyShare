@@ -102,24 +102,45 @@ var del = function (user, callback) {
     });
 };
 
+/**
+ * Function for google login. Get access token from google servers and extract user info : name, email, picture
+ * @param accesstoken AccessToken received by app
+ * @param callback function callback
+ * @private
+ */
 function __login_google(accesstoken, callback) {
     //console.log("Logging in Google: " + accesstoken);
+    //Google API URL
     var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + accesstoken;
+    //Using request module to send requests
     request({
         url: url
     }, function (err, response, body) {
         if (err) {
-            console.log("User crud operations: err" + JSON.stringify(err));
             callback(errorJSON(err, "GOOGLE_SIGNIN_ERROR", err));
         } else {
             body = JSON.parse(body);
-            console.log("User crud operations: body:" + JSON.stringify(body));
-            //console.log("Email of user: " + body.email);
+            //If email id exists then login user without password and update their profile picture
+            //If email id does not exists then create basic profile and login
             User.findOne({email: body.email}, function (err, doc) {
                 if (doc) {
+                    User.update({email: body.email}, {
+                        $set: {'image.url': body.picture}
+                    });
                     callback(successJSON(doc));
                 } else {
-                    callback(errorJSON(err));
+                    var user = new User({
+                        name: body.name,
+                        email: body.email,
+                        'image.url': body.picture
+                    });
+                    user.save(function (err, doc) {
+                        if (err) {
+                            callback(errorJSON(501, "MONGO_ERROR", err));
+                        } else {
+                            callback(successJSON(doc));
+                        }
+                    });
                 }
             });
         }

@@ -12,7 +12,7 @@ app.controller('remedyController', function ($scope) {
     $scope.user = undefined;
     $scope.comments = [];
 
-    $scope.guest= $.cookie("guest") || false;
+    $scope.guest= $.cookie("guest")==="true" || false;
 
     $scope.__loadRemedies = function (url) {
         apiAjax({
@@ -46,7 +46,7 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.upvote = function (_id) {
-        if($scope.guest){
+        if(!$scope.guest){
             apiAjax({
                 method: 'PUT',
                 url: '/remedy/' + _id + "/upvote",
@@ -93,7 +93,7 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.downvote = function (_id) {
-        if($scope.guest){
+        if(!$scope.guest){
             apiAjax({
                 method: 'PUT',
                 url: '/remedy/' + _id + "/downvote",
