@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 0.8
+before_install: npm install -g npm
+deploy:
+  provider: openshift
+  user: jibinmathews7@gmail.com
+  password:
+    secure: UqTJqRgb6kVJT7IQXLOFwNasYp4KEaznqSag9oARpbjZlJ+4lF6E0HU3QFxNyy4g0jTw0b6ua2MB/5EA3H0LUaRtQmpyGUKJmH4ZqFm83e++n77D4sgE1Z7jyaYMew/WglgrFaG4RH6jsL02yd3L5rEMnsQykcQh9ccR2HpnBve/0dwZ53E4aP20xYkZyBNaO7u1u07rLs/wuSrh/kDA/ETs+tVwXLCYn1+vOZSwDVkHOLovuNzUSYuGkrNY4XqxjfpL5I5hlCA7MVrMN4f156L7AjRpPs6FGKs8tpZ0t8q/3HG11J22JHhB5499ZW/3BUnzf+Hlkm7XaANBfdvSGd5K/53KHK0oeyF/K09pwUkljlNVEdqqel5Q8mTwX7xzrqOxpRVv21+07+yA5ZnsteIdjcEjhmt5JA21lPJmtK+3tI9EMX9ExKibQsNPdr82RuPfR05JcquRfGDFOqhKKN8olDxeOujnPoUBiu8YbxDDdZ6vy2rvzEbqrHYbHMHjFjqRRwyAImIsFOeab2eapEtPUjF7QLMztfvyKX6zl3Va69JKIFgP89St+XeiRyoogAo0sbxlptIPDxrUTN3HD2gGhdiR02bVnGYOH3GfOzp526UNtE3TK41TUJrQOO47tfYoDjGlnLzQl3QJAozdKbSS23YiCDzP0fl66tcc0PI=
+  app: medicalassistant
+  domain: jazzyarchitect
+  on:
+    repo: jazzyarchitects/remedyShare
