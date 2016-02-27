@@ -35,7 +35,7 @@ var getRemedy = function (user, remedy_id, callback) {
 };
 
 var update = function (user_id, remedy, callback) {
-    RemedyOperations.getRemedy(remedy._id, function (result) {
+    RemedyOperations.getRemedy(user_id, remedy._id, function (result) {
         if (result.success && result.data.author._id.equals(user_id)) {
             RemedyOperations.update(remedy, function (result) {
                 callback(result);

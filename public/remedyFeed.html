@@ -35,7 +35,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title"><a href="/app">Medical Assistant v26.2.1432</a></span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant v27.2.1615</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -113,9 +113,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-1 col-md-1">
+            <div class="col-lg-1 col-md-1" ng-controller="remedyController">
                 <div class="card fab" id="refreshFab" ng-click="refresh()" title="Refresh List">
-                    <img src="images/ic_action_reload.png" alt="Refresh List"/>
+                    <img src="images/ic_action_reload.png" id="refreshImage" class="refreshImage" alt="Refresh List"/>
                 </div>
                 <div class="card fab" id="addFab" title="Add new remedy">
                     <img src="images/ic_action_add.png" alt="Add new remedy"/>

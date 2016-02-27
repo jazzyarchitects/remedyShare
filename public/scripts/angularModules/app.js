@@ -12,16 +12,22 @@ app.controller('remedyController', function ($scope) {
     $scope.user = undefined;
     $scope.comments = [];
 
-    $scope.guest= $.cookie("guest")==="true" || false;
+    $scope.guest = $.cookie("guest") === "true" || false;
 
     $scope.__loadRemedies = function (url) {
         apiAjax({
             method: 'GET',
             url: url,
             success: function (result) {
+                setTimeout(function(){
+                    $("#refreshImage").removeClass("refreshImageLoading");
+                },1000);
                 $scope.$apply(function () {
                     $scope.remedies = result.data.remedies;
                 });
+            },
+            error: function(err){
+                $("#refreshImage").removeClass("refreshImageLoading");
             }
         });
     };
@@ -46,96 +52,94 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.upvote = function (_id) {
-        if(!$scope.guest){
+        if (!$scope.guest) {
+            for (var i = 0; i < $scope.remedies.length; i++) {
+                if ($scope.remedies[i]._id.toString() === _id.toString()) {
+                    $scope.$apply(function () {
+                        if ($scope.remedies[i].upvoted) {
+                            $scope.remedies[i].stats.upvote--;
+                        } else {
+                            $scope.remedies[i].stats.upvote++;
+                        }
+                        $scope.remedies[i].upvoted = !$scope.remedies[i].upvoted;
+                        if ($scope.remedies[i].upvoted) {
+                            if ($scope.remedies[i].downvoted) {
+                                $scope.remedies[i].stats.downvote--;
+                            }
+                            $scope.remedies[i].downvoted = false;
+                        }
+                    });
+                }
+            }
+            if ($scope.remedy._id.toString() === _id.toString()) {
+                $scope.$apply(function () {
+                    if ($scope.remedy.upvoted) {
+                        $scope.remedy.stats.upvote--;
+                    } else {
+                        $scope.remedy.stats.upvote++;
+                    }
+                    $scope.remedy.upvoted = !$scope.remedy.upvoted;
+                    if ($scope.remedy.upvoted) {
+                        if ($scope.remedy.downvoted) {
+                            $scope.remedy.stats.downvote--;
+                        }
+                        $scope.remedy.downvoted = false;
+                    }
+                });
+            }
+
             apiAjax({
                 method: 'PUT',
-                url: '/remedy/' + _id + "/upvote",
-                success: function (result) {
-                    for (var i = 0; i < $scope.remedies.length; i++) {
-                        if ($scope.remedies[i]._id.toString() === _id.toString()) {
-                            $scope.$apply(function () {
-                                if ($scope.remedies[i].upvoted) {
-                                    $scope.remedies[i].stats.upvote--;
-                                } else {
-                                    $scope.remedies[i].stats.upvote++;
-                                }
-                                $scope.remedies[i].upvoted = !$scope.remedies[i].upvoted;
-                                if ($scope.remedies[i].upvoted) {
-                                    if ($scope.remedies[i].downvoted) {
-                                        $scope.remedies[i].stats.downvote--;
-                                    }
-                                    $scope.remedies[i].downvoted = false;
-                                }
-                            });
-                        }
-                    }
-                    if ($scope.remedy._id.toString() === _id.toString()) {
-                        $scope.$apply(function () {
-                            if ($scope.remedy.upvoted) {
-                                $scope.remedy.stats.upvote--;
-                            } else {
-                                $scope.remedy.stats.upvote++;
-                            }
-                            $scope.remedy.upvoted = !$scope.remedy.upvoted;
-                            if ($scope.remedy.upvoted) {
-                                if ($scope.remedy.downvoted) {
-                                    $scope.remedy.stats.downvote--;
-                                }
-                                $scope.remedy.downvoted = false;
-                            }
-                        });
-                    }
-                }
-            })
-        }else{
+                url: '/remedy/' + _id + "/upvote"
+            });
+        } else {
             showLoginPopup();
         }
     };
 
     $scope.downvote = function (_id) {
-        if(!$scope.guest){
+        if (!$scope.guest) {
+            for (var i = 0; i < $scope.remedies.length; i++) {
+                if ($scope.remedies[i]._id.toString() === _id.toString()) {
+                    $scope.$apply(function () {
+                        if ($scope.remedies[i].downvoted) {
+                            $scope.remedies[i].stats.downvote--;
+                        } else {
+                            $scope.remedies[i].stats.downvote++;
+                        }
+                        $scope.remedies[i].downvoted = !$scope.remedies[i].downvoted;
+
+                        if ($scope.remedies[i].downvoted) {
+                            if ($scope.remedies[i].upvoted) {
+                                $scope.remedies[i].stats.upvote--;
+                            }
+                            $scope.remedies[i].upvoted = false;
+                        }
+                    });
+                }
+            }
+            if ($scope.remedy._id.toString() === _id.toString()) {
+                $scope.$apply(function () {
+                    if ($scope.remedy.downvoted) {
+                        $scope.remedy.stats.downvote--;
+                    } else {
+                        $scope.remedy.stats.downvote++;
+                    }
+                    $scope.remedy.downvoted = !$scope.remedy.downvoted;
+                    if ($scope.remedy.downvoted) {
+                        if ($scope.remedy.upvoted) {
+                            $scope.remedy.stats.upvote--;
+                        }
+                        $scope.remedy.upvoted = false;
+                    }
+                });
+            }
+
             apiAjax({
                 method: 'PUT',
-                url: '/remedy/' + _id + "/downvote",
-                success: function (result) {
-                    for (var i = 0; i < $scope.remedies.length; i++) {
-                        if ($scope.remedies[i]._id.toString() === _id.toString()) {
-                            $scope.$apply(function () {
-                                if ($scope.remedies[i].downvoted) {
-                                    $scope.remedies[i].stats.downvote--;
-                                } else {
-                                    $scope.remedies[i].stats.downvote++;
-                                }
-                                $scope.remedies[i].downvoted = !$scope.remedies[i].downvoted;
-
-                                if ($scope.remedies[i].downvoted) {
-                                    if ($scope.remedies[i].upvoted) {
-                                        $scope.remedies[i].stats.upvote--;
-                                    }
-                                    $scope.remedies[i].upvoted = false;
-                                }
-                            });
-                        }
-                    }
-                    if ($scope.remedy._id.toString() === _id.toString()) {
-                        $scope.$apply(function () {
-                            if ($scope.remedy.downvoted) {
-                                $scope.remedy.stats.downvote--;
-                            } else {
-                                $scope.remedy.stats.downvote++;
-                            }
-                            $scope.remedy.downvoted = !$scope.remedy.downvoted;
-                            if ($scope.remedy.downvoted) {
-                                if ($scope.remedy.upvoted) {
-                                    $scope.remedy.stats.upvote--;
-                                }
-                                $scope.remedy.upvoted = false;
-                            }
-                        });
-                    }
-                }
-            })
-        }else{
+                url: '/remedy/' + _id + "/downvote"
+            });
+        } else {
             showLoginPopup();
         }
     };
@@ -159,6 +163,7 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.refresh = function () {
+        $("#refreshImage").addClass("refreshImageLoading");
         $scope.loadRemedies(undefined, userGlobal);
     };
 
@@ -186,13 +191,22 @@ app.controller('remedyController', function ($scope) {
         var tags = $("#form_tags").val();
         var diseases = $("#form_diseases").val();
 
-        //$scope.$apply(function(){
-        //   $scope.remedy = {};
-        //});
 
+        var method = 'POST';
+        var url='/remedy/';
+        var alertTitle= "Remedy saved";
+        var update=false;
+        var id=$scope.remedy._id;
+        if ($scope.remedy._id) {
+            //Update
+            url = url+$scope.remedy._id;
+            method= 'PUT';
+            alertTitle= "Remedy updated";
+            update=true;
+        }
         apiAjax({
-            method: 'POST',
-            url: '/remedy/',
+            method: method,
+            url: url,
             data: {
                 title: title,
                 description: description,
@@ -201,10 +215,24 @@ app.controller('remedyController', function ($scope) {
                 diseases: diseases
             },
             success: function (result) {
-                $scope.loadMyRemedies(1);
+                bootbox.alert(alertTitle, function () {
+                    console.log("Remedy saved sucessfully");
+                });
+                console.log("Saved remedy: " + JSON.stringify(result));
+                //$scope.loadMyRemedies(1);
+                $scope.$apply(function () {
+                    if(!update) {
+                        $scope.remedies.push(result.data)
+                    }else{
+                        var object = $.grep($scope.remedies, function (e) {
+                            return e._id == id;
+                        });
+                        $scope.remedies[$scope.remedies.indexOf(object[0])] = result.data;
+                    }
+                    $scope.remedy = {};
+                });
             }
-        })
-
+        });
     };
 
     $scope.new = function () {
@@ -222,7 +250,7 @@ app.controller('remedyController', function ($scope) {
     };
 
     $scope.addComment = function (id) {
-        if($scope.guest){
+        if ($scope.guest) {
             showLoginPopup();
             return;
         }
@@ -266,21 +294,41 @@ app.controller('remedyController', function ($scope) {
                 });
             }
         })
+
     };
 
     $scope.deleteRemedy = function (id) {
-        apiAjax({
-            url: '/remedy/' + id,
-            method: 'DELETE',
-            success: function (result) {
-                $scope.$apply(function () {
-                    var object = $.grep($scope.remedies, function (e) {
-                        return e._id == id;
-                    });
-                    $scope.remedies.splice($scope.remedies.indexOf(object[0]), 1);
-                });
+        bootbox.dialog({
+            title: "Confirm deletion",
+            message: "Are you sure you want to delete this remedy? This cannot be undone",
+            buttons: {
+                danger: {
+                    label: 'Delete',
+                    className: 'btn-danger',
+                    callback: function () {
+                        $scope.$apply(function () {
+                            var object = $.grep($scope.remedies, function (e) {
+                                return e._id == id;
+                            });
+                            $scope.remedies.splice($scope.remedies.indexOf(object[0]), 1);
+                        });
+
+                        apiAjax({
+                            url: '/remedy/' + id,
+                            method: 'DELETE',
+                            success: function (result) {
+                                //console.log("Delete remedy: "+JSON.stringify(result));
+                            }
+                        })
+                    }
+                },
+                main: {
+                    label: 'Cancel'
+                }
             }
-        })
+        });
+
+
     };
 
     //$scope.loadRemedies();
@@ -308,7 +356,7 @@ function redirectToNew() {
 }
 
 
-function showLoginPopup(){
+function showLoginPopup() {
     $("#loginModal").modal();
 }
 
