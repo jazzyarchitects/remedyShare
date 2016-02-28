@@ -5,12 +5,23 @@
 
 var fs = require('fs');
 
+var folders = ['doc/', 'naturals/'];
+var docs = ['doc.jpg', 'pills.jpg'];
+var naturals = ['fruits.jpg', 'ayurvedic.jpg', 'leaf_pills.jpg', 'pill_fruits.jpg'];
+var folderFiles = [docs, naturals];
 
 var sendPicture = function (uploadDirectory, filename, res) {
     //console.log("Sending image: "+filename);
     fs.readFile("./uploads/images/" + uploadDirectory + "/" + filename, function (err, file) {
         if (err) {
-            fs.readFile("./public/images/stethoscope.jpg", function (err, file) {
+
+            var baseFolder = "./public/images/med/";
+            var folderIndex = getRandomInt(folders);
+            var categoryFolder = folders[folderIndex];
+            var file2 = folderFiles[folderIndex][getRandomInt(folderFiles[folderIndex])];
+            var filePath = baseFolder+categoryFolder+file2;
+            //console.log("Sending file form path: "+filePath);
+            fs.readFile(filePath, function (err, file) {
                 if (err) {
                     res.end();
                 } else {
@@ -28,6 +39,11 @@ var sendPicture = function (uploadDirectory, filename, res) {
         }
     });
 };
+
+function getRandomInt(array) {
+    var max=array.length;
+    return Math.floor(Math.random() * max);
+}
 
 var sendUserPic = function (req, res) {
     sendPicture('users', req.params.filename, res);

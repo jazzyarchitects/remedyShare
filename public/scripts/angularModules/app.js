@@ -3,11 +3,25 @@
  */
 
 var url;
-var app = angular.module('remedyShare', []);
+
+angular.module('filters', [])
+    .filter('htmlToPlaintext', function() {
+    return function(text) {
+        return String(text).replace(/<[^>]+>/gm, '');
+    }
+})
+    .filter('parseHtml', function(){
+        return function(text){
+            return $.parseHTML(text);
+        }
+    });
+
+var app = angular.module('remedyShare', ['ui.tinymce','filters']);
 var userGlobal;
 
 
-app.controller('remedyController', function ($scope) {
+
+app.controller('remedyController', function ($scope, $parse) {
     $scope.remedies = [];
     $scope.user = undefined;
     $scope.comments = [];
@@ -24,6 +38,9 @@ app.controller('remedyController', function ($scope) {
                 },1000);
                 $scope.$apply(function () {
                     $scope.remedies = result.data.remedies;
+                    //for(var i=0;i<$scope.remedies.length;i++){
+                    //    $scope.remedies[i].description = $parse(result.data.remedies[i].description)($scope);
+                    //}
                 });
             },
             error: function(err){
@@ -152,6 +169,7 @@ app.controller('remedyController', function ($scope) {
                 $scope.$apply(function () {
                     $scope.comments = [];
                     $scope.remedy = result.data;
+                    $(".remedyDescription").html(result.data.description);
                     $scope.loadComments(result.data._id);
                 });
             },
@@ -186,10 +204,16 @@ app.controller('remedyController', function ($scope) {
         }
 
         var title = $("#form_title").val();
-        var description = $("#form_description").val();
+        var description = $scope.remedy.description;
         var references = $("#form_references").val();
         var tags = $("#form_tags").val();
         var diseases = $("#form_diseases").val();
+        //
+        //var title = $scope.remedy.title;
+        //var description = $scope.remedy.description;
+        //var references = $scope.remedy.references;
+        //var tags = $scope.remedy.tags;
+        //var diseases = $scope.remedy.diseases;
 
 
         var method = 'POST';
@@ -218,7 +242,7 @@ app.controller('remedyController', function ($scope) {
                 bootbox.alert(alertTitle, function () {
                     console.log("Remedy saved sucessfully");
                 });
-                console.log("Saved remedy: " + JSON.stringify(result));
+                //console.log("Saved remedy: " + JSON.stringify(result));
                 //$scope.loadMyRemedies(1);
                 $scope.$apply(function () {
                     if(!update) {

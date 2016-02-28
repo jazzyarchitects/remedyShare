@@ -10,7 +10,7 @@
     <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
     <script src="scripts/jquery.cookie.js"></script>
     <script src="scripts/angularModules/common/angular.min.js"></script>
-    <script src="scripts/angularModules/common/angular-route-min.js"></script>
+    <!--<script src="scripts/angularModules/common/angular-route-min.js"></script>-->
 
     <script src="scripts/angularModules/app.js"></script>
     <script src="scripts/api.js"></script>
@@ -23,6 +23,10 @@
     <link href="styles/material.min.css" rel="stylesheet"/>
 
     <!--<link rel="stylesheet" href="./assets/css/form-elements.css">-->
+
+    <script src="scripts/tinymce/tinymce-basic.js"></script>
+    <script src="scripts/tinymce/tinymce.min.js"></script>
+    <script src="scripts/tinymce/tinymce.js"></script>
 
     <!-- Cuidar references -->
     <script src="scripts/layouts.js"></script>
@@ -97,7 +101,7 @@
                                     <br/>
 
                                     <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
-                                        {{remedy.description | limitTo: 60}}{{remedy.description.length > 55 ?
+                                        {{remedy.description | htmlToPlaintext | limitTo: 60}}{{remedy.description.length > 55 ?
                                         '...':''}}
                                     </p>
                                     <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
@@ -113,8 +117,14 @@
                     <form id="remForm">
                         <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
                                ng-model="remedy.title" readonly>
-                    <textarea placeholder="Remedy description" id="form_description" name="description"
-                              class="remedyForm" rows="10" ng-model="remedy.description" readonly></textarea>
+
+                    <!--<textarea placeholder="Remedy description" id="form_description" name="description"-->
+                              <!--class="remedyForm" rows="10" ng-bind-html="remedy.description" ng-model="remedy.description" readonly></textarea>-->
+
+                        <!--<div ng-sanitize="remedy.description"></div>-->
+
+                        <div class="remedyDescription" style="padding: 5px; border: 1px rgba(63, 81, 181, 0.13) solid; background: #fdfdfd;  margin-top:10px; margin-bottom: 10px;"></div>
+
                         <input type="text" placeholder="Tags" id="form_tags" class="remedyForm"
                                name="tags" readonly
                                ng-model="remedy.tags">

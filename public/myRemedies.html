@@ -20,6 +20,10 @@
     <link href="styles/bootstrap.min.css" rel="stylesheet"/>
     <script src="scripts/bootstrap.min.js"></script>
 
+    <script src="scripts/tinymce/tinymce-basic.js"></script>
+    <script src="scripts/tinymce/tinymce.min.js"></script>
+    <script src="scripts/tinymce/tinymce.js"></script>
+
     <!-- Material Theme -->
     <link href="styles/material.min.css" rel="stylesheet"/>
 
@@ -71,7 +75,10 @@
                     }
                 </style>
                 <a href="#" id="logout">Logout</a>
-                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1" target="_blank"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" height="45px" /></a>
+                <a href="https://play.google.com/store/apps/details?id=architect.jazzy.medicinereminder&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"
+                   target="_blank"><img alt="Get it on Google Play"
+                                        src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+                                        height="45px"/></a>
             </div>
         </div>
     </header>
@@ -107,7 +114,9 @@
                                     <br/>
 
                                     <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
-                                        {{remedy.description | limitTo: 60}}{{remedy.description.length > 55 ?
+                                       <!--ng-bind-html="remedy.description">-->
+
+                                        {{remedy.description | htmlToPlaintext | limitTo: 60}}{{remedy.description.length > 55 ?
                                         '...':''}}
                                     </p>
                                     <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
@@ -123,11 +132,17 @@
             <div class="col-lg-8 col-md-8">
                 <div class="card" id="feedCard">
                     <form id="remForm">
-                        <input type="text" class="remedyForm" placeholder="Title" name="title" id="form_title"
+                        <input type="text" style="margin-bottom: 10px;" class="remedyForm" placeholder="Title" name="title" id="form_title"
                                ng-model="remedy.title">
-                    <textarea placeholder="Remedy description" id="form_description" name="description"
-                              class="remedyForm" rows="10" ng-model="remedy.description"></textarea>
-                        <input type="text" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm"
+
+
+
+                    <textarea placeholder="Remedy description" name="description"
+                              class="remedyForm" rows="10" ui-tinymce ng-model="remedy.description">
+                    </textarea>
+
+
+                        <input type="text" style="margin-top: 10px;" placeholder="Tags (Seperated by comma ',')" id="form_tags" class="remedyForm"
                                name="tags"
                                ng-model="remedy.tags">
                         <input type="text" placeholder="Diseases (Seperated by comma ',')" id="form_diseases"

@@ -24,6 +24,10 @@
 
     <link rel="stylesheet" href="./assets/css/form-elements.css">
 
+    <script src="scripts/tinymce/tinymce-basic.js"></script>
+    <script src="scripts/tinymce/tinymce.min.js"></script>
+    <script src="scripts/tinymce/tinymce.js"></script>
+
     <!-- Cuidar references -->
     <link href="styles/remedyFeed.css" rel="stylesheet"/>
     <script src="scripts/layouts.js"></script>
@@ -51,7 +55,7 @@
     <header class="mdl-layout__header" id="header" style="z-index:19999; position: fixed; top:0; left:0;">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title"><a href="/app">Medical Assistant v27.2.1645</a></span>
+            <span class="mdl-layout-title"><a href="/app">Medical Assistant v28.2.1634</a></span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
 
@@ -108,7 +112,7 @@
                                     <br/>
 
                                     <p style="margin:0; padding:3px; text-align: justify; background: #F8F8F8; font-size:0.9em;">
-                                        {{remedy.description | limitTo: 225}}{{remedy.description.length > 250 ?
+                                        {{remedy.description | htmlToPlaintext | limitTo: 225}}{{remedy.description.length > 250 ?
                                         '...':''}}
                                     </p>
                                     <i><span class="diseaseSpan">Diseases: {{remedy.diseases.toString()}}</span></i>
