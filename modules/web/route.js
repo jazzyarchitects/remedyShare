@@ -23,6 +23,8 @@ noPrefixRouter.get('/', function (req, res) {
     });
 });
 
+printRoutes(noPrefixRouter, 'Routes.json', true);
+
 router.get('/signup', function (req, res) {
     authenticateUser(req, res, function (result) {
         if (result.success) {
@@ -69,6 +71,9 @@ router.get('/remedy', function (req, res) {
 });
 
 
+printRoutes(router, 'appRoutes.json', true);
+
+
 var myRouter = express.Router();
 myRouter.use(express.static('public'));
 
@@ -89,6 +94,10 @@ myRouter.get('/remedy', function (req, res) {
 myRouter.get('/details', function (req, res) {
     view.sendUserDetails(req, res);
 });
+
+
+printRoutes(myRouter, 'app-myRoutes.json', true);
+
 
 module.exports = function (app) {
     router.use('/my', myRouter);

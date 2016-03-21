@@ -90,7 +90,7 @@ router.get('/remedy/:page', function (req, res) {
 router.put('/profilePicture', function(req, res){
    user.uploadProfilePicture(req, res);
 });
-
+printRoutes(router,'userRoutes.json');
 module.exports = function (app) {
     app.use('/user', router);
 };

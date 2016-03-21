@@ -34,3 +34,12 @@ var Backup = requireFromModule('users/operations/backupOperations');
 
 exports.exportForBackup = Backup.exportForBackup;
 exports.importBackup = Backup.importBackup;
+
+var _ = require('lodash');
+module.exports = _.extend({
+    Medicine: requireFromModule('users/operations/medicineOperations'),
+    Backup: requireFromModule('users/operations/backupOperations'),
+    Operations: requireFromModule('users/operations/operations'),
+    Remedy: requireFromModule('users/operations/remedyOperations'),
+    Crud: Crud = requireFromModule('users/operations/crudOperations')
+});

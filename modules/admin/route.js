@@ -25,7 +25,6 @@ router.get('/export', function(req, res){
    admin.exportDatabase(req, res);
 });
 
-
 module.exports = function (app) {
     app.use('/admin', router);
 };

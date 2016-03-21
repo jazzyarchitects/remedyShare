@@ -17,6 +17,8 @@ router.delete('/:id', function (req, res) {
     comments.deleteComment(req, res);
 });
 
+printRoutes(router,'commentsRoutes.json');
+
 module.exports = function (app) {
     app.use('/comment', router);
 };

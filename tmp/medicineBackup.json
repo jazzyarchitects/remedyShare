@@ -1,0 +1,77 @@
+{
+  "medicines": [
+    {
+      "dinner": "none",
+      "id": 1445163784346,
+      "icon": 54,
+      "customTime": {
+        "minute": -1,
+        "hour": -1
+      },
+      "days": {
+        "saturday": true,
+        "wednesday": true,
+        "friday": true,
+        "tuesday": true,
+        "thursday": true,
+        "monday": true,
+        "sunday": true
+      },
+      "breakfast": "after",
+      "name": "Embeta TM50",
+      "endDate": "indefinite",
+      "lunch": "none",
+      "notes": "",
+      "doctor": "0"
+    },
+    {
+      "dinner": "none",
+      "id": 1445163821302,
+      "icon": 54,
+      "customTime": {
+        "minute": -1,
+        "hour": -1
+      },
+      "days": {
+        "saturday": true,
+        "wednesday": true,
+        "friday": true,
+        "tuesday": true,
+        "thursday": true,
+        "monday": true,
+        "sunday": true
+      },
+      "breakfast": "none",
+      "name": "Clopitab A75",
+      "endDate": "indefinite",
+      "lunch": "after",
+      "notes": "",
+      "doctor": "0"
+    },
+    {
+      "dinner": "after",
+      "id": 1445163855759,
+      "icon": 54,
+      "customTime": {
+        "minute": -1,
+        "hour": -1
+      },
+      "days": {
+        "saturday": true,
+        "wednesday": true,
+        "friday": true,
+        "tuesday": true,
+        "thursday": true,
+        "monday": true,
+        "sunday": true
+      },
+      "breakfast": "none",
+      "name": "Tonact TG",
+      "endDate": "indefinite",
+      "lunch": "none",
+      "notes": "",
+      "doctor": "0"
+    }
+  ],
+  "doctors": []
+}

@@ -15,7 +15,6 @@ var multer = require('multer');
 var config = require('./config');
 var fs = require('fs');
 //var router=express.Router();
-var user= requireFromModule('users/views');
 
 
 module.exports = function (app) {

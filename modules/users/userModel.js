@@ -62,7 +62,7 @@ var UserSchema = new Schema({
     medicines: [{
         type: Schema.Types.ObjectId,
         required: false,
-        ref: 'MedicineDetail'
+        ref: 'Medicine'
     }],
     created_at: {
         type: Schema.Types.Date,

@@ -19,9 +19,6 @@ router.get('/all/:page', function (req, res) {
     Remedy.getAll(req, res);
 });
 
-/**
- * Checked
- */
 router.get('/:id', function (req, res) {
     Remedy.get(req, res);
 });
@@ -38,38 +35,23 @@ router.use(function (req, res, next) {
     }
 });
 
-/**
- * Checked
- */
 router.post('/', uploadImage, function (req, res) {
     Remedy.insert(req, res);
 });
 
-/**
- * Checked
- */
+
 router.put('/:id', uploadImage, function (req, res) {
     Remedy.update(req, res);
 });
 
-
-/**
- * Checked
- */
 router.delete('/:id', function (req, res) {
     Remedy.delete(req, res);
 });
 
-/**
- * Checked
- */
 router.put('/:id/upvote', function (req, res) {
     Remedy.upvote(req, res);
 });
 
-/**
- * Checked
- */
 router.put('/:id/downvote', function (req, res) {
     Remedy.downvote(req, res);
 });
@@ -78,50 +60,37 @@ router.put('/:id/bookmark', function (req, res) {
     Remedy.bookmarkRemedy(req, res);
 });
 
-/**
- * Checked
- */
 router.post('/:id/comment', function (req, res) {
     Remedy.insertComment(req, res);
 });
 
-/**
- * Checked
- */
 router.get('/diseases/:disease', function (req, res) {
     Remedy.findByDisease(req, res);
 });
 
-
-/**
- * Checked
- */
 router.get('/diseases/:disease/:page', function (req, res) {
     Remedy.findByDisease(req, res);
 });
 
-/**
- * Checked
- */
 router.get('/search/:query', function (req, res) {
     Remedy.searchRemedy(req, res);
 });
 
-/**
- * Checked
- */
 router.get('/search/:query/:page', function (req, res) {
     Remedy.searchRemedy(req, res);
 });
 
-router.put('/viewed/:id', function (req, res) {
+router.put('/view/:id', function (req, res) {
     Remedy.registerView(req, res);
 });
+
 
 router.post('/import', multer({'dest': './uploads/backups/'}).single('backup'), function (req, res) {
     Remedy.importFromJSON(req, res);
 });
 
+
+printRoutes(router,'remedyRoutes.json');
 
 module.exports = function (app) {
     app.use('/remedy', router);

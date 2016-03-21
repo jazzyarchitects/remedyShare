@@ -38,7 +38,13 @@ var successJSON = function (data) {
 };
 
 var errorJSON = function (errorCode, description, message) {
-    return {success: false, error: true, errorCode: errorCode || 501, description: description || "INTERNAL_USE_ONLY", message: message || "FOR_ADMIN_EMAIL_AT_:_JAZZY.ARCHITECTS@GMAIL.COM"};
+    return {
+        success: false,
+        error: true,
+        errorCode: errorCode || 501,
+        description: description || "INTERNAL_USE_ONLY",
+        message: message || "FOR_ADMIN_EMAIL_AT_:_JAZZY.ARCHITECTS@GMAIL.COM"
+    };
 };
 
 var authenticateUser = function (req, res, callback) {
@@ -48,9 +54,9 @@ var authenticateUser = function (req, res, callback) {
             var userCookie = JSON.parse(req.cookies.user);
             ckey = userCookie.key;
             cid = userCookie.id;
-        }catch (Err){
-            ckey=null;
-            cid=null;
+        } catch (Err) {
+            ckey = null;
+            cid = null;
         }
     }
 
@@ -64,9 +70,9 @@ var authenticateUser = function (req, res, callback) {
     if (key && id) {
         ClientOperations.authenticate(id, key, function (success, doc) {
             req.authenticated = success;
-            if(success) {
+            if (success) {
                 callback(successJSON({user: doc.user, admin: doc.admin}));
-            }else{
+            } else {
                 callback(errorJSON({}));
             }
         });
@@ -76,8 +82,13 @@ var authenticateUser = function (req, res, callback) {
     }
 };
 
+var printRoutes = function (router, outputFileName, isNotApi) {
+    fs.writeFileSync('./tmp/routes/'+(isNotApi?'':'api-')+(outputFileName || 'routes.json'), JSON.stringify(router.stack), 'utf-8')
+};
+
 exports.walk = walk;
 exports.requireFromModule = requireFromModule;
 exports.successJSON = successJSON;
 exports.errorJSON = errorJSON;
 exports.authenticateUser = authenticateUser;
+exports.printRoutes = printRoutes;

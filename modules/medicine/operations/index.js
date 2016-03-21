@@ -5,6 +5,5 @@ var _ = require('lodash');
 
 
 module.exports = _.extend({
-    Medicine: requireFromModule('medicine/operations/medicineOperations'),
-    MedicineDetails: requireFromModule('medicine/operations/medicineDetailsOperations')
+    Crud: requireFromModule('medicine/operations/crudOperations')
 });
