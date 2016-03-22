@@ -18,7 +18,7 @@ var deleteComment = function (user_id, comment_id, callback) {
                     if (result) {
                         RemedyOperations.deleteComment(comment_id, comment.remedy, function (result) {
                             if (result) {
-                                UserOperations.deleteComment(user_id, comment_id, function (result) {
+                                UserOperations.Operations.deleteComment(user_id, comment_id, function (result) {
                                     if (result) {
                                         callback(successJSON({deletedComment: true}));
                                     } else {

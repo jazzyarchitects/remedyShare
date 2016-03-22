@@ -30,7 +30,7 @@ var importDatabase = function (file, callback) {
                     callback(result);
                 });
             },function(callback){
-                UserOperations.importBackup(users, function(result){
+                UserOperations.Backup.importBackup(users, function(result){
                     if(result.success){
                         callback(null, true);
                         return;
@@ -61,7 +61,7 @@ var importDatabase = function (file, callback) {
 var exportDatabase = function (callback) {
     async.parallel([
         function (callback) {
-            UserOperations.exportForBackup(function (result) {
+            UserOperations.Backup.exportForBackup(function (result) {
                 if (result.success) {
                     callback(null, {key: "users", value: result.data});
                 } else {
@@ -101,6 +101,18 @@ var exportDatabase = function (callback) {
     });
 };
 
+
+var sendErrorLog = function(req, res){
+    fs.mkdir('./logFiles/', function(err){
+       if(err){
+           if(err.errorCode == EEXIST){
+
+           }
+       }
+    });
+};
+
+exports.sendErrorLog = sendErrorLog;
 
 exports.exportDatabase = exportDatabase;
 exports.importDatabase = importDatabase;

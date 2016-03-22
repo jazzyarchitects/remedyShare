@@ -10,14 +10,14 @@ var MedicineDetailSchema = new Schema({
         required: true
     },
     endDate: {
-        type: Schema.Types.Date,
-        required: false
-    },
-    note: {
         type: String,
         required: false
     },
-    doctors: {
+    notes: {
+        type: String,
+        required: false
+    },
+    doctor: {
         type: Schema.Types.ObjectId,
         required: false,
         ref: 'Doctor'
@@ -72,7 +72,13 @@ var MedicineDetailSchema = new Schema({
         type: Boolean,
         required: true,
         'default': true
-    }
+    },
+    appId:{
+        type: String,
+        required: true,
+        'default': '-1'
+    },
+    appDoctorId:String
 });
 
 

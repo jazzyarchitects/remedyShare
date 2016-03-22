@@ -14,7 +14,7 @@ var async = require('async');
 var insert = function (user, remedy, callback) {
     RemedyOperations.insert(user, remedy, function (result) {
         if (result.success) {
-            UserOperations.linkRemedy(user, result.remedy, function (success) {
+            UserOperations.Remedy.linkRemedy(user, result.remedy, function (success) {
                 if (!success) {
                     RemedyOperations.removeRemedy(remedy._id);
                     callback(errorJSON(501, "Error Linking remedy to user"));
@@ -52,7 +52,7 @@ var del = function (user, remedy_id, callback) {
             var remedy = result.data;
             var user = remedy.author._id;
             RemedyOperations.deactivateRemedy(remedy_id);
-            UserOperations.unlinkRemedy(user, remedy._id, function (success) {
+            UserOperations.Remedy.unlinkRemedy(user, remedy._id, function (success) {
                 if (success) {
                     callback(successJSON({deleted: true}));
                 } else {
@@ -67,13 +67,13 @@ var del = function (user, remedy_id, callback) {
 
 var upvote = function (user_id, remedy_id, callback) {
     RemedyOperations.upvote(user_id, remedy_id);
-    UserOperations.upvoteRemedy(user_id, remedy_id);
+    UserOperations.Remedy.upvoteRemedy(user_id, remedy_id);
     callback(successJSON({upvoted: true}));
 };
 
 var downvote = function (user_id, remedy_id, callback) {
     RemedyOperations.downvote(user_id, remedy_id);
-    UserOperations.downvoteRemedy(user_id, remedy_id);
+    UserOperations.Remedy.downvoteRemedy(user_id, remedy_id);
     callback(successJSON({downvoted: true}));
 };
 
@@ -85,7 +85,7 @@ var insertComment = function (user_id, remedy_id, comment, callback) {
             var finalComment = result.data;
             RemedyOperations.insertComment(finalComment._id, remedy_id, function (result) {
                 if (result.success) {
-                    UserOperations.addComment(user_id, finalComment._id, function (result) {
+                    UserOperations.Operations.addComment(user_id, finalComment._id, function (result) {
                         if (result.success) {
                             Comment.populate(finalComment,{
                                 path: "author",
@@ -159,7 +159,7 @@ var bookmarkRemedy = function(user_id, remedy_id, callback){
       RemedyOperations.bookmarkRemedy(user_id, remedy_id, callback);
   };
     var userBookmark = function(callback){
-        UserOperations.bookmarkRemedy(user_id, remedy_id, callback);
+        UserOperations.Remedy.bookmarkRemedy(user_id, remedy_id, callback);
     };
 
     async.parallel([remedyBookmark, userBookmark], function(errs, results){

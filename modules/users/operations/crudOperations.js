@@ -14,21 +14,25 @@ var signUp = function (userDetails, callback) {
             callback(errorJSON(601, "INVALID_DATA_PASSED", "EMAIL_OR_MOBILE_REGISTERED"));
         } else {
             var user = new User(userDetails);
-            Hash.hash(user, user.created_at.toString(), function (result) {
-                if (result.success) {
-                    user.password = result.hash;
+            try {
+                Hash.hash(user, us/remedyser.created_at.toString(), function (result) {
+                    if (result.success) {
+                        user.password = result.hash;
 
-                    user.save(function (err) {
-                        if (err) {
-                            callback(errorJSON(501, err));
-                        } else {
-                            callback(successJSON(user))
-                        }
-                    });
-                } else {
-                    callback(errorJSON(501, result.error));
-                }
-            });
+                        user.save(function (err) {
+                            if (err) {
+                                callback(errorJSON(501, err));
+                            } else {
+                                callback(successJSON(user))
+                            }
+                        });
+                    } else {
+                        callback(errorJSON(501, result.error));
+                    }
+                });
+            }catch (e){
+                errorJSON(601,"mongo error-invalid signup parameters", e);
+            }
         }
     });
 };

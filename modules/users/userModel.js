@@ -64,6 +64,11 @@ var UserSchema = new Schema({
         required: false,
         ref: 'Medicine'
     }],
+    doctors: [{
+        type: Schema.Types.ObjectId,
+        required: false,
+        ref: 'Doctor'
+    }],
     created_at: {
         type: Schema.Types.Date,
         required: true,
@@ -97,8 +102,8 @@ var UserSchema = new Schema({
                     downvote: Number
                 }
             },
-            bookmarks:{
-                type:{
+            bookmarks: {
+                type: {
                     remedies: Number
                 }
             }
@@ -117,8 +122,8 @@ var UserSchema = new Schema({
                 upvotes: 0,
                 downvotes: 0
             },
-            bookmarks:{
-                remedies:0
+            bookmarks: {
+                remedies: 0
             }
         }
     },
@@ -128,19 +133,19 @@ var UserSchema = new Schema({
             path: String,
             url: String
         },
-        'default':{
+        'default': {
             filename: "",
-            path:"",
+            path: "",
             url: ""
         }
     },
-    bookmarks:{
-      type:{
-          remedies: [{
-              type:Schema.Types.ObjectId,
-              ref: 'Remedy'
-          }]
-      }
+    bookmarks: {
+        type: {
+            remedies: [{
+                type: Schema.Types.ObjectId,
+                ref: 'Remedy'
+            }]
+        }
     },
     remedyVotes: {
         type: {
@@ -175,21 +180,21 @@ var UserSchema = new Schema({
         },
         select: false
     },
-    settings:{
-        notification:{
+    settings: {
+        notification: {
             type: Boolean,
             'default': false
         },
-        popup:{
+        popup: {
             type: Boolean,
             'default': false
         },
-        timings:{
-            beforeBreakfast:{
+        timings: {
+            beforeBreakfast: {
                 type: String,
                 'default': "08:00"
             },
-            afterBreakfast:{
+            afterBreakfast: {
                 type: String,
                 'default': "10:00"
             },
@@ -201,18 +206,17 @@ var UserSchema = new Schema({
                 type: String,
                 'default': "14:00"
             },
-            beforeDinner:{
+            beforeDinner: {
                 type: String,
                 'default': "20:00"
             },
-            afterDinner:{
+            afterDinner: {
                 type: String,
                 'default': "22:00"
             }
         }
     }
 });
-
 
 
 module.exports = mongoose.model('User', UserSchema);

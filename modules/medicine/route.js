@@ -5,6 +5,14 @@ var express = require('express');
 var router = express.Router();
 var control = requireFromModule('medicine/controllers');
 
+router.use(function (req, res, next) {
+    if (req.authenticated === false) {
+        res.json(errorJSON(602, "AUTHENTICATION_ERROR", "USER_KEY_NOT_PROVIDED"));
+    } else {
+        next();
+    }
+});
+
 router.post('/multiple', function (req, res) {
     control.createMultipleMedicines(req, res);
 });

@@ -13,7 +13,7 @@ function getMedicine(req) {
         var temp = JSON.parse(req.body.medicine);
         medicine.name = temp.name;
         medicine.endDate = temp.endDate;
-        medicine.note = temp.notes;
+        medicine.notes = temp.notes;
         medicine.days = JSON.parse(temp.days);
         medicine.timings = {};
         medicine.timings.breakfast = temp.breakfast;
@@ -21,11 +21,12 @@ function getMedicine(req) {
         medicine.timings.dinner = temp.dinner;
         medicine.timings.custom = temp.custom.hour + ":" + temp.custom.minute;
         medicine.icon = temp.icon;
+        medicine.appId = temp.id;
         medicine.user = req.user;
     } else {
         medicine.name = req.body.name;
         medicine.endDate = req.body.endDate;
-        medicine.note = req.body.notes;
+        medicine.notes = req.body.notes;
         medicine.days = JSON.parse(req.body.days);
         medicine.timings = {};
         medicine.timings.breakfast = req.body.breakfast;
@@ -33,6 +34,7 @@ function getMedicine(req) {
         medicine.timings.dinner = req.body.dinner;
         medicine.timings.custom = req.body.custom.hour + ":" + req.body.custom.minute;
         medicine.icon = req.body.icon;
+        medicine.appId = req.body.id;
         medicine.user = req.user;
     }
 
@@ -44,12 +46,13 @@ function getMedicinesFromObject(req, temp) {
     var medicine = {};
     medicine.name = temp.name;
     medicine.endDate = temp.endDate;
-    medicine.note = temp.notes;
+    medicine.notes = temp.notes;
     medicine.days = JSON.parse(temp.days);
     medicine.timings = {};
     medicine.timings.breakfast = temp.breakfast;
     medicine.timings.lunch = temp.lunch;
     medicine.timings.dinner = temp.dinner;
+    medicine.appId = temp.id;
     medicine.timings.custom = temp.custom.hour + ":" + temp.custom.minute;
     medicine.icon = temp.icon;
     medicine.user = req.user;

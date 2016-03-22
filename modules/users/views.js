@@ -140,6 +140,17 @@ var getSelfProfile = function(req, res){
   });
 };
 
+var uploadAppData = function(req, res){
+    control.uploadAppData(req, function(result){
+        res.json(successJSON());
+    });
+};
+
+var downloadAppData = function(req, res){
+    control.downloadAppData(req, function(result){
+        res.json(result);
+    });
+};
 
 exports.signUp = signup;
 exports.login = login;
@@ -152,3 +163,5 @@ exports.uploadProfilePicture = uploadProfilePicture;
 exports.logout = logout;
 exports.loginSocial = loginSocial;
 exports.getSelfProfile = getSelfProfile;
+exports.uploadAppData =uploadAppData;
+exports.downloadAppData  = downloadAppData;

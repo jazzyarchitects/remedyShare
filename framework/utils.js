@@ -38,6 +38,13 @@ var successJSON = function (data) {
 };
 
 var errorJSON = function (errorCode, description, message) {
+    //console.log("Error: " + JSON.stringify({
+    //        error: true,
+    //        errorCode: errorCode || 501,
+    //        description: description || "INTERNAL_USE_ONLY",
+    //        message: message || "FOR_ADMIN_EMAIL_AT_:_JAZZY.ARCHITECTS@GMAIL.COM"
+    //    }));
+    createErrorLog(description, message);
     return {
         success: false,
         error: true,
@@ -46,6 +53,14 @@ var errorJSON = function (errorCode, description, message) {
         message: message || "FOR_ADMIN_EMAIL_AT_:_JAZZY.ARCHITECTS@GMAIL.COM"
     };
 };
+
+function createErrorLog(description, message) {
+    var fileName = (new Date()).getTime().toString();
+    var data = "{\"errror\":{\"description\":\"" + description + "\",\"message\":" + JSON.stringify(message)+"}}";
+    fs.writeFile('./logFiles/' + fileName + '.json', data, {flag: 'w'}, function (err) {
+        console.log(err);
+    });
+}
 
 var authenticateUser = function (req, res, callback) {
     var ckey, cid;
@@ -83,7 +98,7 @@ var authenticateUser = function (req, res, callback) {
 };
 
 var printRoutes = function (router, outputFileName, isNotApi) {
-    fs.writeFileSync('./tmp/routes/'+(isNotApi?'':'api-')+(outputFileName || 'routes.json'), JSON.stringify(router.stack), 'utf-8')
+    fs.writeFileSync('./tmp/routes/' + (isNotApi ? '' : 'api-') + (outputFileName || 'routes.json'), JSON.stringify(router.stack), 'utf-8')
 };
 
 exports.walk = walk;

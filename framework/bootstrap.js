@@ -79,8 +79,6 @@ module.exports = function (config) {
                     error: 601,
                     message: "Service UnAuthorised. Please contact system admin at jazzyarchitects@gmail.com"
                 });
-                //req.service="unauthorised";
-                //next();
             }
         });
     }
@@ -98,6 +96,7 @@ module.exports = function (config) {
         requireFromModule('comments/route')(router);
         requireFromModule('admin/route')(router);
         requireFromModule('medicine/route')(router);
+        requireFromModule('doctors/route')(router);
         app.use('/api', router);
 
         processRoutes();
@@ -172,6 +171,14 @@ module.exports = function (config) {
 
         });
     }
+
+    function createLogFolder(){
+        if(!fs.existsSync('./logFiles')){
+            fs.mkdirSync('./logFiles');
+        }
+    }
+
+    createLogFolder();
 
 
     return app;

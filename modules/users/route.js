@@ -33,6 +33,7 @@ router.get('/', function (req, res) {
 });
 
 
+
 router.get('/:id', function(req, res){
     if(req.params.id.toString() === "full"){
         user.getSelfProfile(req, res);
@@ -49,6 +50,15 @@ router.use(function (req, res, next) {
     } else {
         next();
     }
+});
+
+
+router.get('/app/downloadApp', function(req, res){
+    user.downloadAppData(req, res);
+});
+
+router.post('/app/uploadApp', function(req, res){
+    user.uploadAppData(req, res);
 });
 
 //router.get('/full', function(req, res){
@@ -90,6 +100,9 @@ router.get('/remedy/:page', function (req, res) {
 router.put('/profilePicture', function(req, res){
    user.uploadProfilePicture(req, res);
 });
+
+
+
 printRoutes(router,'userRoutes.json');
 module.exports = function (app) {
     app.use('/user', router);

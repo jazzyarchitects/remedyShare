@@ -6,9 +6,12 @@
 var path = requireFromModule('path');
 var UserOperations = requireFromModule('users/operations');
 var ClientOperations = requireFromModule('clients/operations');
+var MedicineOperations = requireFromModule('medicine/operations');
+var DoctorOperations = requireFromModule('doctors/operations');
+var async = require('async');
 
 var signUp = function (user, service, callback) {
-    UserOperations.signUp(user, function (resultUser) {
+    UserOperations.Crud.signUp(user, function (resultUser) {
         //console.log(result);
         if (resultUser.success) {
             ClientOperations.createNewClient(resultUser.data, service, function (result) {
@@ -40,12 +43,12 @@ function loginCallback(result1, service, callback) {
 
 var login = function (user, service, callback) {
     if (user.email) {
-        UserOperations.loginWithEmail(user, function (result) {
+        UserOperations.Crud.loginWithEmail(user, function (result) {
             //console.log(result);
             loginCallback(result, service, callback);
         });
     } else if (user.mobile) {
-        UserOperations.loginWithMobile(user, function (result) {
+        UserOperations.Crud.loginWithMobile(user, function (result) {
             loginCallback(result, service, callback);
         });
     } else {
@@ -54,13 +57,13 @@ var login = function (user, service, callback) {
 };
 
 var update = function (user, callback) {
-    UserOperations.updateUser(user, function (result) {
+    UserOperations.Crud.updateUser(user, function (result) {
         callback(result);
     });
 };
 
 var del = function (user, callback) {
-    UserOperations.delete(user, function (result) {
+    UserOperations.Crud.delete(user, function (result) {
         if (result.success) {
             ClientOperations.logout(user, function (result) {
                 if (result.success) {
@@ -74,15 +77,15 @@ var del = function (user, callback) {
 };
 
 var remedyList = function (user_id, page, callback) {
-    UserOperations.getRemedyList(user_id, page, function (result) {
+    UserOperations.Remedy.getRemedyList(user_id, page, function (result) {
         callback(result);
     });
 };
 
 var getUserData = function (user_id, callback) {
-        UserOperations.getUserData(user_id, function (result) {
-            callback(result);
-        });
+    UserOperations.Operations.getUserData(user_id, function (result) {
+        callback(result);
+    });
 };
 
 var logout = function (user, callback) {
@@ -94,13 +97,13 @@ var logout = function (user, callback) {
 };
 
 var uploadProfilePicture = function (user, file, callback) {
-    UserOperations.linkProfilePicture(user, file, function (result) {
+    UserOperations.Operations.linkProfilePicture(user, file, function (result) {
         callback(result);
     });
 };
 
 var loginSocial = function (stream, accessToken, callback) {
-    UserOperations.loginSocial(stream, accessToken, function (resultUser) {
+    UserOperations.Crud.loginSocial(stream, accessToken, function (resultUser) {
         if (resultUser.success) {
             ClientOperations.createNewClient(resultUser.data, "social", function (result) {
                 if (result.error) {
@@ -117,8 +120,95 @@ var loginSocial = function (stream, accessToken, callback) {
 };
 
 var getUserProfile = function (user_id, callback) {
-    UserOperations.getUserProfile(user_id, callback);
+    UserOperations.Operations.getUserProfile(user_id, callback);
 };
+
+var uploadAppData = function (req, callback) {
+    var data = JSON.parse(req.body.data);
+
+    var importMedicineFunction = function (callback) {
+        MedicineOperations.Crud.importFromAppBackup(data.medicines, req.user, function (errs, medicines) {
+            callback();
+        });
+    };
+
+    var importDoctorFunction = function (callback) {
+        DoctorOperations.Crud.importFromAppBackup(data.doctors, req.user, function (errs, doctors) {
+            callback()
+        });
+    };
+
+    var linkDoctorsToMedicine = function (callback) {
+        MedicineOperations.Doctors.linkDoctorsFromBackup(req.user, function (errs, results) {
+            callback();
+        });
+    };
+
+    var linkMedicinetoDoctors = function (callback) {
+        DoctorOperations.Medicines.linkMedicinesFromBackup(req.user, function (errs, results) {
+            callback();
+        });
+    };
+
+    var linkMedicinesToUsers = function (callback) {
+        UserOperations.Medicine.linkMedicinesToUserFromAppBackup(req.user, function (errs, results) {
+            callback();
+        });
+    };
+
+    var linkDoctorsToUser = function (callback) {
+        UserOperations.Doctor.linkDoctorsToUserFromAppBackup(req.user, function (errs, results) {
+            callback();
+        });
+    };
+
+    async.waterfall([importMedicineFunction,
+            importDoctorFunction,
+            linkDoctorsToMedicine,
+            linkMedicinetoDoctors,
+            linkMedicinesToUsers,
+            linkDoctorsToUser
+        ],
+        function (err, result) {
+            //console.log("Importing data form backup: \n errors: "+JSON.stringify(err)+" \n Result: "+JSON.stringify(result));
+            callback(result);
+        })
+
+};
+
+
+var downloadAppData = function (req, callback) {
+    async.parallel([function (callback) {
+        MedicineOperations.Backup.exportForApp(req.user, function (result) {
+            if (result.success) {
+                //console.log("Medicine Operations backup export for App  in user controller: "+JSON.stringify(result));
+                callback(null, result.data);
+            } else {
+                callback(result, null);
+            }
+        });
+    }, function (callback) {
+        DoctorOperations.Backup.exportForApp(req.user, function (result) {
+            if (result.success) {
+                //console.log("Doctor Operations backup export for App  in user controller: "+JSON.stringify(result));
+                callback(null, result.data);
+            } else {
+                callback(result, null);
+            }
+        });
+    }], function (errs, results) {
+        var noError = true;
+        if (errs && (errs[0] || errs[1])) {
+            noError = false;
+        }
+        if (noError) {
+            callback(successJSON({medicines: results[0], doctors: results[1]}));
+        } else {
+            callback(errorJSON({error1: errs[0], error2: errs[1]}));
+        }
+    });
+};
+
 
 exports.signUp = signUp;
 exports.login = login;
@@ -130,3 +220,5 @@ exports.logout = logout;
 exports.uploadProfilePicture = uploadProfilePicture;
 exports.loginSocial = loginSocial;
 exports.getUserProfile = getUserProfile;
+exports.uploadAppData = uploadAppData;
+exports.downloadAppData = downloadAppData;

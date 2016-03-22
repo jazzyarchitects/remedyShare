@@ -25,6 +25,13 @@ router.get('/export', function(req, res){
    admin.exportDatabase(req, res);
 });
 
+router.get('/errorLog', function(req, res){
+
+});
+
+
+printRoutes(router, 'adminRoutes.json');
+
 module.exports = function (app) {
     app.use('/admin', router);
 };

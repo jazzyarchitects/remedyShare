@@ -13,7 +13,11 @@ var PAGE_LIMIT = 5;
 
 var getUserData = function (user_id, callback) {
     if(!mongoose.Types.ObjectId.isValid(user_id)){
-        user_id=mongoose.Types.ObjectId(user_id);
+        try {
+            user_id = mongoose.Types.ObjectId(user_id);
+        }catch (e){
+            errorJSON(602, "Mongo error - invalid objectId: /user/operations/operations/getUserData", e);
+        }
     }
     User.findOne({_id: user_id}, function (err, doc) {
         //console.log("UserOperations: "+JSON.stringify(doc)+ " \nfor user:"+user_id);
