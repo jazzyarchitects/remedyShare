@@ -1,7 +1,10 @@
 language: node_js
 node_js:
 - 0.8
-before_install: npm install -g npm
+before_install: 
+- npm install -g npm
+- npm install -g forever
+              
 deploy:
   provider: openshift
   user: jibinmathews7@gmail.com
