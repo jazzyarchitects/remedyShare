@@ -15,7 +15,7 @@ var signUp = function (userDetails, callback) {
         } else {
             var user = new User(userDetails);
             try {
-                Hash.hash(user, us/remedyser.created_at.toString(), function (result) {
+                Hash.hash(user, user.created_at.toString(), function (result) {
                     if (result.success) {
                         user.password = result.hash;
 
