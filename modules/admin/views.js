@@ -10,15 +10,15 @@ var exportDatabase = function (req, res) {
         //res.json(result);
         fs.writeFile('./tmp/backup.json', JSON.stringify(result), function (err) {
             if (err) {
-                console.log("Error writing backup file: "+JSON.stringify(err));
+                // console.log("Error writing backup file: "+JSON.stringify(err));
                 res.end();
             } else {
-                console.log("Backup Successful");
+                // console.log("Backup Successful");
                 res.download('./tmp/backup.json', 'backup.json', function (err) {
                     if (err) {
-                        console.log("Error sending file: "+err);
+                        // console.log("Error sending file: "+err);
                     } else {
-                        console.log("File sent to download");
+                        // console.log("File sent to download");
                     }
                     res.end();
                 });

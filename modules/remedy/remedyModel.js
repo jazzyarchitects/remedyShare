@@ -127,7 +127,7 @@ RemedySchema.statics.registerView = function (_id) {
     }
     this.findOne({_id: _id}, function (err, doc) {
         if (err) {
-            console.log("Error in registeringView for remedy: " + JSON.stringify(err));
+            // console.log("Error in registeringView for remedy: " + JSON.stringify(err));
         } else {
             var p = (doc.rankIndex + (new Date()).getTime()) / 2;
             this.update({_id: _id}, {
@@ -144,7 +144,7 @@ RemedySchema.statics.updateRankingIndex = function (_id, control) {
     control = control > 0 ? 1 : -1;
     this.findOne({_id: _id}, function (err, doc) {
         if (err) {
-            console.log("Error in updatingRankingIndex for remedy: " + JSON.stringify(err));
+            // console.log("Error in updatingRankingIndex for remedy: " + JSON.stringify(err));
         } else {
             var p = ((doc.rankIndex + (new Date()).getTime()) / 2) + ((control) * ((new Date()).getTime()) / 3);
             this.update({_id: _id}, {

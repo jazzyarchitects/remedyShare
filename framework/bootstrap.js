@@ -99,7 +99,9 @@ module.exports = function (config) {
         requireFromModule('doctors/route')(router);
         app.use('/api', router);
 
-        processRoutes();
+        if(process.env.NODE_ENV === 'development' || !process.env.NODE_ENV){
+            processRoutes();
+        }
     }
 
     bootstrapRoutes();
@@ -109,6 +111,8 @@ module.exports = function (config) {
         var string = "";
         fs.readdir(dirName, function (err, fileNames) {
             if (err) {
+                fs.mkdirSync(dirName);
+                return processRoutes(dir);
                 console.log("Error in storing routes");
             } else {
                 console.log("FileNames: " + JSON.stringify(fileNames));

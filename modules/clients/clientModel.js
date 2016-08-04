@@ -47,7 +47,7 @@ clientSchema.pre('save', function (next, done) {
                             service: self.service
                         });
                         client.save(function (err, doc) {
-                            console.log("ClientSchema: saving: err:" + JSON.stringify(err)+" success: "+JSON.stringify(doc));
+                            // console.log("ClientSchema: saving: err:" + JSON.stringify(err)+" success: "+JSON.stringify(doc));
                             if (err) {
                                 this.invalidate("_id", "unable to save");
                                 done(err);
@@ -63,7 +63,7 @@ clientSchema.pre('save', function (next, done) {
                 next();
             }
         } else {
-            console.log("ClientSchema: Error saving");
+            // console.log("ClientSchema: Error saving");
             next();
         }
     })

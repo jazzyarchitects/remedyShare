@@ -7,12 +7,12 @@ var walk = function (moduleDirectory, walkDirectory, callback) {
     if (!callback) {
         callback = requireFromModule;
     }
-    console.log(moduleDirectory);
+    // console.log(moduleDirectory);
     fs.readdirSync(moduleDirectory).forEach(function (dir) {
         var dirPath = path.join(moduleDirectory, dir);
         var dirStat = fs.statSync(dirPath);
         if (dirStat.isDirectory()) {
-            console.log(dirStat);
+            // console.log(dirStat);
             var walkPath = path.join(dirPath, walkDirectory);
             fs.readdirSync(walkPath).forEach(function (file) {
                 var filePath = path.join(walkPath, file);
@@ -58,7 +58,7 @@ function createErrorLog(description, message) {
     var fileName = (new Date()).getTime().toString();
     var data = "{\"errror\":{\"description\":\"" + description + "\",\"message\":" + JSON.stringify(message)+"}}";
     fs.writeFile('./logFiles/' + fileName + '.json', data, {flag: 'w'}, function (err) {
-        console.log(err);
+        // console.log(err);
     });
 }
 
@@ -98,7 +98,9 @@ var authenticateUser = function (req, res, callback) {
 };
 
 var printRoutes = function (router, outputFileName, isNotApi) {
-    fs.writeFileSync('./tmp/routes/' + (isNotApi ? '' : 'api-') + (outputFileName || 'routes.json'), JSON.stringify(router.stack), 'utf-8')
+    if(process.env.NODE_ENV==="development" || !process.env.NODE_ENV){
+        fs.writeFileSync('./tmp/routes/' + (isNotApi ? '' : 'api-') + (outputFileName || 'routes.json'), JSON.stringify(router.stack), 'utf-8')
+    };
 };
 
 exports.walk = walk;

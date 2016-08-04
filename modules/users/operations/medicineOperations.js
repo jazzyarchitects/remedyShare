@@ -29,9 +29,9 @@ var linkMedicines = function (medicines, user_id, callback) {
             callback(err, result)
         });
     }, function (errs, results) {
-        console.log("Linking medicines: " + JSON.stringify(errs) + " \n\n" + JSON.stringify(results));
+        // console.log("Linking medicines: " + JSON.stringify(errs) + " \n\n" + JSON.stringify(results));
         if (errs) {
-            console.log("Linking medicines: Error: " + JSON.stringify(errs));
+            // console.log("Linking medicines: Error: " + JSON.stringify(errs));
             callback(errorJSON(601, "mongo-errors", errs));
         } else {
             callback(successJSON(results));

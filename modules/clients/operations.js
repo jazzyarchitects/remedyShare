@@ -79,7 +79,7 @@ var logout = function (user, callback) {
 var exportForBackup = function(callback){
   Client.find({}, function(err, doc){
      if(err){
-         console.log("Error exporting clients:" +err);
+         // console.log("Error exporting clients:" +err);
          callback(errorJSON(501, "GENERAL_ERROR_-_CLIENT_EXPORT", err));
      } else{
          callback(successJSON(doc));
@@ -90,7 +90,7 @@ var exportForBackup = function(callback){
 var importBackup = function(clients, callback){
     Client.create(clients, function(err, doc){
         if(err){
-            console.log("Erorr importing clients: "+JSON.stringify(err));
+            // console.log("Erorr importing clients: "+JSON.stringify(err));
             callback(errorJSON(501,"ERROR_IMPORTING_CLIENT_BACKUP", err));
         } else{
             callback({success: true});

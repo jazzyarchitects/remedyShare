@@ -19,7 +19,7 @@ var importFromJSON = function (user, remedies, callback) {
         remedy = new Remedy(remedyObject);
         remedy.save(function (err, doc) {
             if (err) {
-                console.log("Error importing: " + JSON.stringify(err));
+                //console.log("Error importing: " + JSON.stringify(err));
             }
             asyncCallback();
         });
@@ -41,7 +41,7 @@ var importFromJSON = function (user, remedies, callback) {
 var exportForBackup = function (callback) {
     Remedy.find({}, function (err, doc) {
         if(err){
-            console.log("Error Exporting Remedy: "+JSON.stringify(err));
+            //console.log("Error Exporting Remedy: "+JSON.stringify(err));
             callback(errorJSON(501, "GENERAL_ERROR_-_EXPORTING_REMEDY", err));
         }else{
             for(var i=0;i<doc.length;i++){
@@ -57,7 +57,7 @@ var exportForBackup = function (callback) {
 var importBackup = function(remedies, callback){
     Remedy.create(remedies, function(err, doc){
         if(err){
-            console.log("Erorr importing remedies: "+JSON.stringify(err));
+            //console.log("Erorr importing remedies: "+JSON.stringify(err));
             callback(errorJSON(501,"GENERAL_ERROR_-_ERROR_IMPORTING_REMEDY_BACKUP", err));
         } else{
             callback({success: true});

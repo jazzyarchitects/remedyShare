@@ -1,7 +1,3 @@
-/*
-    Author : Akas Antony
-    Date : 03/06/2015
-*/
 'use strict'
 var jwt    = require('jsonwebtoken');
 

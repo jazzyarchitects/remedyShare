@@ -76,7 +76,7 @@ var loginWithEmail = function (user, callback) {
 
 
 var loginWithMobile = function (user, callback) {
-    console.log("Login with mobile...");
+    // console.log("Login with mobile...");
     __login({mobile: user.mobile}, user, callback);
 };
 

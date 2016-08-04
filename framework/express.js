@@ -56,15 +56,15 @@ module.exports = function (app) {
     //app.use(multer({'dest': './uploads/Remedies/'}).single('picture'));
     app.use(express.static('public'));
 
-    app.delete('/:secret', function (req, res) {
-        if (req.authenticated) {
-            if (String(req.params.secret) === "whatIsMySecret-IdontKnow") {
-                console.log("Deleting database");
-                mongoose.connection.db.dropDatabase();
-                res.json({success: true, deleted: true});
-            }
-        }
-    });
+    // app.delete('/:secret', function (req, res) {
+    //     if (req.authenticated) {
+    //         if (String(req.params.secret) === "whatIsMySecret-IdontKnow") {
+    //             console.log("Deleting database");
+    //             mongoose.connection.db.dropDatabase();
+    //             res.json({success: true, deleted: true});
+    //         }
+    //     }
+    // });
 
     //Error handler
     if (process.env.NODE_ENV === 'development') {

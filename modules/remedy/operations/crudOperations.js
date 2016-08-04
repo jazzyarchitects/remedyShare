@@ -21,7 +21,7 @@ var insert = function (user, remedy, callback) {
 
 var remove = function (remedy_id) {
     Remedy.remove({_id: remedy_id}, function (err, doc) {
-        console.log("removing remedy: " + JSON.stringify(doc));
+        // console.log("removing remedy: " + JSON.stringify(doc));
     });
 };
 

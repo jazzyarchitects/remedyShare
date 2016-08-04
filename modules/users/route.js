@@ -15,16 +15,6 @@ router.post('/signup', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-    //console.log('User Login');
-    var email = req.body.email;
-    var password = req.body.password;
-    
-    if(email === 'assignment@rentomojo.com' && password === "Rentomojo123@"){
-        res.json({success: true});
-    }else if(email === '7417417412' && password === "Rentomojo123@"){
-        res.json({success: true});
-    }
-    
     user.login(req, res);
 });
 
