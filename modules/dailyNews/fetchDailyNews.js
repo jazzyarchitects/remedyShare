@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var config = require('../../config/development');
-mongoose.connect(config.db.uri, config.db.options);
+// mongoose.connect(config.db.uri, config.db.options);
 var DailyNews = require('./model');
 var request = require('request');
 var async = require('async');
@@ -103,7 +103,9 @@ var fetchDailyNews = function(){
 
 
 // exports.fetchDailyNews = fetchDailyNews;
-fetchDailyNews()
-.then(function(){
-  process.exit(1);
-});
+// fetchDailyNews()
+// .then(function(){
+//   process.exit(1);
+// });
+
+module.exports = fetchDailyNews;

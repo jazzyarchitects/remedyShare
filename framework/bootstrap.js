@@ -73,7 +73,6 @@ module.exports = function (config) {
                 }
             }
             else {
-                /**UnComment the following before deployment TODO:*/
                 res.json({
                     success: false,
                     error: 601,
@@ -97,6 +96,7 @@ module.exports = function (config) {
         requireFromModule('admin/route')(router);
         requireFromModule('medicine/route')(router);
         requireFromModule('doctors/route')(router);
+        requireFromModule('dailyNews/route')(router);
         app.use('/api', router);
 
         if(process.env.NODE_ENV === 'development' || !process.env.NODE_ENV){
