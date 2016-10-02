@@ -66,6 +66,14 @@ module.exports = function (app) {
     //     }
     // });
 
+    app.get("/cv/jibin",function(req, res, next){
+        res.redirect("https://drive.google.com/file/d/0B1cWZGp8N63McEpWQXNDSlhYNFE/view?usp=sharing");
+    });
+
+    app.get("/cv/aanisha", function(req, res, next){
+        res.redirect("https://drive.google.com/file/d/0B1cWZGp8N63MMDBpSDhLNlN5aFk/view?usp=sharing");
+    });
+
     //Error handler
     if (process.env.NODE_ENV === 'development') {
         app.use(errorHandler());
