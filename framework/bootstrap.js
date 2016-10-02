@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var utils = require('./utils');
 var fs = require('fs');
+var Log = require('jlogger');
 var path = require('path');
 
 var moduleDir = './modules';
@@ -20,7 +21,13 @@ console.log("Hello!!!");
 
 module.exports = function (config) {
     global.app = express();
+    global.Log = Log;
     require('./express')(app);
+
+    Log.setGlobalConfig({
+        'defaultTag': 'RemedyShare',
+        'projectName': 'RemedyShare'
+    });
 
     //Connect to the database with given db url and options
     function connectDb() {
@@ -84,12 +91,14 @@ module.exports = function (config) {
 
 
     function bootstrapRoutes() {
+        Log.i("Bootstrap.js", "Bootstrapping routes");
         var router = express.Router();
         requireFromModule('web/route')(app);
         requireFromModule('images/route')(app);
 
         apiAuthentication(app);
 
+        Log.w("Setting api authentication for routes");
         requireFromModule('users/route')(router);
         requireFromModule('remedy/route')(router);
         requireFromModule('comments/route')(router);

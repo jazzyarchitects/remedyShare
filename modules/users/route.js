@@ -7,6 +7,14 @@ var express = require('express');
 var remedy = requireFromModule('remedy/views');
 var router = express.Router();
 var multer=require('multer');
+
+var Log2 = require('jlogger');
+var Logger = new Log2.Logger({
+    'defaultTag': 'UserModule',
+    'tagBold': true,
+    'showHrTimestamp': true
+});
+
 router.use(multer({'dest': './uploads/images/users/'}).single('image'));
 
 router.post('/signup', function (req, res) {
@@ -50,6 +58,9 @@ router.use(function (req, res, next) {
         next();
     }
 });
+
+Logger.e("User routes");
+Logger.hr();
 
 
 router.get('/app/downloadApp', function(req, res){
