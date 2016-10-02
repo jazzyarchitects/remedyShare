@@ -1,0 +1,22 @@
+Hello!!!
+****************Medical Assistant is now live!****************
+Config: {"hrChar":"-","hrColor":"blue","showHrTimestamp":false,"projectName":"reviewit-server","projectRoot":"/home/jibin/Documents/NodeJS/remedyShare/"}
+07-09 23:19:40:207 framework/bootstrap.js : Bootstrap.js : Bootstrapping routes
+Config: {"hrChar":"-","hrColor":"blue","showHrTimestamp":false,"projectName":"reviewit-server","projectRoot":"/home/jibin/Documents/NodeJS/remedyShare/"}
+07-09 23:19:40:240 framework/bootstrap.js : RemedyShare : Setting api authentication for routes
+Config: {"defaultTag":"UserModule","tagBold":true,"showHrTimestamp":true,"projectName":"reviewit-server","projectRoot":"/home/jibin/Documents/NodeJS/remedyShare/"}
+07-09 23:19:40:759 modules/users/route.js : UserModule : User routes
+
+Listening on 127.0.0.1, server_port 3000
+FileNames: ["Routes.json","api-adminRoutes.json","api-commentsRoutes.json","api-dailyNewsRoutes.json","api-doctorRoutes.json","api-imageRoutes.json","api-medicineRoutes.json","api-remedyRoutes.json","api-userRoutes.json","app-myRoutes.json","appRoutes.json"]
+Iterations: Routes.json compare to appRoutes.json
+Iterations: api-adminRoutes.json compare to appRoutes.json
+Iterations: api-dailyNewsRoutes.json compare to appRoutes.json
+Iterations: api-commentsRoutes.json compare to appRoutes.json
+Iterations: api-doctorRoutes.json compare to appRoutes.json
+Iterations: api-imageRoutes.json compare to appRoutes.json
+Iterations: api-medicineRoutes.json compare to appRoutes.json
+Iterations: api-remedyRoutes.json compare to appRoutes.json
+Iterations: api-userRoutes.json compare to appRoutes.json
+Iterations: appRoutes.json compare to appRoutes.json
+Iterations: app-myRoutes.json compare to appRoutes.json

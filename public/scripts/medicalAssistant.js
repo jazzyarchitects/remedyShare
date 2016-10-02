@@ -41,8 +41,8 @@ $(document).ready(function (e) {
         $("#smileImage1").prop("src", "images/ic_action_emo_basic.png");
         $("#smileImage2").prop("src", "images/ic_action_emo_basic.png");
     }).click(function (e) {
-        window.open("http://www.facebook.com/jibin.mathews7","_blank");
-        window.location="http://www.facebook.com/aanisha.ismd";
+        window.open("https://www.facebook.com/jibin.mathews7","_blank");
+        window.location="https://www.facebook.com/aanisha.annie";
     });
 
 });
