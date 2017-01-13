@@ -2,13 +2,13 @@
  * Created by Jibin_ism on 27-Jan-16.
  */
 
-var mongoose = require('mongoose');
-var User = requireFromModule('users/userModel');
-var Hash = requireFromModule('clients/cryptoOperations');
-var request = require('request');
-var PAGE_LIMIT = 5;
+ var mongoose = require('mongoose');
+ var User = requireFromModule('users/userModel');
+ var Hash = requireFromModule('clients/cryptoOperations');
+ var request = require('request');
+ var PAGE_LIMIT = 5;
 
-var signUp = function (userDetails, callback) {
+ var signUp = function (userDetails, callback) {
     User.findOne({$or: [{email: userDetails.email}, {mobile: userDetails.mobile}]}, function (err, doc) {
         if (doc) {
             callback(errorJSON(601, "INVALID_DATA_PASSED", "EMAIL_OR_MOBILE_REGISTERED"));
@@ -44,7 +44,7 @@ var signUp = function (userDetails, callback) {
  * @param callback - callback function
  */
 
-function __login(query, user, callback) {
+ function __login(query, user, callback) {
     //console.log("__login: "+JSON.stringify(query)+" "+JSON.stringify(user));
     User.findOne(query, "+password", function (err, userDoc) {
         if (userDoc) {
@@ -112,7 +112,7 @@ var del = function (user, callback) {
  * @param callback function callback
  * @private
  */
-function __login_google(accesstoken, callback) {
+ function __login_google(accesstoken, callback) {
     //console.log("Logging in Google: " + accesstoken);
     //Google API URL
     var url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + accesstoken;
